@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinnuli.github.io/"/>
-  <updated>2018-02-02T08:15:18.930Z</updated>
+  <updated>2018-03-08T07:32:04.131Z</updated>
   <id>https://pinnuli.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2018要学的知识</title>
+    <link href="https://pinnuli.github.io/2018/03/08/2018%E8%A6%81%E5%AD%A6%E7%9A%84%E7%9F%A5%E8%AF%86/"/>
+    <id>https://pinnuli.github.io/2018/03/08/2018要学的知识/</id>
+    <published>2018-03-08T04:29:55.000Z</published>
+    <updated>2018-03-08T07:32:04.131Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1、java"><a href="#1、java" class="headerlink" title="  1、java "></a><font color="#1E90FF" size="5" face="黑体">  1、java </font></h4><ul><li><strong><font size="4" face="宋体">  《java核心技术》 </font></strong></li><li><strong><font size="4" face="宋体">  《servlet、jsp、spring mvc初学指南》 </font></strong></li><li><strong><font size="4" face="宋体">  《Spring技术内幕》 </font></strong></li><li><strong><font size="4" face="宋体">  《轻量级javaEE》 </font></strong></li><li><strong><font size="4" face="宋体">  《java编程思想》 </font></strong></li><li><strong><font size="4" face="宋体">  《深入理解java虚拟机》 </font></strong><h4 id="2、前端入门"><a href="#2、前端入门" class="headerlink" title="  2、前端入门 "></a><font color="#1E90FF" size="5" face="黑体">  2、前端入门 </font></h4></li><li><strong><font size="4" face="宋体">  bootstrap </font></strong></li><li><strong><font size="4" face="宋体">  jquery </font></strong></li></ul><h4 id="3、数据库"><a href="#3、数据库" class="headerlink" title="  3、数据库"></a><font color="#1E90FF" size="5" face="黑体">  3、数据库</font></h4><ul><li><strong><font size="4" face="宋体">  《高性能mysql》</font></strong></li></ul><h4 id="4、linux"><a href="#4、linux" class="headerlink" title="  4、linux"></a><font color="#1E90FF" size="5" face="黑体">  4、linux</font></h4><ul><li><strong><font size="4" face="宋体">  《Linux私房菜基础学习》</font></strong><h4 id="5、专业基础课"><a href="#5、专业基础课" class="headerlink" title="  5、专业基础课"></a><font color="#1E90FF" size="5" face="黑体">  5、专业基础课</font></h4><ul><li><strong><font size="4" face="宋体">  计算机组成原理 </font></strong></li><li><strong><font size="4" face="宋体">  操作系统 </font></strong> </li><li><strong><font size="4" face="宋体">  计算机网络</font></strong></li><li><strong><font size="4" face="宋体">  数据库 </font></strong></li><li><strong><font size="4" face="宋体">  编译原理 </font></strong></li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;1、java&quot;&gt;&lt;a href=&quot;#1、java&quot; class=&quot;headerlink&quot; title=&quot;  1、java &quot;&gt;&lt;/a&gt;&lt;font color=&quot;#1E90FF&quot; size=&quot;5&quot; face=&quot;黑体&quot;&gt;  1、java &lt;/font&gt;&lt;/h4&gt;&lt;ul
+      
+    
+    </summary>
+    
+    
+      <category term="-计划" scheme="https://pinnuli.github.io/tags/%E8%AE%A1%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
