@@ -20,7 +20,7 @@ tags:
 - 为多个客户端服务时，可以用多线程解决
 - 半关闭：套接字连接的一段UN可以终止其输出，同时仍可以接受来自另一端的数据，反过来也一样，调用Socket.shutdownInput/Socket.shutdownOutput
 ####二、获取Web数
-- URI和URL
+- **URI和URL**
     - URL是URI的一个特例，URI是个纯粹的语法结构，包含用来点位Web资源的字符串和各种组成功哪部分，URL包含了用于定位Web资源的足够信息，其他无法定位任何数据的URI，称之为URN
     - 一个URI具有一下语法：`[scema:]schemaSpecficPart[#fragment]`
     > I.包含schema:部分的URI成为绝对URI，否则为相对URI
@@ -31,8 +31,57 @@ tags:
         - 解析表示福并将它分解成各种不同组成成分
         - 标识符的相对化和解析相对标识符
 - 使用URLCollection
+    > URLConnection类可以比URL类有更多的控制
+    
+    必须严格按照以下步骤进行操作：
+    1.调用URL类中的openConnection方法得到URLConnection对象：`URLConnection connection = url.openConnection();`
+    2.设置请求属性
+    3.调用connect方法连接远程资源:connection.connect();
+    4.建立连接后，可以查询头信息
+    5.访问资源数据，使用getInputStream方法获取一个输入流
+    > PS:这里的getInputStream/getOutputStream与Socket类的又很大的不同，这里具有很多处理请求和响应消息头时的强大功能
+- 提交表单
+    1.提交数据之前，需要创建一个URLConnection对象
+    ```java
+    URL url = new URL("http;??host/script");
+    URLConnection connection = url.openConnection();
+    ```
+    2.调用setDoOutput方法建立一个输出的连接
+    ```java
+    connection.setRequestMethod("POST");
+    connection.setDoOutput（true);
+    ```
+    3.调用getOutputStream方法获得一个输出流，想服务器发送数据
+    ```java
+    OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream(), "UTF-8");
+    osw.write(name1 + "=" + URLEncoder.eccode(value1,"UTF-8") + "&);
+    osw.write(name2 + "=" + URLEncoder.encode(value2,"UTF-8"));
+     ```
+    4.关闭输出流
+    ```java
+    osw.flush();
+    osw.close();
+    ```
+    5.调用getInputStream方法对服务器的响应
+    ```java
+    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
+    StringBuffer response = new StringBuffer();
+    String temp;
+    while ((temp = br.readLine()) != null) {
+        response.append(temp);
+        response.append("\n");
+    }
+    ```
+    >I.设置请求方法时，必须使用大写，如POST，使用post无法识别
+    II.如果想要获取错误页面，可以将URLConnection转型为HTTPURLConnection类并调用getErrorStream方法
+    `InputStream err = ((HTTPURLConnection) connection).getErrorStream();`
 
 
+    URL编码需遵循以下规则：
+    >I.保留字符A-Z、a-z、0-9 以及.-*_
+    II.用`+`替换所有空格
+    III.将其他所有字符编码为UTF-8，并将每个字节都编码为%后面紧跟一个两位的十六进制数字
+    比如发送"New York, NY"，可以使用New+York%2C+NY
 ----
 #### 二、基于TCP的SOcket通信
 1.创建ServerSocket和Socket
