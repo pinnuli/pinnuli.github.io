@@ -1,7 +1,9 @@
 ---
 title: java io流与文件
 date: 2018-07-19 06:27:55
+categories: "javase笔记" 
 tags:
+	- javase
 ---
 #### 一、流 ####
 - 读写字节

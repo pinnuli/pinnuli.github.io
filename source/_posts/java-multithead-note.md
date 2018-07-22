@@ -1,7 +1,9 @@
 ---
-title: java multithead note
+title: java 多线程
 date: 2018-03-16 20:31:44
-tags: javase
+categories: "javase笔记" 
+tags: 
+	- javase
 ---
 
 ##### 一、实现多线程

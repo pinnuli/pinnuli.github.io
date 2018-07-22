@@ -1,8 +1,9 @@
 ---
 title: git分支管理常用命令
 date: 2018-03-11 15:26:34
+categories: "git" 
 tags:
-	-git
+	- git
 ---
 
 创建分支：

@@ -1,8 +1,10 @@
 ---
 title: jsoup要点记录
 date: 2018-03-16 12:50:17
+categories: "Jsoup笔记" 
 tags:
-	java爬虫
+	- java爬虫
+	- Jsoup
 ---
 
 

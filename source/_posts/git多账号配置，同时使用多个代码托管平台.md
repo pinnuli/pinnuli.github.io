@@ -1,7 +1,9 @@
 ---
 title: git多账号配置，同时使用多个代码托管平台
 date: 2018-04-09 21:01:52
-tags:	git
+categories: "git" 
+tags:	
+        - git
 ---
 
 我们在使用git管理代码的时候，经常需要放到不同的托管网站，如github，osc等，那么不同的网站账号不一样，就需要生成不同密钥，配置对应的不同网站，接下来我们写写如何处理。
@@ -12,9 +14,7 @@ ps:这里是在centos7.2下操作，不过其他操作系统依然适用，这�
 这里可以设置密钥文件名和路径，/root/.ssh 是路径（一般路径选择默认），id_rsa_github是密钥文件名, 文件命名后按两次回车，即密码为空
 
 ``` bash
-
 	ssh-keygen -T rsa -C "example@qq.com" 
-	
 ```
 生成github的密钥![git_multi_account_ssh_github](/images/git_multiaccount_ssh_github.jpg)
 

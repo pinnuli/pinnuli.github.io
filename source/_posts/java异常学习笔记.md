@@ -1,7 +1,9 @@
 ---
 title: java异常学习笔记
 date: 2018-07-10 15:12:11
+categories: "javase笔记" 
 tags:
+	- javase
 ---
 java异常结构
 ![structure_of_java_exception](https://i.imgur.com/dAXpn87.png)

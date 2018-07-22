@@ -1,7 +1,9 @@
 ---
 title: markdownpad2 无法预览 显示This view has crashed!
 date: 2018-03-10 17:46:33
-tags: 编辑器
+categories: "踩过的坑"
+tags: 
+    - markdownPad
 ---
 
 在使用markdownpad2时，一直报错，说html渲染错误，上了官网查看解释如下，

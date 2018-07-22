@@ -1,7 +1,9 @@
 ---
-title: Java中的XML
+title: java中的XML
 date: 2018-07-20 11:00:21
+categories: "javase笔记" 
 tags:
+    - javase
 ---
 #### HTML与XML的区别
 - HTML对大小写不敏感，XML大小写敏感

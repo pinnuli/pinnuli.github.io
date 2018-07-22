@@ -1,7 +1,9 @@
 ---
 title: java反射
 date: 2018-07-22 13:30:00
+categories: "javase笔记" 
 tags:
+    - javase
 ---
 #### Class类的使用
 1.类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：

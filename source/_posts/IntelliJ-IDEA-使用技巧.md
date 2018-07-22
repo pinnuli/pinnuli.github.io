@@ -1,7 +1,9 @@
 ---
 title: IntelliJ IDEA 使用技巧
 date: 2018-04-30 10:18:35
+categories: "编辑器" 
 tags:
+	- IDEA
 ---
 一、跳转快捷键
 

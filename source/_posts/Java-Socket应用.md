@@ -1,25 +1,31 @@
 ---
-title: Java Socket应用¨
+title: java Socket应用¨
 date: 2018-07-21 15:09:14
+categories: "javase笔记" 
 tags:
+    - javase
 ---
-####一、 Socket使用时应当注意的一些问题
-- 设置超时，从套接字读取信息时，在有数据可供访问之前，读操作会被阻塞，如果此时主机不可达，那么程序将会等待很长时间，并因为系统操作系统的限制最终导致超时
-    - 调用setSoTimeout方法设置
-    ```JAVA
-    Socket s = new Socket(...);
-    s.setSoTimeout(10000);
-    ```
-    - 对构造器Socket(String host,int port)，可以先构建一个无连接的套接字，再使用超时
-    ```java
-    Socket s = new Socket();
-    s.connect(new InetSocketAddress(host,port),timeout);
-    ````
+####  一、Socket使用时应当注意的一些问题
+-设置超时，从套接字读取信息时，在有数据可供访问之前，读操作会被阻塞，如果此时主机不可达，那么程序将会等待很长时间，并因为系统操作系统的限制最终导致超时
+
+> 调用setSoTimeout方法设置
+
+```JAVA
+Socket s = new Socket(...);
+s.setSoTimeout(10000);
+```
+> 对构造器Socket(String host,int port)，可以先构建一个无连接的套接字，再使用超时
+
+```java
+Socket s = new Socket();
+s.connect(new InetSocketAddress(host,port),timeout);
+````
+
 - 可中断套接字，用SocketChannel类
 - 需要解析因特网地址时，可以用InetAddress类
 - 为多个客户端服务时，可以用多线程解决
 - 半关闭：套接字连接的一段UN可以终止其输出，同时仍可以接受来自另一端的数据，反过来也一样，调用Socket.shutdownInput/Socket.shutdownOutput
-####二、获取Web数
+#### 二、获取Web数
 - **URI和URL**
     - URL是URI的一个特例，URI是个纯粹的语法结构，包含用来点位Web资源的字符串和各种组成功哪部分，URL包含了用于定位Web资源的足够信息，其他无法定位任何数据的URI，称之为URN
     - 一个URI具有一下语法：`[scema:]schemaSpecficPart[#fragment]`
@@ -252,4 +258,4 @@ tags:
     ```
     > 当Socket关闭时，输入输出流也就关闭了
 
-> 参阅[Java Socket应用---通信是这样练成的](https://www.cnblogs.com/tocy/p/markdown-footnote_link.html)
+> 参阅[Java Socket应用---通信是这样练成的](https://www.imooc.com/learn/161)

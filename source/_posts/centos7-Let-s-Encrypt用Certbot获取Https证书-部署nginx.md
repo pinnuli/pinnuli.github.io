@@ -1,7 +1,10 @@
 ---
 title: centos7 Let's Encrypt用Certbot获取Https证书 部署nginx
 date: 2018-07-15 17:24:42
+categories: "服务器" 
 tags:
+	- centos
+	- nginx
 ---
 
 - 检查nginx下是否有`--with-http_stub_status_module` 和`--with-http_ssl_module`两个模块，安装之后再重新编译
@@ -14,10 +17,8 @@ tags:
  	>/opt/certbot-master/letsencrypt-auto --help
 - 关闭nginx，检出80端口，443端口是否有开启
 	>nginx -s stop
-	                                                                                                                                                                                   
-
+	                                    
 	>firewall-cmd --query-port=80/tcp
-
 
 	>firewall-cmd --query-port=443/tcp
 	
@@ -95,4 +96,4 @@ tags:
 	>     	      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 	>     }
 
-- 设置自动更新
+- 设置自动更新（待更新）
