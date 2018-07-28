@@ -21,5 +21,6 @@ tags:
  
 ### 过滤器分类
 ![filter_classify](/images/filter_classify.png)
+- `@WebFilter`
 
-使用`@WebFilter`注解声明过滤器，该注解会在部署时被容器处理，并根据其具体属性配置将其相应的类部署为过滤器
+在servlet3中，可以使用`@WebFilter`注解声明过滤器，该注解会在部署时被容器处理，并根据其具体属性配置将其相应的类部署为过滤器，而不用配置

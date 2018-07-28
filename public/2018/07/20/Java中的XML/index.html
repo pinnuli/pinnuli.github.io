@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!--添加顶部加载条-->
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Rotobo:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="javase," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PINNULI'S BLOG" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="HTML与XML的区别 HTML对大小写不敏感，XML大小写敏感 HTML结束标签可以省略，如&amp;lt;/p&amp;gt;，XML不能 XML只有单个标签而没有结束标签的元素必须以/结束 XML属性值必须用引号括起来 HTML属性可以没有值，XML所有属性必须有值  解析XML文档现有以下xml文档books.xml123456789101112131415&amp;lt;?xml version=&quot;1.0&quot; e">
+<meta name="keywords" content="javase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java中的XML">
+<meta property="og:url" content="https://pinnuli.github.io/2018/07/20/Java中的XML/index.html">
+<meta property="og:site_name" content="PINNULI&#39;S BLOG">
+<meta property="og:description" content="HTML与XML的区别 HTML对大小写不敏感，XML大小写敏感 HTML结束标签可以省略，如&amp;lt;/p&amp;gt;，XML不能 XML只有单个标签而没有结束标签的元素必须以/结束 XML属性值必须用引号括起来 HTML属性可以没有值，XML所有属性必须有值  解析XML文档现有以下xml文档books.xml123456789101112131415&amp;lt;?xml version=&quot;1.0&quot; e">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-23T13:41:11.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java中的XML">
+<meta name="twitter:description" content="HTML与XML的区别 HTML对大小写不敏感，XML大小写敏感 HTML结束标签可以省略，如&amp;lt;/p&amp;gt;，XML不能 XML只有单个标签而没有结束标签的元素必须以/结束 XML属性值必须用引号括起来 HTML属性可以没有值，XML所有属性必须有值  解析XML文档现有以下xml文档books.xml123456789101112131415&amp;lt;?xml version=&quot;1.0&quot; e">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pinnuli.github.io/2018/07/20/Java中的XML/"/>
+
+
+
+
+
+  <title>java中的XML | PINNULI'S BLOG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5302ef1ff06baba1932c46f843e4cd9f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  
+  
+<script src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/pinnuli">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+    </a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PINNULI'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-成就">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            成就
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/07/20/Java中的XML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java中的XML</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T11:00:21+08:00">
+                2018-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javase笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">javase笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="HTML与XML的区别"><a href="#HTML与XML的区别" class="headerlink" title="HTML与XML的区别"></a>HTML与XML的区别</h4><ul>
+<li>HTML对大小写不敏感，XML大小写敏感</li>
+<li>HTML结束标签可以省略，如<code>&lt;/p&gt;</code>，XML不能</li>
+<li>XML只有单个标签而没有结束标签的元素必须以<code>/</code>结束</li>
+<li>XML属性值必须用引号括起来</li>
+<li>HTML属性可以没有值，XML所有属性必须有值</li>
+</ul>
+<h4 id="解析XML文档"><a href="#解析XML文档" class="headerlink" title="解析XML文档"></a>解析XML文档</h4><p>现有以下xml文档books.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">bookstore</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">book</span> <span class="attr">id</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>冰与火之歌<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">author</span>&gt;</span>乔治马丁<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">year</span>&gt;</span>2014<span class="tag">&lt;/<span class="name">year</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">price</span>&gt;</span>89<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">book</span> <span class="attr">id</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>安徒生童话<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">year</span>&gt;</span>2004<span class="tag">&lt;/<span class="name">year</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">price</span>&gt;</span>77<span class="tag">&lt;/<span class="name">price</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">language</span>&gt;</span>English<span class="tag">&lt;/<span class="name">language</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">book</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bookstore</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>DOM解析<br>  1、创建一个DocumentBuilder的对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">DocumentBuilder db = dbf.newDocumentBuilder();</span><br></pre></td></tr></table></figure>
+<p>  2、调用parser方法加载books.xml文件到当前项目下</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Document document = db.parse(<span class="string">"books.xml"</span>);</span><br></pre></td></tr></table></figure>
+<p>  3、进行解析</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//获取所有book节点的集合</span></span><br><span class="line">NodeList bookList = document.getElementsByTagName(<span class="string">"book"</span>);</span><br><span class="line">   <span class="comment">//?????book??</span></span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bookList.getLength(); i++) &#123;</span><br><span class="line">       <span class="comment">//通过 item(i)方法 获取一个book节点，nodelist的索引值从0开始</span></span><br><span class="line">       Node book = bookList.item(i);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//获取book节点的所有属性集合</span></span><br><span class="line">       NamedNodeMap attrs = book.getAttributes();</span><br><span class="line"></span><br><span class="line">      <span class="comment">//前提：已经知道book节点有且只能有1个id属性</span></span><br><span class="line">   <span class="comment">//将book节点进行强制类型转换，转换成Element类型</span></span><br><span class="line">       Element book = (Element) bookList.item(i);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//通过getAttribute("id")方法获取属性值</span></span><br><span class="line">       String attrValue = book.getAttribute(<span class="string">"id"</span>);</span><br><span class="line">       </span><br><span class="line">       <span class="comment">//解析book节点的子节点</span></span><br><span class="line">       NodeList childNodes = book.getChildNodes();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更多解析方法查看API</p>
+</blockquote>
+</li>
+<li><p>SAX解析<br>  1、通过SAXParserFactory的静态newsInstance()方法获取SAXParserFactory实例</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXParserFactory factory = SAXParserFactory.newInstance();</span><br></pre></td></tr></table></figure>
+<p>  2、通过SAXParserFactory实例的newSAXParser()方法返回SAXParser实例</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXParser parser = factory.newSAXParser();</span><br></pre></td></tr></table></figure>
+<p>  3、创建一个类继承DefaultHandler，重写其中的一些方法进行处理，并创建这个类的实例handler</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   SAXParserHandler handler = <span class="keyword">new</span> SAXParserHandler();</span><br><span class="line">parser.parse(<span class="string">"books.xml"</span>, handler);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>handler类</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//标识解析开始</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	<span class="keyword">super</span>.startDocument();</span><br><span class="line">	System.out.println(<span class="string">"SAX解析开始"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//标识解析结束</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	<span class="keyword">super</span>.endDocument();</span><br><span class="line">	System.out.println(<span class="string">"SAX解析结束"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//解析xml元素</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startElement</span><span class="params">(String uri, String localName, String qName,</span></span></span><br><span class="line"><span class="function"><span class="params">		Attributes attributes)</span> <span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">	<span class="comment">//调用DefaultHandler类的startElement方法</span></span><br><span class="line">	<span class="keyword">super</span>.startElement(uri, localName, qName, attributes);</span><br><span class="line">	<span class="keyword">if</span> (qName.equals(<span class="string">"book"</span>)) &#123;</span><br><span class="line">		<span class="comment">//已知book元素下属性的名称，根据属性名称获取属性值</span></span><br><span class="line">		String value = attributes.getValue(<span class="string">"id"</span>);</span><br><span class="line">		System.out.println(<span class="string">"book的属性值是："</span> + value);</span><br><span class="line"></span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span> (!qName.equals(<span class="string">"name"</span>) &amp;&amp; !qName.equals(<span class="string">"bookstore"</span>)) &#123;</span><br><span class="line">		System.out.print(<span class="string">"节点名是："</span> + qName + <span class="string">"---"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endElement</span><span class="params">(String uri, String localName, String qName)</span></span></span><br><span class="line"><span class="function">		<span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">	<span class="comment">//调用DefaultHandler类的endElement方法</span></span><br><span class="line">	<span class="keyword">super</span>.endElement(uri, localName, qName);</span><br><span class="line">	<span class="comment">//判断是否针对一本书已经遍历结束</span></span><br><span class="line">	<span class="keyword">if</span> (qName.equals(<span class="string">"book"</span>)) &#123;</span><br><span class="line">		System.out.println(<span class="string">"结束遍历某一本书的内容"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">characters</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function">		<span class="keyword">throws</span> SAXException </span>&#123;</span><br><span class="line">	<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	<span class="keyword">super</span>.characters(ch, start, length);</span><br><span class="line">	value = <span class="keyword">new</span> String(ch, start, length);</span><br><span class="line">	<span class="keyword">if</span> (!value.trim().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">		System.out.println(<span class="string">"节点值是："</span> + value);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>JDOM??<br>  1、创建一个SAXBuilder的对象</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXBuilder saxBuilder = new SAXBuilder();</span><br></pre></td></tr></table></figure>
+<p>  2、创建一个输入流，将xml文件加载到输入流中</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">in = new FileInputStream(&quot;books.xml&quot;);</span><br></pre></td></tr></table></figure>
+<p>  3、通过saxBuilder的build方法，将输入流加载到saxBuilder中</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Document document = saxBuilder.build(in);</span><br></pre></td></tr></table></figure>
+<p>  4、通过document对象获取xml文件的根节点</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element rootElement = document.getRootElement();</span><br></pre></td></tr></table></figure>
+<p>  5、获取根节点下的子节点的List集合</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Element&gt; bookList = rootElement.getChildren();</span><br><span class="line">for (Element book : bookList) &#123;</span><br><span class="line">    // 解析book的属性集合</span><br><span class="line">    List&lt;Attribute&gt; attrList = book.getAttributes();</span><br><span class="line">    //知道节点下属性名称时，获取节点值</span><br><span class="line">    book.getAttributeValue(&quot;id&quot;);</span><br><span class="line"></span><br><span class="line">    // 对book节点的子节点的节点名以及节点值的遍历</span><br><span class="line">    List&lt;Element&gt; bookChilds = book.getChildren();</span><br><span class="line">    for (Element child : bookChilds) &#123;</span><br><span class="line">        System.out.println(&quot;????&quot; + child.getName() + &quot;----????&quot;</span><br><span class="line">                + child.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果需要设置编码可以按照以下方式设置</p>
+</blockquote>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(in, <span class="string">"UTF-8"</span>);</span><br><span class="line">Document document = saxBuilder.build(isr);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DOM4J解析<br>  1、通过reader对象的read方法加载books.xml文件,获取docuemnt对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">Document document = reader.read(<span class="keyword">new</span> File(<span class="string">"src/res/books.xml"</span>));</span><br></pre></td></tr></table></figure>
+<p>  2、通过document对象获取根节点</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element bookStore = document.getRootElement();</span><br></pre></td></tr></table></figure>
+<p>  3、通过element对象的elementIterator方法获取迭代器</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iterator it = bookStore.elementIterator();</span><br></pre></td></tr></table></figure>
+<p>  4、遍历迭代器，获取根节点中的信息</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">    Element book = (Element) it.next();</span><br><span class="line">    <span class="comment">// 获取book的属性名以及 属性值</span></span><br><span class="line">    List&lt;Attribute&gt; bookAttrs = book.attributes();</span><br><span class="line">    <span class="keyword">for</span> (Attribute attr : bookAttrs) &#123;</span><br><span class="line">        System.out.println(<span class="string">"????"</span> + attr.getName() + <span class="string">"--????"</span></span><br><span class="line">                + attr.getValue());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历子节点</span></span><br><span class="line">    Iterator itt = book.elementIterator();</span><br><span class="line">    <span class="keyword">while</span> (itt.hasNext()) &#123;</span><br><span class="line">        Element bookChild = (Element) itt.next();</span><br><span class="line">        System.out.println(<span class="string">"????"</span> + bookChild.getName() + <span class="string">"--????"</span> + bookChild.getStringValue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>四种解析方式的区别</p>
+<ul>
+<li>DOM:将文件全部加载到内存中，形成树结构，适用于小文件，需要频繁修改时<blockquote>
+<p>优点：直观好理解，代码易编写；解析过程树结构保留在内存中，方便修改<br>  缺点：当xml文件较大时，对内存消耗比较大，容易影响解析性能并造成内存溢出</p>
+</blockquote>
+</li>
+<li>SAX:采用事件驱动模式，适用于只需要处理xml中的数据时，不需要频繁修改时<blockquote>
+<p>优点：内存消耗小<br>  缺点：不易编码；很难同时访问同一个xml中的多处不同数据</p>
+</blockquote>
+</li>
+<li>JDOM：API大量使用了Collections类</li>
+<li>DOM4J：JDOM的一种智能分支，合并了许多超出基本xml文档表示的功能，性能优异，灵活性好，功能强大，十分易用</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="生成XML文档"><a href="#生成XML文档" class="headerlink" title="生成XML文档"></a>生成XML文档</h4><ul>
+<li><p>DOM<br>  1、创建DocumentBuilder对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();</span><br><span class="line">DocumentBuilder db = dbf.newDocumentBuilder();</span><br></pre></td></tr></table></figure>
+<p>  2、添加节点</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">document.setXmlStandalone(<span class="keyword">true</span>);</span><br><span class="line">Element bookstore = document.createElement(<span class="string">"bookStore"</span>);</span><br><span class="line"><span class="comment">//向bookstore根节点中添加子节点book</span></span><br><span class="line">Element book = document.createElement(<span class="string">"book"</span>);</span><br><span class="line">Element name = document.createElement(<span class="string">"name"</span>);</span><br><span class="line">name.setTextContent(<span class="string">"???"</span>);</span><br><span class="line"></span><br><span class="line">book.appendChild(name);</span><br><span class="line">book.setAttribute(<span class="string">"id"</span>, <span class="string">"1"</span>);</span><br><span class="line"><span class="comment">//将book节点添加到bookstore根节点中</span></span><br><span class="line">bookstore.appendChild(book);</span><br><span class="line"><span class="comment">//将bookstore节点（已经包含了book）添加到dom树中</span></span><br><span class="line">document.appendChild(bookstore);</span><br></pre></td></tr></table></figure>
+<p>  3、生成xml文件</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TransformerFactory tff = TransformerFactory.newInstance();</span><br><span class="line">Transformer tf = tff.newTransformer();</span><br><span class="line"><span class="comment">//设置文件</span></span><br><span class="line">tf.setOutputProperty(OutputKeys.INDENT, <span class="string">"yes"</span>);</span><br><span class="line">tf.transform(<span class="keyword">new</span> DOMSource(document),<span class="keyword">new</span> StreamResult(<span class="keyword">new</span> File(<span class="string">"books1.xml"</span>)));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SAX<br>  1、创建一个TransformerFactory类的对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXTransformerFactory tff = (SAXTransformerFactory) SAXTransformerFactory.newsInstance();</span><br></pre></td></tr></table></figure>
+<p>  2、通过SAXTransformerFactory对象创建一个TransformerHandler对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TransformerHandler handler = tff.newTransformerHandler();</span><br></pre></td></tr></table></figure>
+<p>  3、通过handler对象创建一个Transformer对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transformer tr = handler.getTransformer();</span><br></pre></td></tr></table></figure>
+<p>  4、通过Transformer对象对生成的xml文件进行设置</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">   // 设置xml的编码</span><br><span class="line">   tr.setOutputProperty(OutputKeys.ENCODING, &quot;UTF-8&quot;);</span><br><span class="line">   // 设置xml的“是否换行”</span><br><span class="line">   tr.setOutputProperty(OutputKeys.INDENT, &quot;yes&quot;);</span><br><span class="line">5、创建一个Result对象</span><br><span class="line">   ```java</span><br><span class="line">   File f = new File(&quot;newbooks.xml&quot;);</span><br><span class="line">   if (!f.exists()) &#123;</span><br><span class="line">       f.createNewFile();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>  6、创建Result对象，并且使其与handler关联</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Result result = <span class="keyword">new</span> StreamResult(<span class="keyword">new</span> FileOutputStream(f));</span><br><span class="line">handler.setResult(result);</span><br></pre></td></tr></table></figure>
+<p>  7、利用handler对象进行xml文件内容的编写O</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 打开document</span></span><br><span class="line">handler.startDocument();</span><br></pre></td></tr></table></figure>
+<p>  8、添加节点属性和节点值</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">   AttributesImpl attr = <span class="keyword">new</span> AttributesImpl();</span><br><span class="line">handler.startElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"bookstore"</span>, attr);</span><br><span class="line">   <span class="keyword">for</span> (Book book : bookList) &#123;</span><br><span class="line">       attr.clear();</span><br><span class="line">       attr.addAttribute(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"id"</span>, <span class="string">""</span>, book.getId());</span><br><span class="line">       handler.startElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"book"</span>, attr);</span><br><span class="line">       <span class="comment">// 创建name节点</span></span><br><span class="line">       <span class="keyword">if</span> (book.getName() != <span class="keyword">null</span> &amp;&amp; !book.getName().trim().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">           attr.clear();</span><br><span class="line">           handler.startElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"name"</span>, attr);</span><br><span class="line">           handler.characters(book.getName().toCharArray(), <span class="number">0</span>, book</span><br><span class="line">                   .getName().length());</span><br><span class="line">           handler.endElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"name"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       handler.endElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"book"</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   handler.endElement(<span class="string">""</span>, <span class="string">""</span>, <span class="string">"bookstore"</span>);</span><br><span class="line">   <span class="comment">// 关闭document</span></span><br><span class="line">   handler.endDocument();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JDOM<br>  1.生成一个根节点</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element rss = <span class="keyword">new</span> Element(<span class="string">"rss"</span>);</span><br></pre></td></tr></table></figure>
+<p>  2.为节点添加属性</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rss.setAttribute(<span class="string">"version"</span>, <span class="string">"2.0"</span>);</span><br></pre></td></tr></table></figure>
+<p>  3.生成一个document对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Document document = <span class="keyword">new</span> Document(rss);</span><br><span class="line">Element channel = <span class="keyword">new</span> Element(<span class="string">"channel"</span>);</span><br><span class="line">rss.addContent(channel);</span><br><span class="line">Element title = <span class="keyword">new</span> Element(<span class="string">"title"</span>);</span><br><span class="line">title.setText(<span class="string">"&lt;![CDATA[上海移动互联网产业促进中心正式揭牌 ]]&gt;"</span>);</span><br><span class="line">channel.addContent(title);</span><br><span class="line"><span class="comment">//设置文件编码和换行</span></span><br><span class="line">Format format = Format.getCompactFormat();</span><br><span class="line">format.setIndent(<span class="string">""</span>);</span><br><span class="line">format.setEncoding(<span class="string">"GBK"</span>);</span><br></pre></td></tr></table></figure>
+<p>  4.创建XMLOutputter的对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLOutputter outputer = <span class="keyword">new</span> XMLOutputter(format);</span><br></pre></td></tr></table></figure>
+<p>  5.利用outputer将document对象转换成xml文档</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputer.output(document, <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"rssnews.xml"</span>)));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DOM4J</p>
+<blockquote>
+<p>使用DOM4J生成RSS文件</p>
+</blockquote>
+<p>  1.创建document对象，代表整个xml文档</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Document document = DocumentHelper.createDocument();</span><br></pre></td></tr></table></figure>
+<p>  2.创建根节点rss</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element rss = document.addElement(<span class="string">"rss"</span>);</span><br></pre></td></tr></table></figure>
+<p>  3.向rss节点中添加version属性</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rss.addAttribute(<span class="string">"version"</span>, <span class="string">"2.0"</span>);</span><br></pre></td></tr></table></figure>
+<p>  4.生成子节点及节点内容</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Element channel = rss.addElement(<span class="string">"channel"</span>);</span><br><span class="line">Element title = channel.addElement(<span class="string">"title"</span>);</span><br><span class="line">title.setText(<span class="string">"&lt;![CDATA[上海移动互联网产业促进中心正式揭牌 ]]&gt;"</span>);</span><br></pre></td></tr></table></figure>
+<p>  5.设置生成xml的格式</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OutputFormat format = OutputFormat.createPrettyPrint();</span><br><span class="line">format.setEncoding(<span class="string">"GBK"</span>);</span><br></pre></td></tr></table></figure>
+<p>  6.生成xml文件</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">File file = <span class="keyword">new</span> File(<span class="string">"rssnews.xml"</span>);</span><br><span class="line">XMLWriter writer;</span><br><span class="line">writer = <span class="keyword">new</span> XMLWriter(<span class="keyword">new</span> FileOutputStream(file), format);</span><br><span class="line"><span class="comment">//设置是否转义，默认值是true，代表转义</span></span><br><span class="line">writer.setEscapeText(<span class="keyword">false</span>);</span><br><span class="line">writer.write(document);</span><br><span class="line">writer.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="验证XML文档"><a href="#验证XML文档" class="headerlink" title="验证XML文档"></a>验证XML文档</h4><blockquote>
+<p>需要指定文档结构时，可以提供一个文档类型定义（DTD）或XML Schema</p>
+<ul>
+<li>文档类型定义<ul>
+<li>将这些规则纳入XML文档  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration[</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">    &lt;!ELEMENT configuration...&gt;</span></span><br><span class="line"><span class="meta">    ...</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>这些规则被纳入到DOCTYPE声明中，代码块[…]用来限定其接线，比如configuration</p>
+<pre><code>- SYSTEM声明，将DTD存储在外面
+    <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE configuration SYSTEM "config.dtd"&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration SYSTEM "http://myserver.com/config.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
+</code></pre></blockquote>
+<pre><code>- 标记PUBLIC标识符
+    <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEntityResolver</span> <span class="keyword">implements</span> <span class="title">EntityResolver</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> InputSource <span class="title">resolveEntity</span><span class="params">(String publicId, String systemID)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(publicID.equals(a knowx ID))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> InputSource(DTD data):</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+&gt;PS：具体的类型规则看文档，注意在设计DTD时应该要么只包含文本，要么包含其他元素，避免解析混合式（标签和文本的混合）内容时空
+</code></pre><ul>
+<li><p>XML Schema</p>
+<ul>
+<li><p>声明Schema文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用xsd:表示XSL Schema定义的命名空间</p>
+<xsd:element name="name" type="xsd:string"></xsd:element></li>
+<li>ref属性引用Schema中位于别处的定义<br><xsd:element ref="name"><br>&lt;xsd:element name=”style” type=StyleType”/&gt;<br>  <xsd:restriction base="xsd:string"><pre><code>&lt;xsd:enumeration value=&quot;PLAIN&quot;/&gt;
+</code></pre>  </xsd:restriction><br></xsd:element><h4 id="使用XPath定位信息"><a href="#使用XPath定位信息" class="headerlink" title="使用XPath定位信息"></a>使用XPath定位信息</h4></li>
+</ul>
+</li>
+<li><p>查找下列的username的值，,通过XPath表达式/configuration/database/username</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;configfuration&gt;</span><br><span class="line">    &lt;database&gt;</span><br><span class="line">        &lt;username id=&quot;test&quot;&gt;pinnuli&lt;/username&gt;</span><br><span class="line">        &lt;password&gt;123456&lt;/password&gt;</span><br><span class="line">    &lt;/database&gt;</span><br><span class="line">&lt;/configfuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用XPathFactory创建一个XPath对象，调用evaluate方法计算XPath表达式</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XPathFactory xpFactory = XPathFactory.newInstance();</span><br><span class="line">path = xpfactory.newXPath();</span><br><span class="line">String username = path.evaluate(/configuration/database/username&quot;,doc);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="gt-具体的语法看文档"><a href="#gt-具体的语法看文档" class="headerlink" title="&gt;具体的语法看文档"></a>&gt;具体的语法看文档</h2><h4 id="XML的命名空间"><a href="#XML的命名空间" class="headerlink" title="XML的命名空间"></a>XML的命名空间</h4><ul>
+<li><p>使用xmlns给定命名空间</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">element</span> <span class="attr">xmlns</span>=<span class="string">"namespaceURI1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">child</span> <span class="attr">xmlns</span>=<span class="string">"namespaceURI2"</span>&gt;</span></span><br><span class="line">        grandchildren</span><br><span class="line">    <span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">element</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里第一个子元素和孙元素都是第二个命名空间的一部分</p>
+</blockquote>
+</li>
+<li><p>使用xmlns:prefix=”namespaceURI”定义命名空间和前缀</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;xsd:schema xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;</span><br><span class="line">    &lt;xsd:element name=&quot;pinnuli&quot; type=&quot;haha&quot;/&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/xsd:schema&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这里xsd:schema实际上指的是命名空间<code>http://www.w3.org/2001/XMLSchema</code>中的<code>schema</code></p>
+</blockquote>
+</li>
+<li>可以控制解析器对命名空间的处理，默认情况下DOM解析器并非“命名空间感知的”，可以调用DocumentBuilderFactory类的setNamespaceAware()打开命名空间处理特性  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">factory.serNamespaceAware(true);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javase/" rel="tag"><i class="fa fa-tag"></i> javase</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/19/java-io流与文件/" rel="next" title="java io流与文件">
+                <i class="fa fa-chevron-left"></i> java io流与文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/21/Java-Socket应用/" rel="prev" title="java Socket应用¨">
+                java Socket应用¨ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_googleplus"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_copy"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	siteNum:7,
+	sm:"weixin,cqq,fb,twitter,tsina,googleplus,copy",
+	summary:"",
+	boldNum:6,
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="pinnuli" />
+            
+              <p class="site-author-name" itemprop="name">pinnuli</p>
+              <p class="site-description motion-element" itemprop="description">如果你连努力都拼不过别人,凭什么和别人拼天赋！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pinnuli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/users/c855b8a72987/timeline" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML与XML的区别"><span class="nav-number">1.</span> <span class="nav-text">HTML与XML的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析XML文档"><span class="nav-number">2.</span> <span class="nav-text">解析XML文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成XML文档"><span class="nav-number">3.</span> <span class="nav-text">生成XML文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证XML文档"><span class="nav-number">4.</span> <span class="nav-text">验证XML文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用XPath定位信息"><span class="nav-number">5.</span> <span class="nav-text">使用XPath定位信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-具体的语法看文档"><span class="nav-number"></span> <span class="nav-text">&gt;具体的语法看文档</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#XML的命名空间"><span class="nav-number">1.</span> <span class="nav-text">XML的命名空间</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pinnuli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
