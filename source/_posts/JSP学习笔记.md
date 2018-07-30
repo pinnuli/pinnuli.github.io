@@ -8,46 +8,37 @@ tags:
 ---
 ### 一、jsp简介
 
-#### 1、Jsp三大指令
+#### 1、jsp三大指令
 
-- page指令:<%@page 属性="" %>,位于jsp页面顶端，可以有多个
+**page指令**:<%@page 属性="" %>,位于jsp页面顶端，可以有多个
 
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.text.*"%>
 
-	```jsp
-	<%@ page contentType="text/html;charset=UTF-8" language="java" import="java.text.*"%>
+```
+**taglib指令**：标签库
 
-	```
+**include**
+include指令:`<%@include file="date.jsp"%>`
+include动作:`<jsp:include page="url" flush="true|false"/>`
+> page:要包含的页面,
+flush：被包含的页面是否从缓冲区读取
 
-- taglib指令：标签库
-
-
-- include
-	> include指令:
-	
-		<%@include file="date.jsp"%>
-	> include动作:<jsp:include page="url" flush="true|false"/>
-		
-		page:要包含的页面
-
-		flush：被包含的页面是否从缓冲区读取
-
-	**include指令与include动作的区别：**
+**include指令与include动作的区别：**
 ![diff_between_includeCommand_includeAction](https://i.imgur.com/YyHsnwD.png)
 
+**forward动作**：`<jsp: forward page="url"/>`
+等同于：`request.getRequestDispatcher("/url").forward(request,response);`
 
-	- forward动作：<jsp: forward page="url"/>,
-	
-		等同于：request.getRequestDispatcher("/url").forward(request,response);
+**param动作**：`<jsp:param name="参数名" value="参数值">`
+常与<jsp:forward>一起使用，作为其的子标签:
 
-	- param动作：<jsp:param name="参数名" value="参数值">
-	
-		常与<jsp:forward>一起使用，作为其的子标签:
-	``` jsp
-	<jsp:forward page="user.jsp">
-        <%--用<jsp:param "></jsp:param>添加参数--%>
-        <jsp:param name="email" value="11111111@163.com"></jsp:param>
-   </jsp:forward>
-	```
+``` jsp
+<jsp:forward page="user.jsp">
+	<%--用<jsp:param "></jsp:param>添加参数--%>
+	<jsp:param name="email" value="11111111@163.com"></jsp:param>
+</jsp:forward>
+```
 
 #### 2、jsp注释
 - html的注释
@@ -55,10 +46,8 @@ tags:
 - jsp的注释
  <%-- jsp注释 -->（客户端不可见）
 - jsp脚本注释:
-	
-	//单行
-
-	/* */ 多行
+//单行
+/* */ 多行
  
 #### 3、jsp脚本
 <% java代码 %>
@@ -75,18 +64,9 @@ tags:
 
 
 ### 二、jsp内置对象
-** 九大内置对象：**
->out,
-request,
-response,
-session,
-application,
-Page,
-pageContext,
-exception,
-config
+** 九大内置对象：**`out`,`request`,`response`,`session`,`application`,`Page`,`pageContext`,`exception`,`config`
 
-- out
+**out**
 
 ```html
 
@@ -106,7 +86,7 @@ config
     是否自动清空缓冲区：<%= out.isAutoFlush()%><br>
 ```
 
-- request
+**request**
  
 ```html
 
@@ -153,8 +133,7 @@ config
     <%=request.getContextPath()%>
 ```
 	
-
-- response
+**response**
 
 ```html
 
@@ -176,16 +155,12 @@ config
 
 ```
 
-**请求转发和请求重定向：**
+**请求转发和请求重定向的区别：**
 
 ![redirectAndTransmit.PNG](https://i.imgur.com/wWWpmzd.png)
 
-- session
->     HttpSession的实例，
->     周期：在第一个jsp页面被加载时自动创建，
->     即浏览器连接到服务器开始，关闭浏览器离开这个服务器结束，
->     在服务器的几个页面之间切换，服务器应当知道这是一个客户，
->     就可以用session对象
+**session**
+HttpSession的实例，周期：在第一个jsp页面被加载时自动创建，即浏览器连接到服务器开始，关闭浏览器离开这个服务器结束，在服务器的几个页面之间切换，服务器应当知道这是一个客户，就可以用session对象
 
 ```html
 
@@ -221,9 +196,8 @@ config
     <a href="session_page2.jsp">跳转到session_page2</a>
 ```
 
-- application
-	
-> 实现用户间数据的共享，可存放全局边变量，相当于java的静态变量
+**application**
+实现用户间数据的共享，可存放全局边变量，相当于java的静态变量
 
 ```html
 
@@ -244,7 +218,7 @@ config
     jsp(serviet)引擎名和版本号：<%=application.getServerInfo()%><br>
 ```
 	
-- page、pageContext
+**page、pageContext**
 
 ```html
 	<h3>page:</h3>当前page页面的字符串描述：<%=page.toString()%><br><br>
@@ -261,7 +235,7 @@ config
         %>
 ```
 
-- exception
+**exception**
 
 ```html
 
@@ -279,97 +253,94 @@ config
 - 属性私有
 - 用getter()和setter()进行封装
 
-	例如：
+例如：
 
-	```java
+```java
 
-	public class Students{
-    	private String name;
-		private int age;
-    
-		public  Students(){
-        
-    	}
+public class Students{
+	private String name;
+	private int age;
 
-    	public String getName() {
-        	return name;
-    	}
-
-    	public void setName(String name) {
-        	this.name = name;
-    	}
-
-    	public int getAge() {
-        	return age;
-    	}
-
-    	public void setAge(int age) {
-        	this.age = age;
-    	}
-    
+	public  Students(){
+	
 	}
 
-	```
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
-#### 2. 存取Javabean有关的jsp动作元素
+	public int getAge() {
+		return age;
+	}
 
-  
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+}
+
+```
+#### 2. 存取Javabean有关的jsp动作元素  
 **在jsp页面中使用Javabeans：**
 
+方法一：像使用普通java类一样，创建Javabean实例
+方法二：在jsp页面中通常使用jsp动作标签使用javabean,常用的动作标签：userBeans、setProperty、getProperty
 
-- 像使用普通java类一样，创建Javabean实例
-- 在jsp页面中通常使用jsp动作标签使用javabean,常用的动作标签：userBeans、setProperty、getProperty
+- `<jsp:useBeans>`
 
-	- `<jsp:useBeans>`
+在jsp页面中实例化或者在指定范围内使用Javabean：
 
-	在jsp页面中实例化或者在指定范围内使用Javabean：
+`<jsp:useBeans id="标示符" class="java类名" scope="作用范围"/>`
+> scope属性：指定Javabean的作用范围
+> page：当前页面,重定向和转发都无效
+> request：可通过HttpRequest.getAttribute()取得Javabean对象，重定向无效，转发有效
+> session：可通过HttpSession.getAttribute()取得Javabean对象，同个会话有效
+> application:可通过application.getAttribute()取得Javabean对象，不同会话都有效
 
-	`<jsp:useBeans id="标示符" class="java类名" scope="作用范围"/>`
-	> scope属性：指定Javabean的作用范围
-	> page：当前页面,重定向和转发都无效
-	> request：可通过HttpRequest.getAttribute()取得Javabean对象，重定向无效，转发有效
-	> session：可通过HttpSession.getAttribute()取得Javabean对象，同个会话有效
-	> application:可通过application.getAttribute()取得Javabean对象，不同会话都有效
+例如：
+```html
+	<jsp:useBean id="myUsers" class="com.po.Users" scope="application"></jsp:useBean>
+	用户名：<jsp:getProperty name="myUsers" property="username"></jsp:getProperty>
+	密码：<jsp:getProperty name="myUsers" property="password"></jsp:getProperty>
+```
 
-	例如：
-	```html
-		<jsp:useBean id="myUsers" class="com.po.Users" scope="application"></jsp:useBean>
-		用户名：<jsp:getProperty name="myUsers" property="username"></jsp:getProperty>
-		密码：<jsp:getProperty name="myUsers" property="password"></jsp:getProperty>
-	```
+也可使用内置对象获取：
+```html
+	用户名：<%=((Users)application.getAttribute("myUsers")).getUsername()%>
+	密码： <%=((Users) application.getAttribute("myUsers")).getPassword()%>
 
-	也可使用内置对象获取：
-	```html
-    	用户名：<%=((Users)application.getAttribute("myUsers")).getUsername()%>
-    	密码： <%=((Users) application.getAttribute("myUsers")).getPassword()%>
+
+```
+
+- `<jsp:setProperty>`
 	
-	
-	```
+```html	
+	根据表单自动匹配所有属性:
+	<jsp:setProperty name="myUsers" property="username"></jsp:setProperty>
 
-	- `<jsp:setProperty>`
-	 
-	```html	
-		根据表单自动匹配所有属性:
-		<jsp:setProperty name="myUsers" property="username"></jsp:setProperty>
+	根据表单匹配部分属性:
+	<jsp:setProperty name="myUsers" property="username"></jsp:setProperty>
 
-		根据表单匹配部分属性:
-	    <jsp:setProperty name="myUsers" property="username"></jsp:setProperty>
+	与表单无关，通过手工赋值给属性:
+	<jsp:setProperty name="myUsers" property="password" value="hahahaha"></jsp:setProperty>
 
-		与表单无关，通过手工赋值给属性:
-	    <jsp:setProperty name="myUsers" property="password" value="hahahaha"></jsp:setProperty>
-	
-		通过url传参数给属性赋值:
-		<jsp:setProperty name="myUsers" property="password" param="testparam"></jsp:setProperty>
-	
-	```
+	通过url传参数给属性赋值:
+	<jsp:setProperty name="myUsers" property="password" param="testparam"></jsp:setProperty>
 
-	- `<jsp:getProperty>`
-	
-	```html
-		使用getProperty获取属性值:
-	    <jsp:getProperty name="myUsers" property="username"></jsp:getProperty>
+```
 
-	```
+- `<jsp:getProperty>`
+
+```html
+	使用getProperty获取属性值:
+	<jsp:getProperty name="myUsers" property="username"></jsp:getProperty>
+
+```
 	
+> 参阅：
+  [慕课网：JAVA遇见HTML——JSP篇](https://www.imooc.com/learn/166)
 	

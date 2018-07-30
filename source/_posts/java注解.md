@@ -3,17 +3,17 @@ title: java注解
 date: 2018-07-23 12:39:36
 categories: "javase笔记" 
 tags:
-    - javase
+    - JavaSE
 ---
-#### 一、注解分类
-**源码注解（SOURCE）**：注解只在源码中存在，编译成.class文件就不存在
-**编译时注解（CLASS）**：注解在源码和.class文件都存在
-**运行时注解（RUNTIME）**：在运行阶段还起作用，甚至会影响运行逻辑的注解
-**元注解**：注解的注解
+### 一、注解分类
+- 源码注解（SOURCE）：注解只在源码中存在，编译成.class文件就不存在
+- 编译时注解（CLASS）：注解在源码和.class文件都存在
+- 运行时注解（RUNTIME）：在运行阶段还起作用，甚至会影响运行逻辑的注解
+- 元注解：注解的注解
 
-
-#### 二、自定义注解
-**定义：**
+----
+### 二、自定义注解
+#### 定义：
 ```java
 //元注解
 @Target({ElementType.METHOD,ElementType.TYPE})
@@ -52,7 +52,7 @@ public @interface Description{
 >4.如果注解只有一个成员，则成员名必须为value()，在使用时可以忽略成员名和赋值号,即`Description("test")`
 >5.注解可以没有成员名，叫标识注解
 
-**使用：**
+#### 使用：
 @<注解名>(<成员名1>=<成员值1>,<成员名2>=<成员值2>,...)
 ```java
 Description(desc="I am pinnuli",author="pinnuli",age=20)
@@ -60,8 +60,8 @@ public String test(){
     return "test";
 }
 ```
-
-#### 三、解析注解
+----
+### 三、解析注解
 > 通过反射获取类、函数或成员上的运行时追截信息，从而实现动态控制程序运行的逻辑
 
 1.使用类加载器加载类
@@ -97,3 +97,6 @@ for(Method m:ms){
     }
 }
 ```
+
+> 参阅：
+  [慕课网：全面解析Java注解](https://www.imooc.com/learn/456)

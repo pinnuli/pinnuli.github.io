@@ -8,7 +8,7 @@ tags:
 ---
 
 
-#### <font color = #1E90FF size = 5 face = "黑体">  查找dom元素 </font>
+### 查找dom元素 
 
 - getElementById: 根据id查询
 - getElementsByTag: 根据tag名称查询
@@ -17,7 +17,6 @@ tags:
 - getElementsByAttributeValue: 根据属性名和属性值查询
 
 实例代码
-
 
 ``` java
 	
@@ -88,7 +87,7 @@ tags:
 ```
 
 
-#### <font color = #1E90FF size = 5 face = "黑体">  查找dom元素属性值 </font>
+### 查找dom元素属性值 
 
 
 实例代码
@@ -144,9 +143,9 @@ public class Demo2 {
 
 
 
-#### <font color = #1E90FF size = 5 face = "黑体">  使用选择器查询 </font>
+### 使用选择器查询
 
- ***Jsoup 支持css，jquery的选择器***
+ **Jsoup 支持css，jquery的选择器**
 
 实例代码
 

@@ -127,7 +127,7 @@
 
 
 
-  <meta name="keywords" content="javase," />
+  <meta name="keywords" content="JavaSE," />
 
 
 
@@ -140,18 +140,18 @@
 
 
 
-<meta name="description" content="Class类的使用1.类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class   1Class c1 = Student.class;  通过getClass方法获得   1Class c2 = Student.getClass();  forName   1Class c">
-<meta name="keywords" content="javase">
+<meta name="description" content="一、Class类的使用类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class  1Class c1 = Student.class;  通过getClass方法获得  1Class c2 = Student.getClass();  forName  1Class c3 =">
+<meta name="keywords" content="JavaSE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java反射">
 <meta property="og:url" content="https://pinnuli.github.io/2018/07/22/java反射/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="Class类的使用1.类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class   1Class c1 = Student.class;  通过getClass方法获得   1Class c2 = Student.getClass();  forName   1Class c">
+<meta property="og:description" content="一、Class类的使用类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class  1Class c1 = Student.class;  通过getClass方法获得  1Class c2 = Student.getClass();  forName  1Class c3 =">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T13:41:11.211Z">
+<meta property="og:updated_time" content="2018-07-30T03:10:31.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java反射">
-<meta name="twitter:description" content="Class类的使用1.类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class   1Class c1 = Student.class;  通过getClass方法获得   1Class c2 = Student.getClass();  forName   1Class c">
+<meta name="twitter:description" content="一、Class类的使用类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class  1Class c1 = Student.class;  通过getClass方法获得  1Class c2 = Student.getClass();  forName  1Class c3 =">
 
 
 
@@ -454,76 +454,82 @@
       
 
       
-        <h4 id="Class类的使用"><a href="#Class类的使用" class="headerlink" title="Class类的使用"></a>Class类的使用</h4><p>1.类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：</p>
+        <h3 id="一、Class类的使用"><a href="#一、Class类的使用" class="headerlink" title="一、Class类的使用"></a>一、Class类的使用</h3><p>类是对象，任何一个类都是<code>java.lang.class</code>类的实例对象，这个类，这个实例对象可以有三种表达方式，比如<code>Student</code>类：</p>
 <ul>
-<li><p>任何一个类都有一个隐含的静态成员变量class</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c1 = Student.class;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过getClass方法获得</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c2 = Student.getClass();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>forName</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c3 = Class.forName(<span class="string">"com.Student"</span>);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>c1,c2,c3表示了Student类的类类型（class type),可以通过类的类类型创建该类的对象实例—-&gt;通过c1 or c2 or c3创建Student的实例对象</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student stu = c1.newInstance();</span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
+<li>任何一个类都有一个隐含的静态成员变量class</li>
 </ul>
-<h4 id="动态加载类"><a href="#动态加载类" class="headerlink" title="动态加载类"></a>动态加载类</h4><ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c1 = Student.class;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过getClass方法获得</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c2 = Student.getClass();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>forName</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c3 = Class.forName(<span class="string">"com.Student"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>c1,c2,c3表示了Student类的类类型（class type),可以通过类的类类型创建该类的对象实例—-&gt;通过c1 or c2 or c3创建Student的实例对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student stu = c1.newInstance();</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h3 id="二、动态加载类"><a href="#二、动态加载类" class="headerlink" title="二、动态加载类"></a>二、动态加载类</h3><ul>
 <li>静态加载类：编译时加载的类，通过new创建对象是静态加载类</li>
 <li>动态加载类：运行时加载的类，编译时不用管类是否存在或者是否错误等问题</li>
 </ul>
-<h4 id="获取方法信息和成员变量，构造函数信息"><a href="#获取方法信息和成员变量，构造函数信息" class="headerlink" title="获取方法信息和成员变量，构造函数信息"></a>获取方法信息和成员变量，构造函数信息</h4><ul>
-<li><p>方法信息</p>
-<ul>
-<li><p>所有的public的函数，包括父类继承而来的</p>
+<hr>
+<h3 id="三、获取方法信息和成员变量，构造函数信息"><a href="#三、获取方法信息和成员变量，构造函数信息" class="headerlink" title="三、获取方法信息和成员变量，构造函数信息"></a>三、获取方法信息和成员变量，构造函数信息</h3><h4 id="方法信息"><a href="#方法信息" class="headerlink" title="方法信息"></a>方法信息</h4><ul>
+<li>所有的public的函数，包括父类继承而来的</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method[] ms = c.getMethods();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>所有该类自己声明的方法，不问访问权限</p>
+<ul>
+<li>所有该类自己声明的方法，不问访问权限</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method[] ms = c.getDeclaredMethods();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>返回值类型的类类型</p>
+<ul>
+<li>返回值类型的类类型</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class returnType = ms[i].getReturnType();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>参数列表的类型的类类型</p>
+<ul>
+<li>参数列表的类型的类类型</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class[] paramTypes = ms[i].getParameterTypes();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方法的名称</p>
+<ul>
+<li>方法的名称</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String methodName = ms[i].getName();</span><br></pre></td></tr></table></figure>
-</li>
+<h4 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h4><ul>
+<li>所有的public的成员变量的信息</li>
 </ul>
-</li>
-<li><p>成员变量</p>
-<ul>
-<li><p>所有的public的成员变量的信息</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Field[] fs = c.getFields();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>该类自己声明的成员变量的信息</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Field[] fs = c.getDeclaredFields();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>成员变量的类型的类类型</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class fieldType = field.getType();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>成员变量的名称</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String fieldName = field.getName();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>构造函数</p>
 <ul>
-<li><p>所有的public构造函数</p>
+<li>该类自己声明的成员变量的信息</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Field[] fs = c.getDeclaredFields();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>成员变量的类型的类类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class fieldType = field.getType();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>成员变量的名称</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String fieldName = field.getName();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>构造函数</li>
+<li>所有的public构造函数</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Constructor[] cs = c.getConstructors();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>所有的构造函数</p>
+<ul>
+<li>所有的构造函数</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Constructor[] cs = c.getDeclaredConstructors();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>构造函数的参数列表，得到的是参数列表的类类型</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">    Class fieldType = field.getType();</span><br><span class="line">    ``` </span><br><span class="line">&gt; 更多方法看API文档</span><br><span class="line">#### 方法反射的基本操作 </span><br><span class="line">现有A类如下：</span><br><span class="line">```java</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"helloworld"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">		System.out.println(a+b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(String a,String b)</span></span>&#123;</span><br><span class="line">		System.out.println(a.toUpperCase()+<span class="string">","</span>+b.toLowerCase());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<ul>
+<li>构造函数的参数列表，得到的是参数列表的类类型</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class fieldType = field.getType();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更多方法看API文档</p>
+</blockquote>
+<hr>
+<h3 id="四、方法反射的基本操作"><a href="#四、方法反射的基本操作" class="headerlink" title="四、方法反射的基本操作"></a>四、方法反射的基本操作</h3><p>现有A类如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"helloworld"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(String a,String b)</span></span>&#123;</span><br><span class="line">    System.out.println(a.toUpperCase()+<span class="string">","</span>+b.toLowerCase());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>1.要获取一个方法就是获取类的信息，获取类的信息首先要获取类的类类型<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A a1 = <span class="keyword">new</span> A();</span><br><span class="line">Class c = a1.getClass();</span><br></pre></td></tr></table></figure></p>
 <p>2.通过名称和参数列表来获取方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Method m = c.getMethod(<span class="string">"print"</span>, <span class="keyword">int</span>.class,<span class="keyword">int</span>.class);</span><br></pre></td></tr></table></figure></p>
 <p>3.方法的反射操作<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object o = m.invoke(a1, <span class="number">10</span>,<span class="number">20</span>);</span><br></pre></td></tr></table></figure></p>
@@ -538,6 +544,23 @@
     
     
 
+    <div>
+      
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
     
 
     
@@ -548,7 +571,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javase/" rel="tag"><i class="fa fa-tag"></i> javase</a>
+            <a href="/tags/JavaSE/" rel="tag"><i class="fa fa-tag"></i> JavaSE</a>
           
         </div>
       
@@ -679,7 +702,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +724,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -757,7 +780,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Class类的使用"><span class="nav-number">1.</span> <span class="nav-text">Class类的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态加载类"><span class="nav-number">2.</span> <span class="nav-text">动态加载类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取方法信息和成员变量，构造函数信息"><span class="nav-number">3.</span> <span class="nav-text">获取方法信息和成员变量，构造函数信息</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Class类的使用"><span class="nav-number">1.</span> <span class="nav-text">一、Class类的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、动态加载类"><span class="nav-number">2.</span> <span class="nav-text">二、动态加载类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、获取方法信息和成员变量，构造函数信息"><span class="nav-number">3.</span> <span class="nav-text">三、获取方法信息和成员变量，构造函数信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法信息"><span class="nav-number">3.1.</span> <span class="nav-text">方法信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#成员变量"><span class="nav-number">3.2.</span> <span class="nav-text">成员变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、方法反射的基本操作"><span class="nav-number">4.</span> <span class="nav-text">四、方法反射的基本操作</span></a></li></ol></div>
             
 
           </div>

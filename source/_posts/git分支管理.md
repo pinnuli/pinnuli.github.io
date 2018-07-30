@@ -41,7 +41,7 @@ tags:
 
 	git merge --no-ff -m "merge with no-ff" branch_name
 
-(这里会在合并的时候自动生成一个新的commit)
+> 这里会在合并的时候自动生成一个新的commit
 
 删除分支：
 
