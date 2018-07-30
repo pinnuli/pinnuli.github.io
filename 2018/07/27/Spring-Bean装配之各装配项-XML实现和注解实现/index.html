@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!--添加顶部加载条-->
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Rotobo:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaWeb,Spring," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PINNULI'S BLOG" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、Bean管理的XML配置实现1.Bean的配置项 Id:Bean的唯一标识 Class：对应实现的类 Scope：范围 Constructor arguments：构造器参数 Properties：属性 Autowiring mode：自动装配模式  lazy-initialization mode：懒加载模式 Initialization/destruction method：初始化/销毁方">
+<meta name="keywords" content="JavaWeb,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Bean装配之各装配项 XML实现和注解实现">
+<meta property="og:url" content="https://pinnuli.github.io/2018/07/27/Spring-Bean装配之各装配项-XML实现和注解实现/index.html">
+<meta property="og:site_name" content="PINNULI&#39;S BLOG">
+<meta property="og:description" content="一、Bean管理的XML配置实现1.Bean的配置项 Id:Bean的唯一标识 Class：对应实现的类 Scope：范围 Constructor arguments：构造器参数 Properties：属性 Autowiring mode：自动装配模式  lazy-initialization mode：懒加载模式 Initialization/destruction method：初始化/销毁方">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-30T12:52:59.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Bean装配之各装配项 XML实现和注解实现">
+<meta name="twitter:description" content="一、Bean管理的XML配置实现1.Bean的配置项 Id:Bean的唯一标识 Class：对应实现的类 Scope：范围 Constructor arguments：构造器参数 Properties：属性 Autowiring mode：自动装配模式  lazy-initialization mode：懒加载模式 Initialization/destruction method：初始化/销毁方">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pinnuli.github.io/2018/07/27/Spring-Bean装配之各装配项-XML实现和注解实现/"/>
+
+
+
+
+
+  <title>Spring Bean装配之各装配项 XML实现和注解实现 | PINNULI'S BLOG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5302ef1ff06baba1932c46f843e4cd9f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  
+  
+<script src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/pinnuli">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+    </a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PINNULI'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-成就">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            成就
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/07/27/Spring-Bean装配之各装配项-XML实现和注解实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring Bean装配之各装配项 XML实现和注解实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T18:56:18+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、Bean管理的XML配置实现"><a href="#一、Bean管理的XML配置实现" class="headerlink" title="一、Bean管理的XML配置实现"></a>一、Bean管理的XML配置实现</h3><h4 id="1-Bean的配置项"><a href="#1-Bean的配置项" class="headerlink" title="1.Bean的配置项"></a>1.Bean的配置项</h4><ul>
+<li><code>Id</code>:Bean的唯一标识</li>
+<li><code>Class</code>：对应实现的类</li>
+<li><code>Scope</code>：范围</li>
+<li><code>Constructor arguments</code>：构造器参数</li>
+<li><code>Properties</code>：属性</li>
+<li><code>Autowiring mode</code>：自动装配模式 </li>
+<li><code>lazy-initialization mode</code>：懒加载模式</li>
+<li><code>Initialization/destruction method</code>：初始化/销毁方法</li>
+</ul>
+<h4 id="2-Bean的定义"><a href="#2-Bean的定义" class="headerlink" title="2.Bean的定义"></a>2.Bean的定义</h4><p>这里以<code>InjectionImpl</code>中包含<code>InjectionDAO</code>成员变量为例，说明设置注入和构造注入,<code>InjectionImpl</code>类如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InjectionServiceImpl</span> <span class="keyword">implements</span> <span class="title">InjectionService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> InjectionDAO injectionDAO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方式一：设置注入"><a href="#方式一：设置注入" class="headerlink" title="方式一：设置注入"></a>方式一：设置注入</h5><p><code>bean</code>的XML配置:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"injectionService"</span> <span class="attr">class</span>=<span class="string">"com.pinnuli.spring.ioc.injection.service.InjectionServiceImpl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"injectionDAO"</span> <span class="attr">ref</span>=<span class="string">"injectionDAO"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"injectionDAO"</span> <span class="attr">class</span>=<span class="string">"com.pinnuli.spring.ioc.injection.dao.InjectionDAOImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>InjectionIml</code>中setter方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInjectionDAO</span><span class="params">(InjectionDAO injectionDAO)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.injectionDAO = injectionDAO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方式二：构造注入"><a href="#方式二：构造注入" class="headerlink" title="方式二：构造注入"></a>方式二：构造注入</h5><p>bean的XML配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"injectionService"</span> <span class="attr">class</span>=<span class="string">"com.imooc.ioc.injection.service.InjectionServiceImpl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">"injectionDAO"</span> <span class="attr">ref</span>=<span class="string">"injectionDAO"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"injectionDAO"</span> <span class="attr">class</span>=<span class="string">"com.pinnuli.spring.ioc.injection.dao.InjectionDAOImpl"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>InjectionIml</code>中构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">InjectionServiceImpl</span><span class="params">(InjectionDAOImpl injectionDAO)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.injectionDAO = injectionDAO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-Bean的作用域"><a href="#2-Bean的作用域" class="headerlink" title="2.Bean的作用域"></a>2.Bean的作用域</h4><ul>
+<li><code>singleton</code>:单例，一个Bean容器中指存在一份（默认情况下为singleton)</li>
+<li><code>prototype</code>：每次使用（每次请求，即每次向IOC容器请求获取一个对象时）都创建新的实例，destroy方法不生效</li>
+<li><code>request</code>：每次http请求创建一个实例且仅在当前request内有效</li>
+<li><code>session</code>：同上，每次http请求创建，当前session有效</li>
+<li><code>global session</code>：给予portel的web中有效，如果是在web中，则同session</li>
+</ul>
+<p>XML文件中的配置<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanScope"</span> <span class="attr">class</span>=<span class="string">"com.pinnuli.spring.ioc.bean.BeanScope"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="3-Bean的生命周期"><a href="#3-Bean的生命周期" class="headerlink" title="3.Bean的生命周期"></a>3.Bean的生命周期</h4><blockquote>
+<p>定义 &rArr; 初始化 &rArr;    使用 &rArr; 销毁</p>
+</blockquote>
+<p><strong>初始化</strong></p>
+<h5 id="方式一：实现org-springframework-beans-factory-InitializingBean借口，覆盖afterPropertiesSet方法"><a href="#方式一：实现org-springframework-beans-factory-InitializingBean借口，覆盖afterPropertiesSet方法" class="headerlink" title="方式一：实现org.springframework.beans.factory.InitializingBean借口，覆盖afterPropertiesSet方法"></a>方式一：实现org.springframework.beans.factory.InitializingBean借口，覆盖afterPropertiesSet方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleInitializingBean</span> <span class="keyword">implements</span> <span class="title">InitialingBean</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方式二：配置init-method"><a href="#方式二：配置init-method" class="headerlink" title="方式二：配置init-method"></a>方式二：配置init-method</h5><p>XML文件中的配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"example.Example"</span> <span class="attr">init-method</span>=<span class="string">"init"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>对应实现类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>销毁:</strong></p>
+<h5 id="方式一：实现org-springframework-beans-factory-DisposableBean借口，覆盖destory方法"><a href="#方式一：实现org-springframework-beans-factory-DisposableBean借口，覆盖destory方法" class="headerlink" title="方式一：实现org.springframework.beans.factory.DisposableBean借口，覆盖destory方法"></a>方式一：实现org.springframework.beans.factory.DisposableBean借口，覆盖destory方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleInitializingBean</span> <span class="keyword">implements</span> <span class="title">DisposableBean</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="方式二：配置destory-method"><a href="#方式二：配置destory-method" class="headerlink" title="方式二：配置destory-method"></a>方式二：配置destory-method</h5><p>XML文件中的配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"exampleInitBean"</span> <span class="attr">class</span>=<span class="string">"example.Example"</span> <span class="attr">init-method</span>=<span class="string">"destroy"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><code>destory</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleBean</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="配置全局默认初始化、销毁方法"><a href="#配置全局默认初始化、销毁方法" class="headerlink" title="配置全局默认初始化、销毁方法"></a>配置全局默认初始化、销毁方法</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">default-init-method</span>=<span class="string">"init"</span> <span class="attr">default-destroy-mothod</span>=<span class="string">"destroy"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>i.当三种方式同时配置时，实现接口和配置bean初始化/销毁方法会覆盖全局默认方法，全局默认方法会失效；<br>  ii.即使配置了全局方法，在具体实现中依然可以不定义对应的方法，不会有任何异常或报错；<br>  iii.一旦配置了bean初始化/销毁方法，则必须定义对应的初始化销毁方法。</p>
+</blockquote>
+<h4 id="4-Bean的自动装配"><a href="#4-Bean的自动装配" class="headerlink" title="4.Bean的自动装配"></a>4.Bean的自动装配</h4><ul>
+<li><code>No</code>：什么都不操作</li>
+<li><code>byname</code>：即<bean>中的<code>id</code>，根据属性名自动装配，</bean></li>
+<li><code>byType</code>：即<bean>中的<code>class</code></bean></li>
+</ul>
+<blockquote>
+<p>i.如果容器中存在一个与制定属性类型相同的bean，将与该属性自动装配；<br>ii.如果存在多个该类型的bean，则抛出异常，并指出不能使用<code>byType</code>方式进行自动装配<br>iii.如果没有找到匹配的bean，则不进行任何操作<br>以上两种情况bean的XML配置如下：</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">default-autowire</span>=<span class="string">"byType"</span>/"<span class="attr">byName</span>"&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"autoWiringService"</span> <span class="attr">class</span>=<span class="string">"com.pinnuli.spring.ioc.autowiring.AutoWiringService"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"autoWiringDAO"</span> <span class="attr">class</span>=<span class="string">"com.pinnuli.spring.ioc.autowiring.AutoWiringDAO"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Constructor</code>: 应用于构造器参数，与<code>byType</code>类似，如果容器没有找到与构造器参数类型一致的bean，则抛出异常</li>
+</ul>
+<blockquote>
+<p>对应的类中的构造方法和setter方法与设置注入或构造注入一致</p>
+</blockquote>
+<hr>
+<h3 id="二、Bean管理的注解实现"><a href="#二、Bean管理的注解实现" class="headerlink" title="二、Bean管理的注解实现"></a>二、Bean管理的注解实现</h3><h4 id="1-用注解实现时，需要配置以下XML文件扫描有Bean注解的类："><a href="#1-用注解实现时，需要配置以下XML文件扫描有Bean注解的类：" class="headerlink" title="1.用注解实现时，需要配置以下XML文件扫描有Bean注解的类："></a>1.用注解实现时，需要配置以下XML文件扫描有Bean注解的类：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:context</span>=<span class="string">"http://www.springframework.org/schema/context"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">        http://www.springframework.org/schema/context/spring-context.xsd"</span> &gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;context:annotation-config/&gt;</code><br>仅会查找同一个<code>applicat context</code>中的bean注解,即扫描完成注册后的bean中方法和成员变量的注解<br>通过在基于XML的Spring配置如下标签</li>
+</ul>
+<ul>
+<li><code>&lt;context:component-scan&gt;</code>会扫描所有有bean注解的类，并注册到IOC容器，包含了<code>&lt;context:annotation-config&gt;</code>的全部功能，因而通常只需要使用前者，而不用后者</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.example&gt;</span></span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>base-package表示扫描包下的所有类</p>
+</blockquote>
+<h4 id="2-使用过滤器进行自定义扫描"><a href="#2-使用过滤器进行自定义扫描" class="headerlink" title="2.使用过滤器进行自定义扫描"></a>2.使用过滤器进行自定义扫描</h4><p>默认情况下，类被自动发现并注册bean的条件是：使用了<code>@Component</code>，<code>@Repository</code>，<code>@Service</code>，<code>@Controller</code>注解，或者使用@<code>Component</code>的自定义注解，可以通过过滤器修改上述的行为</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.example"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">"regex"</span> <span class="attr">expression</span>=<span class="string">".*Stub.*Respository"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">context:include-filter</span> <span class="attr">type</span>=<span class="string">"annotation"</span> <span class="attr">expression</span>=<span class="string">"org.springframework.stereotype.Repository"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span>/&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>还可以使用<code>use-default-filters=&quot;false&quot;</code>禁用自动发现与注册</p>
+</blockquote>
+<h4 id="Bean的定义"><a href="#Bean的定义" class="headerlink" title="Bean的定义"></a>Bean的定义</h4><p>Bean名称是由<code>BeannameGenerator</code>生成的，默认情况下为类名的首字母变为小写</p>
+<blockquote>
+<p><code>@Component</code>，<code>@Repository</code>，<code>@Service</code>,<code>@Controller</code>都有一个那么属性用于显示设置Bean的名称,如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(<span class="string">"beanName"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanAnnotation</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>也可自定义命名策略,实现<code>BeanNameGenerator</code>接口，并一定要包含一个无参构造器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.example"</span> <span class="attr">name-generator</span>=<span class="string">"org.example.MyNameGenerator"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h4><p>通常情况下启动查找的Spring组件，其scope是<code>singleton</code>，可用<code>@Scope</code>表示scope,<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>也可自定义scope策略，实现实现<code>ScopeMetadataResolver</code>接口，并一定要包含一个无参构造器<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.example"</span> <span class="attr">name-generator</span>=<span class="string">"org.example.MyScopeResolver"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>对于自动装配注解，参见<a href="/2018/07/28/Spring-Bean装配之Autowired注解/#more">Spring Bean装配之Autowired注解</a></p>
+</blockquote>
+<h4 id="代理方式"><a href="#代理方式" class="headerlink" title="代理方式"></a>代理方式</h4><p>有三个值可选：<code>no</code>,<code>interfaces</code>,<code>targetClass</code>，默认情况下为no</p>
+<p>可以配置<code>@Scope</code>注解的<code>proxyMode</code>属性来配置代理方式，即XML配置时的<code>scope-proxy</code>属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Scope</span>(value=<span class="string">"prototype"</span>, proxyMode = ScopedProxyMode.TARGET_CLASS)</span><br></pre></td></tr></table></figure></p>
+<p>可以在XML文件中使用<code>scope-proxy</code>属性指定代理<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"org.example"</span> <span class="attr">scope-proxy</span>=<span class="string">"interfaces"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="三、Resource-amp-ResourceLoader"><a href="#三、Resource-amp-ResourceLoader" class="headerlink" title="三、Resource&amp;ResourceLoader"></a>三、Resource&amp;ResourceLoader</h3><h4 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h4><p>针对资源文件的统一入口，用于Spring加载资源文件</p>
+<ul>
+<li>UrlResource:URL对应的资源，根据一个URL地址即可构建</li>
+<li>ClassPathResource：获取类路径下的资源文件</li>
+<li>FileSystemResource：获取文件系统里面的资源</li>
+<li>ServletContextResource：ServletContext封装的资源，用于访问ServletContext环境下的资源</li>
+<li>InputStreamResource：针对于输入流封装的资源</li>
+<li>ByArrayResource：针对于字节数组封装的资源</li>
+</ul>
+<h4 id="ResourceLoader"><a href="#ResourceLoader" class="headerlink" title="ResourceLoader"></a>ResourceLoader</h4><blockquote>
+<p>i.所有的application contexts都实现了<code>ResourceLoader</code>接口，即可以通过<code>ApplicationContext</code>获得Resource实例<br>ii.使用参数的前缀说明获取资源的类型</p>
+</blockquote>
+<h5 id="1-类路径下的资源文件"><a href="#1-类路径下的资源文件" class="headerlink" title="1.类路径下的资源文件"></a>1.类路径下的资源文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Resource resource = applicationContext.getResource(<span class="string">"classpath:config.txt"</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="2-文件系统中的资源"><a href="#2-文件系统中的资源" class="headerlink" title="2.文件系统中的资源"></a>2.文件系统中的资源</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Resource resource = applicationContext.getResource(<span class="string">"file:/var/SpringDemo/src/main/resources/config.txt"</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="3-URL对应的资源"><a href="#3-URL对应的资源" class="headerlink" title="3.URL对应的资源"></a>3.URL对应的资源</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Resource resource = applicationContext.getResource(<span class="string">"url:httpS://www.pinnuli.com/index.html"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>没有前缀时，取决于<code>ApplicationContext</code>的路径（之后再添加解释）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Resource resource = applicationContext.getResource(<span class="string">"config.txt"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参阅：<br>  <a href="https://www.imooc.com/learn/196" target="_blank" rel="noopener">慕课网：Spring入门篇</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/25/Java-Web-监听器/" rel="next" title="Java Web 监听器">
+                <i class="fa fa-chevron-left"></i> Java Web 监听器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/28/Spring-Bean装配之Autowired注解/" rel="prev" title="Spring Bean装配之Autowired注解">
+                Spring Bean装配之Autowired注解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_googleplus"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_copy"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	siteNum:7,
+	sm:"weixin,cqq,fb,twitter,tsina,googleplus,copy",
+	summary:"",
+	boldNum:6,
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="pinnuli" />
+            
+              <p class="site-author-name" itemprop="name">pinnuli</p>
+              <p class="site-description motion-element" itemprop="description">如果你连努力都拼不过别人,凭什么和别人拼天赋！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pinnuli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/users/c855b8a72987/timeline" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Bean管理的XML配置实现"><span class="nav-number">1.</span> <span class="nav-text">一、Bean管理的XML配置实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Bean的配置项"><span class="nav-number">1.1.</span> <span class="nav-text">1.Bean的配置项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Bean的定义"><span class="nav-number">1.2.</span> <span class="nav-text">2.Bean的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方式一：设置注入"><span class="nav-number">1.2.1.</span> <span class="nav-text">方式一：设置注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方式二：构造注入"><span class="nav-number">1.2.2.</span> <span class="nav-text">方式二：构造注入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Bean的作用域"><span class="nav-number">1.3.</span> <span class="nav-text">2.Bean的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Bean的生命周期"><span class="nav-number">1.4.</span> <span class="nav-text">3.Bean的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方式一：实现org-springframework-beans-factory-InitializingBean借口，覆盖afterPropertiesSet方法"><span class="nav-number">1.4.1.</span> <span class="nav-text">方式一：实现org.springframework.beans.factory.InitializingBean借口，覆盖afterPropertiesSet方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方式二：配置init-method"><span class="nav-number">1.4.2.</span> <span class="nav-text">方式二：配置init-method</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方式一：实现org-springframework-beans-factory-DisposableBean借口，覆盖destory方法"><span class="nav-number">1.4.3.</span> <span class="nav-text">方式一：实现org.springframework.beans.factory.DisposableBean借口，覆盖destory方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方式二：配置destory-method"><span class="nav-number">1.4.4.</span> <span class="nav-text">方式二：配置destory-method</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置全局默认初始化、销毁方法"><span class="nav-number">1.5.</span> <span class="nav-text">配置全局默认初始化、销毁方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Bean的自动装配"><span class="nav-number">1.6.</span> <span class="nav-text">4.Bean的自动装配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Bean管理的注解实现"><span class="nav-number">2.</span> <span class="nav-text">二、Bean管理的注解实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-用注解实现时，需要配置以下XML文件扫描有Bean注解的类："><span class="nav-number">2.1.</span> <span class="nav-text">1.用注解实现时，需要配置以下XML文件扫描有Bean注解的类：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用过滤器进行自定义扫描"><span class="nav-number">2.2.</span> <span class="nav-text">2.使用过滤器进行自定义扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的定义"><span class="nav-number">2.3.</span> <span class="nav-text">Bean的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的作用域"><span class="nav-number">2.4.</span> <span class="nav-text">Bean的作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代理方式"><span class="nav-number">2.5.</span> <span class="nav-text">代理方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Resource-amp-ResourceLoader"><span class="nav-number">3.</span> <span class="nav-text">三、Resource&amp;ResourceLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Resource"><span class="nav-number">3.1.</span> <span class="nav-text">Resource</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResourceLoader"><span class="nav-number">3.2.</span> <span class="nav-text">ResourceLoader</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-类路径下的资源文件"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.类路径下的资源文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-文件系统中的资源"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.文件系统中的资源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-URL对应的资源"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.URL对应的资源</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pinnuli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

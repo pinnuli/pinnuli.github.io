@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!--添加顶部加载条-->
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Rotobo:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaWeb,JSP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PINNULI'S BLOG" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、jsp简介1、jsp三大指令page指令:&amp;lt;%@page 属性=”” %&amp;gt;,位于jsp页面顶端，可以有多个 1&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; import=&quot;java.text.*&quot;%&amp;gt; taglib指令：标签库 includeinclude指令:&amp;lt;%@include f">
+<meta name="keywords" content="JavaWeb,JSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP学习笔记">
+<meta property="og:url" content="https://pinnuli.github.io/2018/05/03/JSP学习笔记/index.html">
+<meta property="og:site_name" content="PINNULI&#39;S BLOG">
+<meta property="og:description" content="一、jsp简介1、jsp三大指令page指令:&amp;lt;%@page 属性=”” %&amp;gt;,位于jsp页面顶端，可以有多个 1&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; import=&quot;java.text.*&quot;%&amp;gt; taglib指令：标签库 includeinclude指令:&amp;lt;%@include f">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/YyHsnwD.png">
+<meta property="og:image" content="https://i.imgur.com/U27ljB4.png">
+<meta property="og:image" content="https://i.imgur.com/wWWpmzd.png">
+<meta property="og:updated_time" content="2018-07-30T12:51:20.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JSP学习笔记">
+<meta name="twitter:description" content="一、jsp简介1、jsp三大指令page指令:&amp;lt;%@page 属性=”” %&amp;gt;,位于jsp页面顶端，可以有多个 1&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; import=&quot;java.text.*&quot;%&amp;gt; taglib指令：标签库 includeinclude指令:&amp;lt;%@include f">
+<meta name="twitter:image" content="https://i.imgur.com/YyHsnwD.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pinnuli.github.io/2018/05/03/JSP学习笔记/"/>
+
+
+
+
+
+  <title>JSP学习笔记 | PINNULI'S BLOG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5302ef1ff06baba1932c46f843e4cd9f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  
+  
+<script src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/pinnuli">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+    </a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PINNULI'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-成就">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            成就
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/05/03/JSP学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JSP学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T21:17:47+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JSP笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JSP笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、jsp简介"><a href="#一、jsp简介" class="headerlink" title="一、jsp简介"></a>一、jsp简介</h3><h4 id="1、jsp三大指令"><a href="#1、jsp三大指令" class="headerlink" title="1、jsp三大指令"></a>1、jsp三大指令</h4><p><strong>page指令</strong>:&lt;%@page 属性=”” %&gt;,位于jsp页面顶端，可以有多个</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.text.*"</span>%&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>taglib指令</strong>：标签库</p>
+<p><strong>include</strong><br>include指令:<code>&lt;%@include file=&quot;date.jsp&quot;%&gt;</code><br>include动作:<code>&lt;jsp:include page=&quot;url&quot; flush=&quot;true|false&quot;/&gt;</code></p>
+<blockquote>
+<p>page:要包含的页面,<br>flush：被包含的页面是否从缓冲区读取</p>
+</blockquote>
+<p><strong>include指令与include动作的区别：</strong><br><img src="https://i.imgur.com/YyHsnwD.png" alt="diff_between_includeCommand_includeAction"></p>
+<p><strong>forward动作</strong>：<code>&lt;jsp: forward page=&quot;url&quot;/&gt;</code><br>等同于：<code>request.getRequestDispatcher(&quot;/url&quot;).forward(request,response);</code></p>
+<p><strong>param动作</strong>：<code>&lt;jsp:param name=&quot;参数名&quot; value=&quot;参数值&quot;&gt;</code><br>常与<jsp:forward>一起使用，作为其的子标签:</jsp:forward></p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:forward page=<span class="string">"user.jsp"</span>&gt;</span><br><span class="line">	&lt;%--用&lt;jsp:param <span class="string">"&gt;&lt;/jsp:param&gt;添加参数--%&gt;</span></span><br><span class="line"><span class="string">	&lt;jsp:param name="</span>email<span class="string">" value="</span><span class="number">11111111</span>@<span class="number">163</span>.com<span class="string">"&gt;&lt;/jsp:param&gt;</span></span><br><span class="line"><span class="string">&lt;/jsp:forward&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、jsp注释"><a href="#2、jsp注释" class="headerlink" title="2、jsp注释"></a>2、jsp注释</h4><ul>
+<li>html的注释  <!-- html注释 --></li>
+<li>jsp的注释<br>&lt;%– jsp注释 –&gt;（客户端不可见）</li>
+<li>jsp脚本注释:<br>//单行<br>/<em> </em>/ 多行</li>
+</ul>
+<h4 id="3、jsp脚本"><a href="#3、jsp脚本" class="headerlink" title="3、jsp脚本"></a>3、jsp脚本</h4><p>&lt;% java代码 %&gt;</p>
+<h4 id="4、jsp声明变量或方法"><a href="#4、jsp声明变量或方法" class="headerlink" title="4、jsp声明变量或方法"></a>4、jsp声明变量或方法</h4><p>&lt;%! java代码 %&gt;</p>
+<h4 id="5、jsp表达式"><a href="#5、jsp表达式" class="headerlink" title="5、jsp表达式"></a>5、jsp表达式</h4><p>&lt;%=表达式 %&gt;  ps:不可;分号结束</p>
+<h4 id="6、jsp页面的生命周期"><a href="#6、jsp页面的生命周期" class="headerlink" title="6、jsp页面的生命周期"></a>6、jsp页面的生命周期</h4><p><img src="https://i.imgur.com/U27ljB4.png" alt="jsp_life_cycle.png"> </p>
+<h3 id="二、jsp内置对象"><a href="#二、jsp内置对象" class="headerlink" title="二、jsp内置对象"></a>二、jsp内置对象</h3><p><strong> 九大内置对象：</strong><code>out</code>,<code>request</code>,<code>response</code>,<code>session</code>,<code>application</code>,<code>Page</code>,<code>pageContext</code>,<code>exception</code>,<code>config</code></p>
+<p><strong>out</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line">   	out.println("&lt;h2&gt;静夜思&lt;/h2&gt;");</span><br><span class="line">   	out.println("床前明月光<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   	out.println("疑是地上霜<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   	out.flush();</span><br><span class="line">  		/*out.clear();会抛出异常*/</span><br><span class="line">   	out.clearBuffer();//这里不会抛出异常</span><br><span class="line">   	out.println("举头望明月<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   	out.println("低头思故乡<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   %&gt;</span><br><span class="line"></span><br><span class="line">   缓冲区大小：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">out.getBufferSize</span>()%&gt;</span>byte<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   缓冲区剩余大小：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">out.getRemaining</span>()%&gt;</span>byte<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   是否自动清空缓冲区：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">out.isAutoFlush</span>()%&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>request</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">request.setCharacterEncoding</span>("<span class="attr">utf-8</span>");//解决<span class="attr">post</span>中文乱码问题，但无法解决<span class="attr">get</span>，<span class="attr">get</span>解决需要直接<span class="attr">Tomcat</span>配置文件</span></span><br><span class="line"><span class="tag">       <span class="attr">request.setAttribute</span>("<span class="attr">password</span>","<span class="attr">123456</span>");//设置属性密码</span></span><br><span class="line"><span class="tag">   %&gt;</span></span><br><span class="line">   用户名：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">request.getParameter</span>("<span class="attr">username</span>")%&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   爱好：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">if</span>(<span class="attr">request.getParameterValues</span>("<span class="attr">favorite</span>") != <span class="string">null)&#123;</span>  //这里需要判断为不为空，<span class="attr">jsp</span>这里不能将<span class="attr">String</span>数组看为<span class="attr">Boolean</span></span></span><br><span class="line"><span class="tag">           <span class="attr">String</span>[] <span class="attr">favorites</span> = <span class="string">request.getParameterValues(</span>"<span class="attr">favorite</span>");</span></span><br><span class="line">           for (int i = 0; i &lt; favorites.length; i++) &#123;</span><br><span class="line">               out.println(favorites[i] + "&amp;nbsp;&amp;nbsp;&amp;nbsp;");</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       String realPath = request.getRealPath("requset.jsp");%&gt;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   密码：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getAttribute("password")%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   请求体的MIME类型：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getContentType()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   协议类型和版本号：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getProtocol()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   服务器主机名：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getServerName()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   服务器端口号：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getServerPort()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   请求文件长度：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getContentLength()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   请求的客户端地址：</span><br><span class="line">   &lt;%=request.getRemoteAddr()%&gt;&lt;&lt;br&gt;</span><br><span class="line"></span><br><span class="line">   请求的真实路径：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getRealPath("requset.jsp")%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   请求的上下文路径：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=request.getContextPath()%</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>response</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">response.setContentType</span>("<span class="attr">text</span>/<span class="attr">html</span>;<span class="attr">charset</span>=<span class="string">utf-8</span>");</span></span><br><span class="line">       out.println("&lt;h1&gt;response内置对象&lt;/h1&gt;");</span><br><span class="line">       out.println("<span class="tag">&lt;<span class="name">hr</span>&gt;</span>");</span><br><span class="line">       //out.flush();</span><br><span class="line">       /* 因为getWrite获得的输出流对象会先于内置对象out输出，</span><br><span class="line">       所以要先清空缓冲区，使out强制输出，否则结果会是先输出outer</span><br><span class="line">       再输出out*/</span><br><span class="line"></span><br><span class="line">       PrintWriter outer = response.getWriter();</span><br><span class="line">       outer.println("大家好，我是response生成的输出流outer");</span><br><span class="line">//  response.sendRedirect("login.jsp");//重定向</span><br><span class="line">//  response.sendRedirect("request.jsp");</span><br><span class="line">       request.getRequestDispatcher("request.jsp").forward(request,response);//转发</span><br><span class="line">   %&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>请求转发和请求重定向的区别：</strong></p>
+<p><img src="https://i.imgur.com/wWWpmzd.png" alt="redirectAndTransmit.PNG"></p>
+<p><strong>session</strong><br>HttpSession的实例，周期：在第一个jsp页面被加载时自动创建，即浏览器连接到服务器开始，关闭浏览器离开这个服务器结束，在服务器的几个页面之间切换，服务器应当知道这是一个客户，就可以用session对象</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">SimpleDateFormat</span> <span class="attr">sdf</span> = <span class="string">new</span> <span class="attr">SimpleDateFormat</span>("<span class="attr">yyyy</span>年<span class="attr">mm</span>月<span class="attr">dd</span>日 <span class="attr">HH:mm:ss</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">Date</span> <span class="attr">d</span> = <span class="string">new</span> <span class="attr">Date</span>(<span class="attr">session.getCreationTime</span>());</span></span><br><span class="line"><span class="tag">       <span class="attr">session.setAttribute</span>("<span class="attr">username</span>","<span class="attr">pinnuli</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">session.setAttribute</span>("<span class="attr">password</span>","<span class="attr">123456</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">session.setAttribute</span>("<span class="attr">age</span>",<span class="attr">20</span>);</span></span><br><span class="line"><span class="tag">//  <span class="attr">session.setMaxInactiveInterval</span>(<span class="attr">10</span>);</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">//设置<span class="attr">session</span>最大生成期限，单位秒,也可在<span class="attr">web.xml</span>中设置<span class="attr">session-timeout</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">   %&gt;</span></span><br><span class="line">   Session创建时间：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=sdf.format(d)%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   Session的ID：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=session.getId()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   Session中获取属性值：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=session.getAttribute("username")%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   Session保存的属性数组：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">String</span>[] <span class="attr">names</span> = <span class="string">session.getValueNames();</span></span></span><br><span class="line">       for(int i=0; i&lt;names.length; i++)&#123;</span><br><span class="line">           out.println(names[i] + "&amp;nbsp;&amp;nbsp;");</span><br><span class="line">       &#125;</span><br><span class="line">//        session.invalidate();//销毁当前会话,每次刷新一次页面就会新建一个session</span><br><span class="line">   %&gt;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">%--测试不同页面是否同一个session--%</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"session_page2.jsp"</span>&gt;</span>跳转到session_page2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>application</strong><br>实现用户间数据的共享，可存放全局边变量，相当于java的静态变量</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">application.setAttribute</span>("<span class="attr">city</span>","广州");</span></span><br><span class="line"><span class="tag">       <span class="attr">application.setAttribute</span>("<span class="attr">postcode</span>","<span class="attr">510000</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">application.setAttribute</span>("<span class="attr">email</span>","<span class="attr">guangzhou</span>@<span class="attr">163.com</span>");</span></span><br><span class="line"><span class="tag">   %&gt;</span></span><br><span class="line">   所在城市：<span class="tag">&lt;<span class="name">%=application.getAttribute("city")%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   所有属性：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">Enumeration</span> <span class="attr">attributes</span> = <span class="string">application.getAttributeNames();</span></span></span><br><span class="line"><span class="tag">       <span class="attr">while</span> (<span class="attr">attributes.hasMoreElements</span>())&#123;</span></span><br><span class="line"><span class="tag">           <span class="attr">out.println</span>(<span class="attr">attributes.nextElement</span>() + "&amp;<span class="attr">nbsp</span>;&amp;<span class="attr">nbsp</span>;");</span></span><br><span class="line"><span class="tag">       &#125;</span></span><br><span class="line"><span class="tag">   %&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   jsp(serviet)引擎名和版本号：<span class="tag">&lt;<span class="name">%=application.getServerInfo()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>page、pageContext</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>page:<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>当前page页面的字符串描述：<span class="tag">&lt;<span class="name">%=page.toString()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>pageContext:<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>用户名：从session中获取属性-<span class="tag">&lt;<span class="name">%=pageContext.getSession().getAttribute("username")%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="tag">&lt;<span class="name">%--跳转到其他页面--%</span>&gt;</span></span><br><span class="line">  &lt;%--&lt;%</span><br><span class="line">      pageContext.forward("out.jsp");</span><br><span class="line">  %&gt;--%&gt;</span><br><span class="line">   include方法，包含其他页面:</span><br><span class="line">       <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">           <span class="attr">pageContext.include</span>("<span class="attr">out.jsp</span>");</span></span><br><span class="line"><span class="tag">       %&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>exception</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">异常消息：<span class="tag">&lt;<span class="name">%=exception.getMessage()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   异常的字符串描述：<span class="tag">&lt;<span class="name">%=exception.toString()%</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="三、jsp使用Javabean"><a href="#三、jsp使用Javabean" class="headerlink" title="三、jsp使用Javabean"></a>三、jsp使用Javabean</h3><h4 id="1-Javabean的设计原则"><a href="#1-Javabean的设计原则" class="headerlink" title="1. Javabean的设计原则"></a>1. Javabean的设计原则</h4><ul>
+<li>必须是公有类</li>
+<li>必须包含无参构造方法</li>
+<li>属性私有</li>
+<li>用getter()和setter()进行封装</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Students</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span>  <span class="title">Students</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-存取Javabean有关的jsp动作元素"><a href="#2-存取Javabean有关的jsp动作元素" class="headerlink" title="2. 存取Javabean有关的jsp动作元素"></a>2. 存取Javabean有关的jsp动作元素</h4><p><strong>在jsp页面中使用Javabeans：</strong></p>
+<p>方法一：像使用普通java类一样，创建Javabean实例<br>方法二：在jsp页面中通常使用jsp动作标签使用javabean,常用的动作标签：userBeans、setProperty、getProperty</p>
+<ul>
+<li><code>&lt;jsp:useBeans&gt;</code></li>
+</ul>
+<p>在jsp页面中实例化或者在指定范围内使用Javabean：</p>
+<p><code>&lt;jsp:useBeans id=&quot;标示符&quot; class=&quot;java类名&quot; scope=&quot;作用范围&quot;/&gt;</code></p>
+<blockquote>
+<p>scope属性：指定Javabean的作用范围<br>page：当前页面,重定向和转发都无效<br>request：可通过HttpRequest.getAttribute()取得Javabean对象，重定向无效，转发有效<br>session：可通过HttpSession.getAttribute()取得Javabean对象，同个会话有效<br>application:可通过application.getAttribute()取得Javabean对象，不同会话都有效</p>
+</blockquote>
+<p>例如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp:useBean</span> <span class="attr">id</span>=<span class="string">"myUsers"</span> <span class="attr">class</span>=<span class="string">"com.po.Users"</span> <span class="attr">scope</span>=<span class="string">"application"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:useBean</span>&gt;</span></span><br><span class="line">用户名：<span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:getProperty</span>&gt;</span></span><br><span class="line">密码：<span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:getProperty</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>也可使用内置对象获取：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名：<span class="tag">&lt;<span class="name">%=((Users)application.getAttribute("myUsers")).getUsername()%</span>&gt;</span></span><br><span class="line">密码： <span class="tag">&lt;<span class="name">%=((Users)</span> <span class="attr">application.getAttribute</span>("<span class="attr">myUsers</span>"))<span class="attr">.getPassword</span>()%&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><code>&lt;jsp:setProperty&gt;</code></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">根据表单自动匹配所有属性:</span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:setProperty</span>&gt;</span></span><br><span class="line"></span><br><span class="line">根据表单匹配部分属性:</span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:setProperty</span>&gt;</span></span><br><span class="line"></span><br><span class="line">与表单无关，通过手工赋值给属性:</span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"hahahaha"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:setProperty</span>&gt;</span></span><br><span class="line"></span><br><span class="line">通过url传参数给属性赋值:</span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:setProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"password"</span> <span class="attr">param</span>=<span class="string">"testparam"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:setProperty</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>&lt;jsp:getProperty&gt;</code></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用getProperty获取属性值:</span><br><span class="line"><span class="tag">&lt;<span class="name">jsp:getProperty</span> <span class="attr">name</span>=<span class="string">"myUsers"</span> <span class="attr">property</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;/<span class="name">jsp:getProperty</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参阅：<br>  <a href="https://www.imooc.com/learn/166" target="_blank" rel="noopener">慕课网：JAVA遇见HTML——JSP篇</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
+          
+            <a href="/tags/JSP/" rel="tag"><i class="fa fa-tag"></i> JSP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/30/vim的使用/" rel="next" title="vim的使用">
+                <i class="fa fa-chevron-left"></i> vim的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/11/java集合框架/" rel="prev" title="java集合框架">
+                java集合框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_googleplus"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_copy"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	siteNum:7,
+	sm:"weixin,cqq,fb,twitter,tsina,googleplus,copy",
+	summary:"",
+	boldNum:6,
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="pinnuli" />
+            
+              <p class="site-author-name" itemprop="name">pinnuli</p>
+              <p class="site-description motion-element" itemprop="description">如果你连努力都拼不过别人,凭什么和别人拼天赋！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pinnuli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/users/c855b8a72987/timeline" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、jsp简介"><span class="nav-number">1.</span> <span class="nav-text">一、jsp简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、jsp三大指令"><span class="nav-number">1.1.</span> <span class="nav-text">1、jsp三大指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、jsp注释"><span class="nav-number">1.2.</span> <span class="nav-text">2、jsp注释</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、jsp脚本"><span class="nav-number">1.3.</span> <span class="nav-text">3、jsp脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、jsp声明变量或方法"><span class="nav-number">1.4.</span> <span class="nav-text">4、jsp声明变量或方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、jsp表达式"><span class="nav-number">1.5.</span> <span class="nav-text">5、jsp表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、jsp页面的生命周期"><span class="nav-number">1.6.</span> <span class="nav-text">6、jsp页面的生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、jsp内置对象"><span class="nav-number">2.</span> <span class="nav-text">二、jsp内置对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、jsp使用Javabean"><span class="nav-number">3.</span> <span class="nav-text">三、jsp使用Javabean</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Javabean的设计原则"><span class="nav-number">3.1.</span> <span class="nav-text">1. Javabean的设计原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-存取Javabean有关的jsp动作元素"><span class="nav-number">3.2.</span> <span class="nav-text">2. 存取Javabean有关的jsp动作元素</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pinnuli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

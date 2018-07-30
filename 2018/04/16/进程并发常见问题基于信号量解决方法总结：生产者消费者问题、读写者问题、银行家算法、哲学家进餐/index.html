@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!--添加顶部加载条-->
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Rotobo:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="OS,计算机基础," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PINNULI'S BLOG" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、信号量 信号量是一个与队列有关的整型变量。 可以初始化成非负数； semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行； semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。  信号量原语semWait和semSignal的定义1234567891011121314151617181920strcut semap">
+<meta name="keywords" content="OS,计算机基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程并发常见问题基于信号量解决方法总结：生产者&#x2F;消费者问题、读&#x2F;写者问题、银行家算法、哲学家进餐">
+<meta property="og:url" content="https://pinnuli.github.io/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/index.html">
+<meta property="og:site_name" content="PINNULI&#39;S BLOG">
+<meta property="og:description" content="一、信号量 信号量是一个与队列有关的整型变量。 可以初始化成非负数； semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行； semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。  信号量原语semWait和semSignal的定义1234567891011121314151617181920strcut semap">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pinnuli.github.io/images/process_concurrent_finite_buffer.png">
+<meta property="og:updated_time" content="2018-07-30T12:14:03.088Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程并发常见问题基于信号量解决方法总结：生产者&#x2F;消费者问题、读&#x2F;写者问题、银行家算法、哲学家进餐">
+<meta name="twitter:description" content="一、信号量 信号量是一个与队列有关的整型变量。 可以初始化成非负数； semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行； semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。  信号量原语semWait和semSignal的定义1234567891011121314151617181920strcut semap">
+<meta name="twitter:image" content="https://pinnuli.github.io/images/process_concurrent_finite_buffer.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pinnuli.github.io/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/"/>
+
+
+
+
+
+  <title>进程并发常见问题基于信号量解决方法总结：生产者/消费者问题、读/写者问题、银行家算法、哲学家进餐 | PINNULI'S BLOG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5302ef1ff06baba1932c46f843e4cd9f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  
+  
+<script src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/pinnuli">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+    </a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PINNULI'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-成就">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            成就
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程并发常见问题基于信号量解决方法总结：生产者/消费者问题、读/写者问题、银行家算法、哲学家进餐</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T19:07:43+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、信号量"><a href="#一、信号量" class="headerlink" title="一、信号量"></a>一、信号量</h3><ul>
+<li>信号量是一个与队列有关的整型变量。</li>
+<li>可以初始化成非负数；</li>
+<li>semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；</li>
+<li>semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。</li>
+</ul>
+<h4 id="信号量原语semWait和semSignal的定义"><a href="#信号量原语semWait和semSignal的定义" class="headerlink" title="信号量原语semWait和semSignal的定义"></a>信号量原语semWait和semSignal的定义</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">strcut semaphore&#123;</span><br><span class="line">	int count;</span><br><span class="line">	aueueType queue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void semWait(semaphore s) &#123;</span><br><span class="line">	s.count--;</span><br><span class="line">	<span class="keyword">if</span>(s.count &lt; 0) &#123;</span><br><span class="line">		place this process <span class="keyword">in</span> s.queue;</span><br><span class="line">		block this process;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void semSignal(semaphore s) &#123;</span><br><span class="line">	s.count ++;</span><br><span class="line">	<span class="keyword">if</span>(s.count &lt;= 0) &#123;</span><br><span class="line">		remove a process P from s.queue;</span><br><span class="line">		place process P on ready list;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="信号量实现互斥"><a href="#信号量实现互斥" class="headerlink" title="信号量实现互斥"></a>信号量实现互斥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const int n;</span><br><span class="line">semaphore s = 1;</span><br><span class="line">void P(int i) &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		semWait(s);</span><br><span class="line">		operate;</span><br><span class="line">		semSignal(s);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">	parbegin(P(1), P(2), ...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>信号量</strong></p>
+<ul>
+<li>一个信号量可用于n个进程的同步互斥；且只能由semWait、semSignal操作修改。</li>
+<li>用于互斥时，S初值为1，取值为1~ - (n-1)        （相当于临界区的通行证，实际上也是资源个数）<br>  S=1：临界区可用<br>  S=0：已有一进程进入临界区<br>  S&lt;0：临界区已被占用，|S|个进程正等待进入</li>
+<li>用于同步时，S初值&gt;=0<br>  S&gt;=0:表示可用资源个数<br>  S&lt;0: 表示该资源的等待队列长度</li>
+</ul>
+<p><strong>semWait、semSignal操作</strong></p>
+<ul>
+<li>semWait(S)：请求分配一个资源。</li>
+<li>semSignal(S)：释放一个资源。</li>
+<li>semWait、semSignal操作必须成对出现。</li>
+<li>用于互斥时，位于同一进程内；</li>
+<li>用于同步时，交错出现于两个合作进程内。</li>
+<li>多个semWait操作的次序不能颠倒，否则可能导致死锁。 </li>
+<li>多个semSignal操作的次序可任意。</li>
+</ul>
+<p>二、生产者/消费者问题</p>
+<p><strong>问题描述：</strong><br>    有一个或多个生产者生产某种类型的数据，并放置在缓冲区中；<br>    有一个消费者从缓冲区中取数据，每次取一项；<br>    系统保证避免对缓冲区的重复操作，即任何时候只有一个主体（生产者或消费者）可以访问缓冲区;<br>    缓存已满时，生产者不能继续添加数据；<br>    缓存已空时，消费者不能继续移走数据。</p>
+<p><strong>producer:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">	/* produce item v */</span><br><span class="line">	<span class="keyword">while</span>((<span class="keyword">in</span> + 1) % n == out) //等待缓存有空位</span><br><span class="line">		/* doing nothing */</span><br><span class="line">	b[<span class="keyword">in</span>] = v;</span><br><span class="line">	<span class="keyword">in</span> = (<span class="keyword">in</span> + 1) % n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>consumer:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">in</span> == out) //此时缓存为空，等待生产者生产放入缓存后才可消费</span><br><span class="line">		/* doing nothing */</span><br><span class="line">	w = b[out];</span><br><span class="line">	out = (out + 1) % n;</span><br><span class="line">	/* consume item w */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>有限缓冲区：</strong></p>
+<p><img src="/images/process_concurrent_finite_buffer.png" alt="process_concurrent_finite_buffer"></p>
+<p><strong>使用信号量解决有限缓冲区生产者消费者问题:</strong></p>
+<blockquote>
+<p>n 表示已生产产品的数量<br>s 用来控制互斥<br>e 表示空闲空间数目</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">semaphore n = 0, s = 1, e = buf - size;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">producer</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		produce();</span><br><span class="line">		semWait(e);</span><br><span class="line">		semWait(s);</span><br><span class="line">		append();</span><br><span class="line">		semSignal(s);</span><br><span class="line">		semSignal(e);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">consumer</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		semWait(n);</span><br><span class="line">		semWait(s);</span><br><span class="line">		take();</span><br><span class="line">		semSignal(s);</span><br><span class="line">		semSignal(e);</span><br><span class="line">		consume();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例题<br>1) 桌子上有一个盘子，可以存放一个水果。父亲总是放苹果到盘子中，而母亲总是放香蕉到盘子中；儿子专等吃盘中的香蕉，而女儿专等吃盘中的苹果。</p>
+<p>分析：<br>    生产者－消费者问题的一种变形，生产者、消费者以及放入缓冲区的产品都有两类（苹果和香蕉），但每类消费者只消费其中固定的一种产品（儿子消费香蕉，女儿消费苹果）。</p>
+<p>数据结构： semaphore dish, apple, banana;<br>    dish: 表示盘子是否为空,用于控制互斥<br>    apple：表示盘子中是否有苹果，初始值为0<br>    banana:表示盘子中是否有香蕉，初始值为0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">process <span class="function"><span class="title">father</span></span>() &#123;</span><br><span class="line">	semWait(dish);</span><br><span class="line">	put the apple <span class="keyword">in</span> the dish;</span><br><span class="line">	semSignal(apple);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process <span class="function"><span class="title">mother</span></span>() &#123;</span><br><span class="line">	semWait(dish);</span><br><span class="line">	put the banana <span class="keyword">in</span> the dish;</span><br><span class="line">	semSignal(banana);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process <span class="function"><span class="title">son</span></span>() &#123;</span><br><span class="line">	semWait(banana);</span><br><span class="line">	get the banana from the dish;</span><br><span class="line">	semSignal(dish);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process <span class="function"><span class="title">daughter</span></span>() &#123;</span><br><span class="line">	semWait(apple);</span><br><span class="line">	get the apple from the dish;</span><br><span class="line">	semSignal(dish);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2) 在一个盒子里，混装了数量相等的黑白围棋子。现在用自动分拣系统把黑子、白子分开，设分拣系统有两个进程P1和P2，其中P1拣白子，P2拣黑子。规定每个进程每次拣一子，当一个进程在拣时，不允许另一个进程去拣；当一个进程拣了一子时，必须让另一个进程去拣。试用信号量协调两个进程的并发执行。</p>
+<p>分析：<br>    实际上就是两个进程的同步问题，也就是拣了一个白棋子才能拣一个黑棋子，两者成合作关系</p>
+<p>数据结构：semaphore s1, s2;<br>    s1 和s2 分别表示可拣白子和黑子，不失一般性，若令先拣白子。初值， s1=1； s2=0；</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">process <span class="function"><span class="title">p1</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">		semWait(s1);</span><br><span class="line">		Pick a white chessman;</span><br><span class="line">		semSignal(s2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process <span class="function"><span class="title">p2</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">		semWait(s2);</span><br><span class="line">		Pick a white chessman;</span><br><span class="line">		semSignal(s1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3) 假设一个阅览室有100个座位，没有座位时读者在阅览室外等待；每个读者进入阅览室时都必须在阅览室门口的一个登记本上登记座位号和姓名，然后阅览，离开阅览室时要去掉登记项。每次只允许一个人登记或去掉登记。用信号量操作描述读者的行为。</p>
+<p>分析：<br>    实际上是一个非常简单的同步-互斥问题，登记时需要保证互斥，室内人数在100之内时，无需等待，大于100人是，开始需要等待室内有人出来后方可有人入室</p>
+<p>数据结构：<br>    strcut {<br>        char name[10];<br>        int number;<br>    } a[100]; //表示进入阅览室的小朋友<br>    semaphore mutex, seatcount;<br>        mutex: 用来控制互斥，初始值为1<br>        seatcount： 对空座位进行计数，初始值为100；</p>
+<pre><code>初始化入室人员信息
+for(int i = 0; i &lt; 100; i++){
+    a[i].number = i;
+    a[i].name = null;
+}
+</code></pre> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">process readeri(char readername[]) &#123;</span><br><span class="line">	semWait(seatcount);  	//等待空余作为，若人数未满100，则直接进入，到达100，则等待</span><br><span class="line">	semWait(mutex);		 	//控制互斥</span><br><span class="line"></span><br><span class="line">	/* 进入是登记 */</span><br><span class="line">	<span class="keyword">for</span>(int i = 0; i &lt; 100; i++)</span><br><span class="line">		<span class="keyword">if</span>(a[i].name == null)&#123;	//找到名字为空的座位</span><br><span class="line">			a[i].name = readername;</span><br><span class="line">			<span class="built_in">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	reader get the seat nember i;</span><br><span class="line">	semSiganl(mutex);</span><br><span class="line">	go into the reading room and sit down at the seat number i.</span><br><span class="line">	</span><br><span class="line">	/* 离开时登记 */</span><br><span class="line">	semWait(mutex);</span><br><span class="line">	a[i].name = null;  </span><br><span class="line">	semSignal(mutex);</span><br><span class="line">	semSignal(seatcount);</span><br><span class="line">	leave reading room;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>二、读/写者问题<br>    描述：<br>    有一个由多个进程共享的数据区，一些进程只读取这个数据区中的数据，一些进程只往数据区中写数据。并须满足以下条件：<br>    任意多的读进程可以同时读文件；<br>    一次只有一个写进程可以写文件；<br>    如果一个写进程正在写文件，那么禁止任何读进程读文件。</p>
+<p>读者优先</p>
+<p>分析：<br>    当一个读进程开始访问数据区时，只要至少有一个读进程正在读，就为读进程保留对这个数据区的控制权，因此，写进程有可能处于饥饿状态。    </p>
+<p>数据结构：<br>    readcount: 控制wsem的的设置<br>    wsem： 当没有读进程正在读时，第一个试图读的读进程需要在wsem上等待； 当至少有一个读进程在读时，随后的读进程无需等待直接进入。<br>    x: 用于确保readcount被正确更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">int readcount;</span><br><span class="line">semphore x = 1, wsem = 1;</span><br><span class="line">void <span class="function"><span class="title">reader</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line"> 	semWait(x);</span><br><span class="line">  		readcount++;</span><br><span class="line">  		<span class="keyword">if</span>(readcount==1)</span><br><span class="line">     		semWait(wsem);  //如果是第一个读者，则要控制wsem</span><br><span class="line">  		semSignal(x);</span><br><span class="line">  		READUNIT();   </span><br><span class="line">	semWait(x);</span><br><span class="line">	readcount--;</span><br><span class="line">	<span class="keyword">if</span>(readcount==0)</span><br><span class="line">  		semSignal(wsem);</span><br><span class="line">	semSignal(x);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">writer</span></span>()&#123;</span><br><span class="line">	 <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">	 		semWait(wsem);</span><br><span class="line">  			WRITEUNIT();</span><br><span class="line">  			semSignal(wsem);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实例：<br>    独木桥问题：东、西向汽车过独木桥。桥上无车时允许一方汽车过桥，待全部过完后才允许另一方汽车过桥。用信号量操作写出同步算法。(提示：参考读者优先的解法)</p>
+<p>数据结构：</p>
+<pre><code>mutex1/mutex2: 用于确保count1/count2被准备更新
+count1/count2: 控制wait的设置
+wait: 当没有车同向的车通过独木桥时，第一辆通过的车需要在wait上等待； 当至少有一辆同向的车通过时，随后同方向的车无需等待直接进入。
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	semaphore <span class="built_in">wait</span>=1, mutex1=1, mutex2=1;</span><br><span class="line">	int count1=0, count2=0; </span><br><span class="line"></span><br><span class="line">	process P <span class="function"><span class="title">east</span></span>()&#123;</span><br><span class="line">   	semWait(mutex1);</span><br><span class="line">     	count1++;</span><br><span class="line">     	<span class="keyword">if</span>(count1==1)   semWait(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex1);</span><br><span class="line">      	through the singal-log bridge；</span><br><span class="line">     	semWait(mutex1);</span><br><span class="line">     	count1--;</span><br><span class="line">     	<span class="keyword">if</span>(count1==0)   semSignal(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">process P <span class="function"><span class="title">west</span></span>()&#123;</span><br><span class="line">   	semWait(mutex2);</span><br><span class="line">     	count2++;</span><br><span class="line">     	<span class="keyword">if</span>(count2==1)   semWait(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex2);</span><br><span class="line">       through the singal-log bridge；</span><br><span class="line">     	semWait(mutex2);</span><br><span class="line">     	count2--;</span><br><span class="line">     	<span class="keyword">if</span>(count2==0)   semSignal(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex2);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>待整理。。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OS/" rel="tag"><i class="fa fa-tag"></i> OS</a>
+          
+            <a href="/tags/计算机基础/" rel="tag"><i class="fa fa-tag"></i> 计算机基础</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/09/git多账号配置，同时使用多个代码托管平台/" rel="next" title="git多账号配置，同时使用多个代码托管平台">
+                <i class="fa fa-chevron-left"></i> git多账号配置，同时使用多个代码托管平台
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/30/IntelliJ-IDEA-使用技巧/" rel="prev" title="IntelliJ IDEA 使用技巧">
+                IntelliJ IDEA 使用技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_googleplus"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_copy"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	siteNum:7,
+	sm:"weixin,cqq,fb,twitter,tsina,googleplus,copy",
+	summary:"",
+	boldNum:6,
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="pinnuli" />
+            
+              <p class="site-author-name" itemprop="name">pinnuli</p>
+              <p class="site-description motion-element" itemprop="description">如果你连努力都拼不过别人,凭什么和别人拼天赋！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pinnuli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/users/c855b8a72987/timeline" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、信号量"><span class="nav-number">1.</span> <span class="nav-text">一、信号量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量原语semWait和semSignal的定义"><span class="nav-number">1.1.</span> <span class="nav-text">信号量原语semWait和semSignal的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量实现互斥"><span class="nav-number">1.2.</span> <span class="nav-text">信号量实现互斥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pinnuli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
