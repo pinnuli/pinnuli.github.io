@@ -140,20 +140,20 @@
 
 
 
-<meta name="description" content="一、信号量 信号量是一个与队列有关的整型变量。可以初始化成非负数；semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。信号量原语semWait和semSignal的定义： 123456789101112131415161718192021strcut semaph">
+<meta name="description" content="一、信号量 信号量是一个与队列有关的整型变量。 可以初始化成非负数； semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行； semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。  信号量原语semWait和semSignal的定义1234567891011121314151617181920strcut semap">
 <meta name="keywords" content="OS,计算机基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程并发常见问题基于信号量解决方法总结：生产者&#x2F;消费者问题、读&#x2F;写者问题、银行家算法、哲学家进餐">
 <meta property="og:url" content="https://pinnuli.github.io/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="一、信号量 信号量是一个与队列有关的整型变量。可以初始化成非负数；semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。信号量原语semWait和semSignal的定义： 123456789101112131415161718192021strcut semaph">
+<meta property="og:description" content="一、信号量 信号量是一个与队列有关的整型变量。 可以初始化成非负数； semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行； semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。  信号量原语semWait和semSignal的定义1234567891011121314151617181920strcut semap">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://pinnuli.github.io/image/process_concurrent_finite_buffer.png">
-<meta property="og:updated_time" content="2018-07-23T13:41:11.215Z">
+<meta property="og:image" content="https://pinnuli.github.io/images/process_concurrent_finite_buffer.png">
+<meta property="og:updated_time" content="2018-07-30T12:14:03.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程并发常见问题基于信号量解决方法总结：生产者&#x2F;消费者问题、读&#x2F;写者问题、银行家算法、哲学家进餐">
-<meta name="twitter:description" content="一、信号量 信号量是一个与队列有关的整型变量。可以初始化成非负数；semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。信号量原语semWait和semSignal的定义： 123456789101112131415161718192021strcut semaph">
-<meta name="twitter:image" content="https://pinnuli.github.io/image/process_concurrent_finite_buffer.png">
+<meta name="twitter:description" content="一、信号量 信号量是一个与队列有关的整型变量。 可以初始化成非负数； semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行； semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。  信号量原语semWait和semSignal的定义1234567891011121314151617181920strcut semap">
+<meta name="twitter:image" content="https://pinnuli.github.io/images/process_concurrent_finite_buffer.png">
 
 
 
@@ -456,26 +456,42 @@
       
 
       
-        <p>一、信号量</p>
-<p>信号量是一个与队列有关的整型变量。<br>可以初始化成非负数；<br>semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；<br>semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。<br>信号量原语semWait和semSignal的定义：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">strcut semaphore&#123;</span><br><span class="line">	int count;</span><br><span class="line">	aueueType queue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void semWait(semaphore s) &#123;</span><br><span class="line">	s.count--;</span><br><span class="line">	<span class="keyword">if</span>(s.count &lt; 0) &#123;</span><br><span class="line">			place this process <span class="keyword">in</span> s.queue;</span><br><span class="line">		block this process;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void semSignal(semaphore s) &#123;</span><br><span class="line">	s.count ++;</span><br><span class="line"> 	<span class="keyword">if</span>(s.count &lt;= 0) &#123;</span><br><span class="line">		remove a process P from s.queue;</span><br><span class="line">		place process P on ready list;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>信号量实现互斥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">const int n;</span><br><span class="line">semaphore s = 1;</span><br><span class="line">void P(int i) &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		semWait(s);</span><br><span class="line">		operate;</span><br><span class="line">		semSignal(s);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">	parbegin(P(1), P(2), ...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：</p>
-<p>信号量：</p>
-<pre><code>一个信号量可用于n个进程的同步互斥；且只能由semWait、semSignal操作修改。
-</code></pre><p>用于互斥时，S初值为1，取值为1~ - (n-1)        （相当于临界区的通行证，实际上也是资源个数）<br>       S=1：临界区可用<br>       S=0：已有一进程进入临界区<br>       S<0：临界区已被占用，|s|个进程正等待进入 用于同步时，s初值="">=0<br>       S&gt;=0:表示可用资源个数<br>       S&lt;0: 表示该资源的等待队列长度</0：临界区已被占用，|s|个进程正等待进入></p>
-<p>semWait、semSignal操作：<br>       semWait(S)：请求分配一个资源。<br>        semSignal(S)：释放一个资源。<br>        semWait、semSignal操作必须成对出现。<br>         用于互斥时，位于同一进程内；<br>         用于同步时，交错出现于两个合作进程内。<br>        多个semWait操作的次序不能颠倒，否则可能导致死锁。<br>        多个semSignal操作的次序可任意。</p>
+        <h3 id="一、信号量"><a href="#一、信号量" class="headerlink" title="一、信号量"></a>一、信号量</h3><ul>
+<li>信号量是一个与队列有关的整型变量。</li>
+<li>可以初始化成非负数；</li>
+<li>semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；</li>
+<li>semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。</li>
+</ul>
+<h4 id="信号量原语semWait和semSignal的定义"><a href="#信号量原语semWait和semSignal的定义" class="headerlink" title="信号量原语semWait和semSignal的定义"></a>信号量原语semWait和semSignal的定义</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">strcut semaphore&#123;</span><br><span class="line">	int count;</span><br><span class="line">	aueueType queue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void semWait(semaphore s) &#123;</span><br><span class="line">	s.count--;</span><br><span class="line">	<span class="keyword">if</span>(s.count &lt; 0) &#123;</span><br><span class="line">		place this process <span class="keyword">in</span> s.queue;</span><br><span class="line">		block this process;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void semSignal(semaphore s) &#123;</span><br><span class="line">	s.count ++;</span><br><span class="line">	<span class="keyword">if</span>(s.count &lt;= 0) &#123;</span><br><span class="line">		remove a process P from s.queue;</span><br><span class="line">		place process P on ready list;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="信号量实现互斥"><a href="#信号量实现互斥" class="headerlink" title="信号量实现互斥"></a>信号量实现互斥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const int n;</span><br><span class="line">semaphore s = 1;</span><br><span class="line">void P(int i) &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		semWait(s);</span><br><span class="line">		operate;</span><br><span class="line">		semSignal(s);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">	parbegin(P(1), P(2), ...,P(n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>信号量</strong></p>
+<ul>
+<li>一个信号量可用于n个进程的同步互斥；且只能由semWait、semSignal操作修改。</li>
+<li>用于互斥时，S初值为1，取值为1~ - (n-1)        （相当于临界区的通行证，实际上也是资源个数）<br>  S=1：临界区可用<br>  S=0：已有一进程进入临界区<br>  S&lt;0：临界区已被占用，|S|个进程正等待进入</li>
+<li>用于同步时，S初值&gt;=0<br>  S&gt;=0:表示可用资源个数<br>  S&lt;0: 表示该资源的等待队列长度</li>
+</ul>
+<p><strong>semWait、semSignal操作</strong></p>
+<ul>
+<li>semWait(S)：请求分配一个资源。</li>
+<li>semSignal(S)：释放一个资源。</li>
+<li>semWait、semSignal操作必须成对出现。</li>
+<li>用于互斥时，位于同一进程内；</li>
+<li>用于同步时，交错出现于两个合作进程内。</li>
+<li>多个semWait操作的次序不能颠倒，否则可能导致死锁。 </li>
+<li>多个semSignal操作的次序可任意。</li>
+</ul>
 <p>二、生产者/消费者问题</p>
-<p>问题描述：<br>    有一个或多个生产者生产某种类型的数据，并放置在缓冲区中；<br>    有一个消费者从缓冲区中取数据，每次取一项；<br>    系统保证避免对缓冲区的重复操作，即任何时候只有一个主体（生产者或消费者）可以访问缓冲区。<br>    缓存已满时，生产者不能继续添加数据；<br>    缓存已空时，消费者不能继续移走数据。</p>
-<p>producer:    </p>
+<p><strong>问题描述：</strong><br>    有一个或多个生产者生产某种类型的数据，并放置在缓冲区中；<br>    有一个消费者从缓冲区中取数据，每次取一项；<br>    系统保证避免对缓冲区的重复操作，即任何时候只有一个主体（生产者或消费者）可以访问缓冲区;<br>    缓存已满时，生产者不能继续添加数据；<br>    缓存已空时，消费者不能继续移走数据。</p>
+<p><strong>producer:</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">	/* produce item v */</span><br><span class="line">	<span class="keyword">while</span>((<span class="keyword">in</span> + 1) % n == out) //等待缓存有空位</span><br><span class="line">		/* doing nothing */</span><br><span class="line">	b[<span class="keyword">in</span>] = v;</span><br><span class="line">	<span class="keyword">in</span> = (<span class="keyword">in</span> + 1) % n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>consumer:</p>
+<p><strong>consumer:</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">in</span> == out) //此时缓存为空，等待生产者生产放入缓存后才可消费</span><br><span class="line">		/* doing nothing */</span><br><span class="line">	w = b[out];</span><br><span class="line">	out = (out + 1) % n;</span><br><span class="line">	/* consume item w */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有限缓冲区：</p>
-<p><img src="/image/process_concurrent_finite_buffer.png" alt="process_concurrent_finite_buffer"></p>
-<p>使用信号量解决有限缓冲区生产者消费者问题:</p>
+<p><strong>有限缓冲区：</strong></p>
+<p><img src="/images/process_concurrent_finite_buffer.png" alt="process_concurrent_finite_buffer"></p>
+<p><strong>使用信号量解决有限缓冲区生产者消费者问题:</strong></p>
+<blockquote>
 <p>n 表示已生产产品的数量<br>s 用来控制互斥<br>e 表示空闲空间数目</p>
+</blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">semaphore n = 0, s = 1, e = buf - size;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">producer</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		produce();</span><br><span class="line">		semWait(e);</span><br><span class="line">		semWait(s);</span><br><span class="line">		append();</span><br><span class="line">		semSignal(s);</span><br><span class="line">		semSignal(e);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void <span class="function"><span class="title">consumer</span></span>() &#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">		semWait(n);</span><br><span class="line">		semWait(s);</span><br><span class="line">		take();</span><br><span class="line">		semSignal(s);</span><br><span class="line">		semSignal(e);</span><br><span class="line">		consume();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>例题<br>1) 桌子上有一个盘子，可以存放一个水果。父亲总是放苹果到盘子中，而母亲总是放香蕉到盘子中；儿子专等吃盘中的香蕉，而女儿专等吃盘中的苹果。</p>
 <p>分析：<br>    生产者－消费者问题的一种变形，生产者、消费者以及放入缓冲区的产品都有两类（苹果和香蕉），但每类消费者只消费其中固定的一种产品（儿子消费香蕉，女儿消费苹果）。</p>
@@ -505,6 +521,7 @@ for(int i = 0; i &lt; 100; i++){
 count1/count2: 控制wait的设置
 wait: 当没有车同向的车通过独木桥时，第一辆通过的车需要在wait上等待； 当至少有一辆同向的车通过时，随后同方向的车无需等待直接进入。
 </code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	semaphore <span class="built_in">wait</span>=1, mutex1=1, mutex2=1;</span><br><span class="line">	int count1=0, count2=0; </span><br><span class="line"></span><br><span class="line">	process P <span class="function"><span class="title">east</span></span>()&#123;</span><br><span class="line">   	semWait(mutex1);</span><br><span class="line">     	count1++;</span><br><span class="line">     	<span class="keyword">if</span>(count1==1)   semWait(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex1);</span><br><span class="line">      	through the singal-log bridge；</span><br><span class="line">     	semWait(mutex1);</span><br><span class="line">     	count1--;</span><br><span class="line">     	<span class="keyword">if</span>(count1==0)   semSignal(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex1);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">process P <span class="function"><span class="title">west</span></span>()&#123;</span><br><span class="line">   	semWait(mutex2);</span><br><span class="line">     	count2++;</span><br><span class="line">     	<span class="keyword">if</span>(count2==1)   semWait(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex2);</span><br><span class="line">       through the singal-log bridge；</span><br><span class="line">     	semWait(mutex2);</span><br><span class="line">     	count2--;</span><br><span class="line">     	<span class="keyword">if</span>(count2==0)   semSignal(<span class="built_in">wait</span>);</span><br><span class="line">     	semSignal(mutex2);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>待整理。。。</p>
 
       
     </div>
@@ -643,8 +660,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -663,7 +689,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -674,7 +700,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -685,7 +711,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -731,6 +757,22 @@ var jiathis_config={
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、信号量"><span class="nav-number">1.</span> <span class="nav-text">一、信号量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量原语semWait和semSignal的定义"><span class="nav-number">1.1.</span> <span class="nav-text">信号量原语semWait和semSignal的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量实现互斥"><span class="nav-number">1.2.</span> <span class="nav-text">信号量实现互斥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

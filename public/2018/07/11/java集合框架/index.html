@@ -140,18 +140,18 @@
 
 
 
-<meta name="description" content="1、迭代器iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，  next()方法 逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用； java迭代器可以认为位于两个元素之家，当调用next()时，迭代器越过下一个元素，并返回刚刚越过的那个元素的引用   用”for each”循环遍历类集的">
+<meta name="description" content="一、迭代器iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，  next()方法 逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用； java迭代器可以认为位于两个元素之家，当调用next()时，迭代器越过下一个元素，并返回刚刚越过的那个元素的引用   用”for each”循环遍历类集的">
 <meta name="keywords" content="JavaSE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java集合框架">
 <meta property="og:url" content="https://pinnuli.github.io/2018/07/11/java集合框架/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="1、迭代器iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，  next()方法 逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用； java迭代器可以认为位于两个元素之家，当调用next()时，迭代器越过下一个元素，并返回刚刚越过的那个元素的引用   用”for each”循环遍历类集的">
+<meta property="og:description" content="一、迭代器iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，  next()方法 逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用； java迭代器可以认为位于两个元素之家，当调用next()时，迭代器越过下一个元素，并返回刚刚越过的那个元素的引用   用”for each”循环遍历类集的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-30T02:58:42.101Z">
+<meta property="og:updated_time" content="2018-07-30T12:50:24.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java集合框架">
-<meta name="twitter:description" content="1、迭代器iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，  next()方法 逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用； java迭代器可以认为位于两个元素之家，当调用next()时，迭代器越过下一个元素，并返回刚刚越过的那个元素的引用   用”for each”循环遍历类集的">
+<meta name="twitter:description" content="一、迭代器iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，  next()方法 逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用； java迭代器可以认为位于两个元素之家，当调用next()时，迭代器越过下一个元素，并返回刚刚越过的那个元素的引用   用”for each”循环遍历类集的">
 
 
 
@@ -454,7 +454,7 @@
       
 
       
-        <h2 id="1、迭代器"><a href="#1、迭代器" class="headerlink" title="1、迭代器"></a>1、迭代器</h2><p>iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，</p>
+        <h3 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h3><p>iterator是一个或者实现了Iterator,或者实现ListIterator接口的对象，可以通过循环输出类集的内容，从而获得或删除元素，</p>
 <ul>
 <li>next()方法<ul>
 <li>逐个访问集合中的每个元素，经常需要与hasNext()方法搭配使用；</li>
@@ -465,26 +465,24 @@
 <li>remove()方法删除上次调用next()时返回的元素，因而调用remove之前没有调用next是不合法的，删除的元素依赖于迭代器的状态</li>
 <li>对于实现List的类集，可以使用ListIterator，可以双向访问类集，如果在调用previous之后调用remove，则会将迭代器右边的元素删掉</li>
 </ul>
-<h2 id="2、List"><a href="#2、List" class="headerlink" title="2、List"></a>2、List</h2><ul>
-<li><p>有序集合，使用基于零的下标，可以用迭代器访问（顺序访问）或者用一个整数索引访问（随机访问）,有两个主要的实现类</p>
+<hr>
+<h3 id="二、List"><a href="#二、List" class="headerlink" title="二、List"></a>二、List</h3><p>有序集合，使用基于零的下标，可以用迭代器访问（顺序访问）或者用一个整数索引访问（随机访问）,有两个主要的实现类</p>
+<p><strong>ArrayList</strong></p>
+<ul>
+<li><p>基于数组，能够动态到地增加或减小其大小，当也可以调用ensureCapacity方法来进行人工地增加ArrayList的容量，从而避免再分配的消耗时间，前提是事先知道需要存储很多内容，然后往往是不知道</p>
 </li>
-<li><p>ArrayList</p>
+<li><p>适用于需要进行随机访问时</p>
 </li>
 </ul>
-<pre><code>- 基于数组，能够动态到地增加或减小其大小，当也可以调用ensureCapacity方法来进行人工地增加ArrayList的容量，从而避免再分配的消耗时间，前提是事先知道需要存储很多内容，然后往往是不知道
-
-- 适用于需要进行随机访问时
-</code></pre><ul>
-<li>LinkedList<ul>
+<p><strong>LinkedList</strong></p>
+<ul>
 <li>基于双向链表，</li>
 <li>对于有序集合，add方法只是添加到链表的尾部，当需要将元素添加到链表中间时，可以用迭代器的add，只有对自然有序的集合使用迭代器添加元素才有实际意义，但是这里的add不返回任何值</li>
 <li>适用于顺序访问</li>
 </ul>
-</li>
-</ul>
-<h2 id="3、Set"><a href="#3、Set" class="headerlink" title="3、Set"></a>3、Set</h2><p>等同于Collection,不允许增加重复的元素，需要定义equals方法来确保元素唯一</p>
-<ul>
-<li><p>HashSet</p>
+<hr>
+<h3 id="三、Set"><a href="#三、Set" class="headerlink" title="三、Set"></a>三、Set</h3><p>等同于Collection,不允许增加重复的元素，需要定义equals方法来确保元素唯一</p>
+<p><strong>HashSet</strong></p>
 <ul>
 <li>基于散列表的集，无序</li>
 <li>存入的元素必须定义有hashCode()，以得到散列码</li>
@@ -492,92 +490,81 @@
 <li>可以设置装填因子来实现再散列</li>
 <li>适用于不关心访问顺序，需要查找大容量容器时</li>
 </ul>
-</li>
-<li><p>TreeSet</p>
+<p><strong>TreeSet</strong></p>
 <ul>
 <li>基于红黑树排序，有序</li>
 <li>存入的元素必须实现Comparable接口，或者构造集必须提供一个Comparator</li>
 <li>每次添加元素时元素都会被放置到正确的位置，因而迭代器总是以排好序的顺序访问</li>
 <li>适用于存储大量需要进行快速检索的排序信息的情况</li>
 </ul>
-</li>
-<li><p>BitSet</p>
+<p><strong>BitSet</strong></p>
 <ul>
 <li>用于存放一个位序列</li>
-<li></li>
 </ul>
-</li>
-</ul>
-<h2 id="4、Queue"><a href="#4、Queue" class="headerlink" title="4、Queue"></a>4、Queue</h2><ul>
-<li>双端队列，可以同时在头部或者尾部添加或删除元素，有两个实现<ul>
-<li>LinkedList</li>
+<hr>
+<h3 id="四、Queue"><a href="#四、Queue" class="headerlink" title="四、Queue"></a>四、Queue</h3><p><strong>双端队列</strong><br>可以同时在头部或者尾部添加或删除元素，有两个实现</p>
+<ul>
+<li>inkedList</li>
 <li>ArrayList</li>
 </ul>
-</li>
-<li>PriorityQueue<ul>
+<p><strong>PriorityQueue</strong></p>
+<ul>
 <li>基于堆，堆是可以自我调整的二叉树，对树执行add和remove时，可以让最小的元素移动到根，不必对元素排序</li>
 <li>按照任意顺序插入，却可以按照顺序进行检索</li>
 <li>和TreeSet一样，存入的元素必须实现Comparable接口，或者构造器必须提供一个Comparator</li>
 </ul>
-</li>
-</ul>
-<h2 id="5、Map"><a href="#5、Map" class="headerlink" title="5、Map"></a>5、Map</h2><ul>
-<li>对键进行散列或排序，键必须唯一，同一个键多次调用put时，后面的会取代前面的，put返回这个键存储的上一个值。</li>
-<li>键不存在时，get方法返回null，可以用getOrDefault返回默认值，test.get(id,0)</li>
-<li>更新映射项，正常情况可以得到与一个键关联的值，替代原来的值，但是在需要持续更新时，例如:使用一个映射统计一个单词在文件中的频数，<code>counts.put(word,counts.get(word)+1)</code>,需要解决一个问题，就是键第一次出现时，这时可以有三种方法<ul>
+<hr>
+<h3 id="五、Map"><a href="#五、Map" class="headerlink" title="五、Map"></a>五、Map</h3><p>对键进行散列或排序，键必须唯一，同一个键多次调用put时，后面的会取代前面的，put返回这个键存储的上一个值。<br><strong>键不存在时</strong><br>get方法返回null，可以用getOrDefault返回默认值，test.get(id,0)<br><strong>更新映射项</strong><br>正常情况可以得到与一个键关联的值，替代原来的值，但是在需要持续更新时，例如:使用一个映射统计一个单词在文件中的频数，<code>counts.put(word,counts.get(word)+1)</code>,需要解决一个问题，就是键第一次出现时，这时可以有三种方法</p>
+<ul>
 <li><code>counts.put(word,counts.getOrDefault(word,0) + 1)</code></li>
 <li>先调用putIfAbsent，只有原先键存在时才会放一个值,<code>counts.putIfAnsent(word,0)</code><br>  <code>counts.put(word,counts.get(word)+1)</code>            </li>
 <li><code>counts.merge(word,1,Interger::sum)</code>(推荐）,当word关联的值为空（即键值对不存在），将word与1关联；不为空时，将sum应用于word和1，sum返回的结果与word关联</li>
 </ul>
-</li>
-<li>映射视图：集合框架不认为映射本身是一种集合，不过可以通过调用Map一些方法得到映射的视图<ul>
+<p><strong>映射视图</strong><br>集合框架不认为映射本身是一种集合，不过可以通过调用Map一些方法得到映射的视图</p>
+<ul>
 <li>键集：<code>Set&lt;K&gt; keySet()</code>，</li>
 <li>值集：<code>Collection&lt;V&gt; values()</code>，</li>
 <li>键/值对集：<code>Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()</code></li>
 <li>这些集合不能添加元素，但可以删除这些集合中的远思，键和相关联的的值也将从映射中删除</li>
 </ul>
-</li>
-<li>散列<ul>
+<p><strong>散列</strong></p>
+<ul>
 <li>散列码，由对象的实例域产生的一个整数，由hashCOde()产生</li>
 <li>散列表，用链表数组实现，每个列表称为桶</li>
-<li>散列实现，Map中用数组保存键，查找表中对象的位置时，先算出散列码，然后与桶的总数取余，结果为保存此元素的桶的索引，即数组的下标，查询时通过equals()方法对List中的值进行查询<blockquote>
+<li><p>散列实现，Map中用数组保存键，查找表中对象的位置时，先算出散列码，然后与桶的总数取余，结果为保存此元素的桶的索引，即数组的下标，查询时通过equals()方法对List中的值进行查询</p>
+<blockquote>
 <p>新版jdk使用红黑树和List（数据多用树，少时用List)</p>
 </blockquote>
 </li>
-<li>散列冲突，桶被占满时，可以设置装填因子（0~1），对散列表满时进行再散列，即创建桶数更多的表</li>
-</ul>
+<li><p>散列冲突，桶被占满时，可以设置装填因子（0~1），对散列表满时进行再散列，即创建桶数更多的表</p>
 </li>
-<li>HashMap<ul>
+</ul>
+<p><strong>HashMap</strong></p>
+<ul>
 <li>比较快，适用于不需要按照排列顺序访问键时</li>
 </ul>
-</li>
-<li>TreeMap<ul>
+<p><strong>TreeMap</strong></p>
+<ul>
 <li>按排序顺序存储键值对，允许快速检索，保证了元素按关键字升序排序</li>
 </ul>
-</li>
-<li>WeakHashMap<ul>
+<p><strong>WeakHashMap</strong></p>
+<ul>
 <li>使用弱引用（weak reference)保存key，WeakReference对象将引用保存到另外一个对象中，就是散列键</li>
 <li>如果垃圾回收器发现某个特定的对象已经没有人引用，就将其回收，而如果某个对象只由WeakReference引用，垃圾回收器仍然回收它，并将这个对象的弱引用放入队列，WeakHashMap将周期性地检查队列，一边找出新添加的弱引用，并将删除对应的条目</li>
 <li>适用于需要缓存时</li>
 </ul>
-</li>
-<li>LinkedHashMap<ul>
+<p><strong>LinkedHashMap</strong></p>
+<ul>
 <li>链接散列集与映射，用访问顺序，对映射条目进行迭代，每次调用get或put时，收到影响的条目从当前位置删除，并放到条目链表的尾部，不过条目仍然在原来散列码对应的桶中，只是改变了条目在链表中的位置</li>
 <li>用于实现高速缓存的“最近最少使用”原则</li>
 </ul>
-</li>
-</ul>
-<h2 id="6、视图与包装器"><a href="#6、视图与包装器" class="headerlink" title="6、视图与包装器"></a>6、视图与包装器</h2><ul>
-<li><p>轻量级集合包装器</p>
+<hr>
+<p>六、视图与包装器<br><strong>轻量级集合包装器</strong><br>例如Arrays类的asList返回一个包装了普通java数组的List包装器，可以将数组传递给一个期望得到列表或集合参数的方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Card[] cardDeck = <span class="keyword">new</span> Card[<span class="number">52</span>];</span><br><span class="line">List&lt;Card&gt; cardList = Arrays.asList(cardDeck);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>返回的是一个视图对象，可以调用底层数组的get和set，但不可改变数组的大小,例如Collections类的一些使用方法，<code>nCopied(100,&quot;KKK&quot;)</code>,<code>single(anObject)</code>等，返回一个不可修改的试图对象</p>
+</blockquote>
+<p><strong>子范围</strong></p>
 <ul>
-<li><p>例如Arrays类的asList返回一个包装了普通java数组的List包装器，可以将数组传递给一个期望得到列表或集合参数的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Card[] cardDeck = new Card[52];</span><br><span class="line">List&lt;Card&gt; cardList = Arrays.asList(cardDeck);</span><br></pre></td></tr></table></figure>
-<p>返回的是一个视图对象，可以调用底层数组的get和set，但不可改变数组的大小</p>
-</li>
-<li>例如Collections类的一些使用方法，nCopied(100,”KKK”),single(anObject)等，返回一个不可修改的试图对象</li>
-</ul>
-</li>
-<li>子范围<ul>
 <li>相当于返回几个的一个“子集合”，例如返回列表staff的第10-19个元素，可以用<code>List group2 = staff.subList(10,20);</code>,类似于String类中获取子串</li>
 <li>可以将任何操作应用于子范围，如`group2.clear()``,元素会从staff中清除</li>
 <li>对于有序集或者映射，可以使用排序顺序建立子范围，如SortedSet声明的三个方法，返回大于等于from小于to的所有元素的子集，<blockquote>
@@ -585,25 +572,26 @@
 </blockquote>
 </li>
 </ul>
-</li>
-<li>不可修改的视图<ul>
+<p><strong>不可修改的视图</strong></p>
+<ul>
 <li>只能对现有集合增加了一个运行时的检查，试图修改会抛出异常，不过仍然可以通过原始引用修改</li>
 <li>访问器方法从原始集合对象中获取值</li>
 <li>视图只是包装了接口而不是实际的集合对象，因而只能访问接口中定义的方法，例如：<blockquote>
-<p>unmodifiableCollection方法将返回一个集合，但他的equals()方法不调用底层集合的，而是调用它继承了Object类的equals()方法，这个方法只是检测两个对象是否是同一个对象，视图就是以这种方式运行的</p>
+<p><code>unmodifiableCollection</code>方法将返回一个集合，但他的<code>equals()</code>方法不调用底层集合的，而是调用它继承了<code>Object类的equals()</code>方法，这个方法只是检测两个对象是否是同一个对象，视图就是以这种方式运行的</p>
 </blockquote>
 </li>
 </ul>
-</li>
-<li>同步视图<ul>
+<p><strong>同步视图</strong></p>
+<ul>
 <li>实现多线程访问，确保集合的线程安全，例如<code>Collections.synchronizedMap</code></li>
 </ul>
-</li>
-<li>受查视图<ul>
+<p><strong>受查视图</strong></p>
+<ul>
 <li>用来对泛型类型进行检测，例如<code>Collections.checkedList</code></li>
 </ul>
-</li>
-</ul>
+<blockquote>
+<p>参阅：<br>  <a href="http://product.dangdang.com/24035306.html" target="_blank" rel="noopener">java核心技术 卷I：基础知识</a></p>
+</blockquote>
 
       
     </div>
@@ -651,8 +639,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/10/java异常学习笔记/" rel="next" title="java异常学习笔记">
-                <i class="fa fa-chevron-left"></i> java异常学习笔记
+              <a href="/2018/05/03/JSP学习笔记/" rel="next" title="JSP学习笔记">
+                <i class="fa fa-chevron-left"></i> JSP学习笔记
               </a>
             
           </div>
@@ -769,7 +757,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -780,7 +768,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -791,7 +779,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -847,7 +835,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、迭代器"><span class="nav-number">1.</span> <span class="nav-text">1、迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、List"><span class="nav-number">2.</span> <span class="nav-text">2、List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Set"><span class="nav-number">3.</span> <span class="nav-text">3、Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、Queue"><span class="nav-number">4.</span> <span class="nav-text">4、Queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、Map"><span class="nav-number">5.</span> <span class="nav-text">5、Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、视图与包装器"><span class="nav-number">6.</span> <span class="nav-text">6、视图与包装器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、迭代器"><span class="nav-number">1.</span> <span class="nav-text">一、迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、List"><span class="nav-number">2.</span> <span class="nav-text">二、List</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Set"><span class="nav-number">3.</span> <span class="nav-text">三、Set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Queue"><span class="nav-number">4.</span> <span class="nav-text">四、Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Map"><span class="nav-number">5.</span> <span class="nav-text">五、Map</span></a></li></ol></div>
             
 
           </div>

@@ -148,7 +148,7 @@
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
 <meta property="og:description" content="一、Socket使用时应当注意的一些问题1.设置超时，从套接字读取信息时，在有数据可供访问之前，读操作会被阻塞，如果此时主机不可达，那么程序将会等待很长时间，并因为系统操作系统的限制最终导致超时  调用setSoTimeout方法设置  12Socket s = new Socket(...);s.setSoTimeout(10000);  对构造器Socket(String host,int p">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-30T04:09:29.883Z">
+<meta property="og:updated_time" content="2018-07-30T12:45:31.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java Socket应用¨">
 <meta name="twitter:description" content="一、Socket使用时应当注意的一些问题1.设置超时，从套接字读取信息时，在有数据可供访问之前，读操作会被阻塞，如果此时主机不可达，那么程序将会等待很长时间，并因为系统操作系统的限制最终导致超时  调用setSoTimeout方法设置  12Socket s = new Socket(...);s.setSoTimeout(10000);  对构造器Socket(String host,int p">
@@ -525,7 +525,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.创建数据报，用于接收服务器端响应的数据</span></span><br><span class="line"><span class="keyword">byte</span>[] data2=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">DatagramPacket packet2=<span class="keyword">new</span> DatagramPacket(data2, data2.length);</span><br><span class="line"><span class="comment">//2.接收服务器响应的数据</span></span><br><span class="line">socket.receive(packet2);</span><br><span class="line"><span class="comment">//3.读取数据</span></span><br><span class="line">String reply=<span class="keyword">new</span> String(data2, <span class="number">0</span>, packet2.getLength());</span><br><span class="line">System.out.println(<span class="string">"我是客户端，服务器说："</span>+reply);</span><br><span class="line"><span class="comment">//4.关闭资源</span></span><br><span class="line">socket.close();</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>当Socket关闭时，输入输出流也就关闭了</p>
-<p>参阅<a href="https://www.imooc.com/learn/161" target="_blank" rel="noopener">Java Socket应用—通信是这样练成的</a></p>
+<p>参阅：<br>  <a href="https://www.imooc.com/learn/161" target="_blank" rel="noopener">慕课网：Java Socket应用—通信是这样练成的</a><br>  <a href="http://product.dangdang.com/25171892.html" target="_blank" rel="noopener">java核心技术 卷II：高级特性</a></p>
 </blockquote>
 
       
@@ -692,7 +692,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -703,7 +703,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -714,7 +714,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

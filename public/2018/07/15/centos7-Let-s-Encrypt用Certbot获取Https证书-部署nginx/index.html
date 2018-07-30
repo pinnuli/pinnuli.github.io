@@ -140,18 +140,18 @@
 
 
 
-<meta name="description" content="检查nginx下是否有--with-http_stub_status_module 和--with-http_ssl_module两个模块，安装之后再重新编译  nginx -V   用http克隆github上的certbot  git clone https://github.com/certbot/certbot /opt/certbot-master   安装所有依赖  /opt/cer">
+<meta name="description" content="1.检查nginx下是否有--with-http_stub_status_module 和--with-http_ssl_module两个模块，安装之后再重新编译1nginx -V 2.用http克隆github上的certbot1git clone https://github.com/certbot/certbot /opt/certbot-master 3.安装所有依赖1/opt/certb">
 <meta name="keywords" content="服务器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centos7 Let&#39;s Encrypt用Certbot获取Https证书 部署nginx">
 <meta property="og:url" content="https://pinnuli.github.io/2018/07/15/centos7-Let-s-Encrypt用Certbot获取Https证书-部署nginx/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="检查nginx下是否有--with-http_stub_status_module 和--with-http_ssl_module两个模块，安装之后再重新编译  nginx -V   用http克隆github上的certbot  git clone https://github.com/certbot/certbot /opt/certbot-master   安装所有依赖  /opt/cer">
+<meta property="og:description" content="1.检查nginx下是否有--with-http_stub_status_module 和--with-http_ssl_module两个模块，安装之后再重新编译1nginx -V 2.用http克隆github上的certbot1git clone https://github.com/certbot/certbot /opt/certbot-master 3.安装所有依赖1/opt/certb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-29T16:18:35.647Z">
+<meta property="og:updated_time" content="2018-07-30T05:31:37.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7 Let&#39;s Encrypt用Certbot获取Https证书 部署nginx">
-<meta name="twitter:description" content="检查nginx下是否有--with-http_stub_status_module 和--with-http_ssl_module两个模块，安装之后再重新编译  nginx -V   用http克隆github上的certbot  git clone https://github.com/certbot/certbot /opt/certbot-master   安装所有依赖  /opt/cer">
+<meta name="twitter:description" content="1.检查nginx下是否有--with-http_stub_status_module 和--with-http_ssl_module两个模块，安装之后再重新编译1nginx -V 2.用http克隆github上的certbot1git clone https://github.com/certbot/certbot /opt/certbot-master 3.安装所有依赖1/opt/certb">
 
 
 
@@ -454,112 +454,17 @@
       
 
       
-        <ul>
-<li><p>检查nginx下是否有<code>--with-http_stub_status_module</code> 和<code>--with-http_ssl_module</code>两个模块，安装之后再重新编译</p>
-<blockquote>
-<p>nginx -V</p>
-</blockquote>
-</li>
-<li><p>用http克隆github上的certbot</p>
-<blockquote>
-<p>git clone <a href="https://github.com/certbot/certbot" target="_blank" rel="noopener">https://github.com/certbot/certbot</a> /opt/certbot-master</p>
-</blockquote>
-</li>
-<li><p>安装所有依赖</p>
-<blockquote>
-<p>/opt/certbot-master/letsencrypt-auto –help</p>
-</blockquote>
-</li>
-<li><p>关闭nginx，检出80端口，443端口是否有开启</p>
-<blockquote>
-<p>nginx -s stop</p>
-<p>firewall-cmd –query-port=80/tcp</p>
-</blockquote>
-</li>
-</ul>
-<pre><code>&gt;firewall-cmd --query-port=443/tcp
-
-没有的话就开启
-&gt;firewall-cmd --permanent --zone=public --add-port=80/tcp
-</code></pre><ul>
-<li>获取证书<blockquote>
-<p>/opt/certbot-master/letsencrypt-auto –nginx -d www.pinnuli.com </p>
-</blockquote>
-</li>
-<li><p>配置nginx（也可选择自动配置)</p>
-<blockquote>
-<pre><code>user nginx;
-worker_processes auto;
-error_log /var/log/nginx/error.log;
-pid /run/nginx.pid;
-
-include /usr/share/nginx/modules/*.conf;
-
-events {
-    worker_connections 1024;
-}
-
-http {
-    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; 
-                 &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;
-                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;
-
-    access_log  /var/log/nginx/access.log  main;
-
-    sendfile            on;
-    tcp_nopush          on;
-    tcp_nodelay         on;
-    keepalive_timeout   65;
-    types_hash_max_size 2048;
-
-    include             /etc/nginx/mime.types;
-    default_type        application/octet-stream;
-
-    include /etc/nginx/conf.d/*.conf;
-
-      server {
-        listen       80 default_server;
-        listen       [::]:80 default_server;
-        server_name  _;
-        root        /var/www/pinnuli.github.io;
-
-        include /etc/nginx/default.d/*.conf;
-
-        location / {
-        }
-
-        error_page 404 /404.html;
-        location = /40x.html {
-        }
-
-        error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-        }
-    }
-    server {
-        server_name www.pinnuli.com; # managed by Certbot
-        root        /var/www/pinnuli.github.io;
-        include /etc/nginx/default.d/*.conf;
-        location / {
-         }
-        error_page 404 /404.html;
-          location = /40x.html {
-        }
-        error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-        }
-          listen [::]:443 ssl ipv6only=on; # managed by Certbot
-          listen 443 ssl; # managed by Certbot
-          ssl_certificate /etc/letsencrypt/live/www.pinnuli.com/fullchain.pem; # managed by Certbot
-          ssl_certificate_key /etc/letsencrypt/live/www.pinnuli.com/privkey.pem; # managed by Certbot
-          include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-          ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-}
-</code></pre></blockquote>
-</li>
-<li><p>设置自动更新</p>
-</li>
-</ul>
+        <p>1.检查nginx下是否有<code>--with-http_stub_status_module</code> 和<code>--with-http_ssl_module</code>两个模块，安装之后再重新编译<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -V</span><br></pre></td></tr></table></figure></p>
+<p>2.用http克隆github上的certbot<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/certbot/certbot /opt/certbot-master</span><br></pre></td></tr></table></figure></p>
+<p>3.安装所有依赖<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/certbot-master/letsencrypt-auto --<span class="built_in">help</span></span><br></pre></td></tr></table></figure></p>
+<p>4.关闭nginx，检出80端口，443端口是否有开启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-port=80/tcp</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --query-port=443/tcp</span><br></pre></td></tr></table></figure>
+<p>没有的话就开启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=public --add-port=80/tcp</span><br></pre></td></tr></table></figure></p>
+<p>5.获取证书<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/certbot-master/letsencrypt-auto --nginx -d www.pinnuli.com</span><br></pre></td></tr></table></figure></p>
+<p>6.配置nginx（也可选择自动配置)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">user nginx;</span><br><span class="line">worker_processes auto;</span><br><span class="line">error_log /var/<span class="built_in">log</span>/nginx/error.log;</span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line"></span><br><span class="line">include /usr/share/nginx/modules/*.conf;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">	worker_connections 1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">	log_format  main  <span class="string">'$remote_addr - $remote_user [$time_local] "$request" </span></span><br><span class="line"><span class="string">				'</span><span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> <span class="string">"<span class="variable">$http_referer</span>"</span> <span class="string">'</span></span><br><span class="line"><span class="string">				'</span><span class="string">"<span class="variable">$http_user_agent</span>"</span> <span class="string">"<span class="variable">$http_x_forwarded_for</span>"</span><span class="string">';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	access_log  /var/log/nginx/access.log  main;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	sendfile            on;</span></span><br><span class="line"><span class="string">	tcp_nopush          on;</span></span><br><span class="line"><span class="string">	tcp_nodelay         on;</span></span><br><span class="line"><span class="string">	keepalive_timeout   65;</span></span><br><span class="line"><span class="string">	types_hash_max_size 2048;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	include             /etc/nginx/mime.types;</span></span><br><span class="line"><span class="string">	default_type        application/octet-stream;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	include /etc/nginx/conf.d/*.conf;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	server &#123;</span></span><br><span class="line"><span class="string">		listen       80 default_server;</span></span><br><span class="line"><span class="string">		listen       [::]:80 default_server;</span></span><br><span class="line"><span class="string">		server_name  _;</span></span><br><span class="line"><span class="string">		root        /var/www/pinnuli.github.io;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		include /etc/nginx/default.d/*.conf;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		location / &#123;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		error_page 404 /404.html;</span></span><br><span class="line"><span class="string">		location = /40x.html &#123;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">		error_page 500 502 503 504 /50x.html;</span></span><br><span class="line"><span class="string">		location = /50x.html &#123;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">	server &#123;</span></span><br><span class="line"><span class="string">			server_name www.pinnuli.com; # managed by Certbot</span></span><br><span class="line"><span class="string">			root        /var/www/pinnuli.github.io;</span></span><br><span class="line"><span class="string">			include /etc/nginx/default.d/*.conf;</span></span><br><span class="line"><span class="string">			location / &#123;</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">			error_page 404 /404.html;</span></span><br><span class="line"><span class="string">			location = /40x.html &#123;</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">			error_page 500 502 503 504 /50x.html;</span></span><br><span class="line"><span class="string">			location = /50x.html &#123;</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">			listen [::]:443 ssl ipv6only=on; # managed by Certbot</span></span><br><span class="line"><span class="string">			listen 443 ssl; # managed by Certbot</span></span><br><span class="line"><span class="string">			ssl_certificate /etc/letsencrypt/live/www.pinnuli.com/fullchain.pem; # managed by Certbot</span></span><br><span class="line"><span class="string">			ssl_certificate_key /etc/letsencrypt/live/www.pinnuli.com/privkey.pem; # managed by Certbot</span></span><br><span class="line"><span class="string">			include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot</span></span><br><span class="line"><span class="string">			ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>7.设置自动更新</p>
+<p>未完待续。。。</p>
 
       
     </div>
@@ -716,7 +621,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -727,7 +632,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -738,7 +643,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

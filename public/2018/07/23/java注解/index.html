@@ -148,7 +148,7 @@
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
 <meta property="og:description" content="一、注解分类 源码注解（SOURCE）：注解只在源码中存在，编译成.class文件就不存在 编译时注解（CLASS）：注解在源码和.class文件都存在 运行时注解（RUNTIME）：在运行阶段还起作用，甚至会影响运行逻辑的注解 元注解：注解的注解   二、自定义注解定义：123456789101112//元注解@Target(&amp;#123;ElementType.METHOD,ElementTyp">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-30T02:58:38.465Z">
+<meta property="og:updated_time" content="2018-07-30T12:48:41.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java注解">
 <meta name="twitter:description" content="一、注解分类 源码注解（SOURCE）：注解只在源码中存在，编译成.class文件就不存在 编译时注解（CLASS）：注解在源码和.class文件都存在 运行时注解（RUNTIME）：在运行阶段还起作用，甚至会影响运行逻辑的注解 元注解：注解的注解   二、自定义注解定义：123456789101112//元注解@Target(&amp;#123;ElementType.METHOD,ElementTyp">
@@ -508,6 +508,9 @@
 <li>方法二</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Method[] ms = c.getMethods();</span><br><span class="line"><span class="keyword">for</span>(Method m:ms)&#123;</span><br><span class="line">    <span class="keyword">for</span>(Annotation a:as)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a <span class="keyword">instanceof</span> Description)&#123;</span><br><span class="line">            Description d = (Description)a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参阅：<br>  <a href="https://www.imooc.com/learn/456" target="_blank" rel="noopener">慕课网：全面解析Java注解</a></p>
+</blockquote>
 
       
     </div>
@@ -673,7 +676,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -684,7 +687,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -695,7 +698,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

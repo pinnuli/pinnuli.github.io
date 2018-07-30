@@ -140,18 +140,18 @@
 
 
 
-<meta name="description" content="一、一般模式：光标的移动、复制粘贴、搜索替换  移动光标：     向左移动一个字符：h 或 ←     向右移动一个字符：l 或 →     向上移动一个字符：k 或 ↑     向下移动一个字符：j 或 ↓    向左移动n个字符：n + h（其他同理)，如10h  向右移动这一行的n个字符(会换到下一行)：n + space,如20space  屏幕向上移动一页：Ctrl + b  屏幕向下">
+<meta name="description" content="一、一般模式：光标的移动、复制粘贴、搜索替换移动光标： 向左移动一个字符：h 或 ←  向右移动一个字符：l 或 →  向上移动一个字符：k 或 ↑  向下移动一个字符：j 或 ↓ 向左移动n个字符：n + h（其他同理)，如10h向右移动这一行的n个字符(会换到下一行)：n + space,如20space屏幕向上移动一页：Ctrl + b屏幕向下移动一页：Ctrl + f屏幕向上移动半页：Ct">
 <meta name="keywords" content="vim">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim的使用">
 <meta property="og:url" content="https://pinnuli.github.io/2018/04/30/vim的使用/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="一、一般模式：光标的移动、复制粘贴、搜索替换  移动光标：     向左移动一个字符：h 或 ←     向右移动一个字符：l 或 →     向上移动一个字符：k 或 ↑     向下移动一个字符：j 或 ↓    向左移动n个字符：n + h（其他同理)，如10h  向右移动这一行的n个字符(会换到下一行)：n + space,如20space  屏幕向上移动一页：Ctrl + b  屏幕向下">
+<meta property="og:description" content="一、一般模式：光标的移动、复制粘贴、搜索替换移动光标： 向左移动一个字符：h 或 ←  向右移动一个字符：l 或 →  向上移动一个字符：k 或 ↑  向下移动一个字符：j 或 ↓ 向左移动n个字符：n + h（其他同理)，如10h向右移动这一行的n个字符(会换到下一行)：n + space,如20space屏幕向上移动一页：Ctrl + b屏幕向下移动一页：Ctrl + f屏幕向上移动半页：Ct">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T13:41:11.215Z">
+<meta property="og:updated_time" content="2018-07-30T11:59:14.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim的使用">
-<meta name="twitter:description" content="一、一般模式：光标的移动、复制粘贴、搜索替换  移动光标：     向左移动一个字符：h 或 ←     向右移动一个字符：l 或 →     向上移动一个字符：k 或 ↑     向下移动一个字符：j 或 ↓    向左移动n个字符：n + h（其他同理)，如10h  向右移动这一行的n个字符(会换到下一行)：n + space,如20space  屏幕向上移动一页：Ctrl + b  屏幕向下">
+<meta name="twitter:description" content="一、一般模式：光标的移动、复制粘贴、搜索替换移动光标： 向左移动一个字符：h 或 ←  向右移动一个字符：l 或 →  向上移动一个字符：k 或 ↑  向下移动一个字符：j 或 ↓ 向左移动n个字符：n + h（其他同理)，如10h向右移动这一行的n个字符(会换到下一行)：n + space,如20space屏幕向上移动一页：Ctrl + b屏幕向下移动一页：Ctrl + f屏幕向上移动半页：Ct">
 
 
 
@@ -454,35 +454,27 @@
       
 
       
-        <p>一、一般模式：光标的移动、复制粘贴、搜索替换</p>
-<ul>
-<li><p>移动光标： </p>
-<p>  <strong> 向左移动一个字符：h 或 ← </strong></p>
-<p>  <strong> 向右移动一个字符：l 或 → </strong></p>
-<p>  <strong> 向上移动一个字符：k 或 ↑ </strong></p>
-<p>  <strong> 向下移动一个字符：j 或 ↓ </strong></p>
-<p>  向左移动n个字符：n + h（其他同理)，如10h<br>  向右移动这一行的n个字符(会换到下一行)：n + space,如20space<br>  屏幕向上移动一页：Ctrl + b<br>  屏幕向下移动一页：Ctrl + f<br>  屏幕向上移动半页：Ctrl + u<br>  屏幕向下移动半页：Ctrl + d<br>  移动到非空格的下一行：+<br>  移动到非空格的上一行：-<br>  移动到屏幕最上方那一行的第一个字符：H<br>  移动到屏幕最中间那一行的第一个字符：M<br>  移动到屏幕最下方那一行的第一个字符：L<br>  <strong> 移动到这个文件的最后一行：G </strong><br>  移动到这个文件的第n行：nG<br>  <strong> 移动到这个文件的第一行:gg </strong><br>  <strong> 向下移动n行：n + enter,如10enter </strong></p>
+        <h3 id="一、一般模式：光标的移动、复制粘贴、搜索替换"><a href="#一、一般模式：光标的移动、复制粘贴、搜索替换" class="headerlink" title="一、一般模式：光标的移动、复制粘贴、搜索替换"></a>一、一般模式：光标的移动、复制粘贴、搜索替换</h3><h4 id="移动光标："><a href="#移动光标：" class="headerlink" title="移动光标："></a>移动光标：</h4><p><strong> 向左移动一个字符：h 或 ← </strong><br><strong> 向右移动一个字符：l 或 → </strong><br><strong> 向上移动一个字符：k 或 ↑ </strong><br><strong> 向下移动一个字符：j 或 ↓ </strong><br>向左移动n个字符：n + h（其他同理)，如10h<br>向右移动这一行的n个字符(会换到下一行)：n + space,如20space<br>屏幕向上移动一页：Ctrl + b<br>屏幕向下移动一页：Ctrl + f<br>屏幕向上移动半页：Ctrl + u<br>屏幕向下移动半页：Ctrl + d<br>移动到非空格的下一行：+<br>移动到非空格的上一行：-<br>移动到屏幕最上方那一行的第一个字符：H<br>移动到屏幕最中间那一行的第一个字符：M<br>移动到屏幕最下方那一行的第一个字符：L<br><strong> 移动到这个文件的最后一行：G </strong><br>移动到这个文件的第n行：nG<br><strong> 移动到这个文件的第一行:gg </strong><br><strong> 向下移动n行：n + enter,如10enter </strong></p>
+<blockquote>
+<p>加粗部分为常用，以下同理</p>
+</blockquote>
+<h4 id="搜索替换："><a href="#搜索替换：" class="headerlink" title="搜索替换："></a>搜索替换：</h4><p><strong> 向光标往下搜索一个word的字符串：/word </strong><br><strong> 向光标往上搜索一个word的字符串：?word </strong><br><strong> 重复前一个搜寻动作 ，如果刚刚我们执行 /word 去向下搜寻 vbird 这个字符串，则按下 n 后，会向下继续搜寻下一个名称为 word 的字符串。如果是？word的话就向上搜寻。按下N则反向 </strong><br><strong> 在第n1行与第n2行之间寻找word1这个字符串，并将给字符串取代为word2:n1,n2s/word1/word2/g, 如:10,100s/word/WORD/g </strong><br><strong> 从第1行到最后一行寻找word1字符串，取代为word2: :1,$s/word1/word2/g </strong><br><strong> 从第1行到最后一行寻找word1字符串，取代为word2，取代前提示用户确认（confirm）是否需要取代: :1,$s/word1/word2/gc </strong></p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p><strong> 向前（后）删除一个字符：x(X)，相当于backspace </strong><br><strong> 连续向后删除n个字符： nx,如10x </strong><br><strong> 删除光标所在的一整行：dd </strong><br><strong> 删除光标所在的向下n行：ndd </strong><br>删除光标所在到第一行的所有数据：d1G<br>输出光标所在到最后一行的所有数据:dG<br>删除光标所在到该行最后一个字符：d$<br>删除光标所在到该行第一个字符：d0</p>
+<h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p><strong> 复制光标所在的那一行：yy </strong><br><strong> 复制光标所在的向下n行：nyy </strong><br>复制光标所在行到第一行的所有数据：y1G<br>复制光标所在行到最后一行的所有数据:yG<br>复制光标所在到该行最后一个字符：y$<br>复制光标所在到该行第一个字符：y0</p>
+<h4 id="粘贴"><a href="#粘贴" class="headerlink" title="粘贴"></a>粘贴</h4><p><strong> 将已复制的数据在光标下（上）一行贴上：p(P); </strong><br><strong> 将光标所在行与 下一行的数据结合成一行： J </strong><br>重复删除多个数据:c，如向下删除10行：10cj<br><strong> 复原前一个动作：u </strong><br><strong> 重复上一个动作：Ctrl + r </strong></p>
+<h3 id="二、一般模式到编辑模式的切换"><a href="#二、一般模式到编辑模式的切换" class="headerlink" title="二、一般模式到编辑模式的切换"></a>二、一般模式到编辑模式的切换</h3><h4 id="进去输入模式"><a href="#进去输入模式" class="headerlink" title="进去输入模式"></a>进去输入模式</h4><ul>
+<li><p>i/I<br><strong> 从目前光标所在处输入：i </strong><br><strong> 从目前所在行的第一个非空格符处开始输入：I </strong></p>
 </li>
-<li><p>搜索替换：</p>
-<p>  <strong> 向光标往下搜索一个word的字符串：/word </strong><br>  <strong> 向光标往上搜索一个word的字符串：?word </strong><br>  <strong> 重复前一个搜寻动作 ，如果刚刚我们执行 /word 去向下搜寻 vbird 这个字符串，则按下 n 后，会向下继续搜寻下一个名称为 word 的字符串。如果是？word的话就向上搜寻。按下N则反向 </strong><br>  <strong> 在第n1行与第n2行之间寻找word1这个字符串，并将给字符串取代为word2:n1,n2s/word1/word2/g, 如:10,100s/word/WORD/g </strong><br>  <strong> 从第1行到最后一行寻找word1字符串，取代为word2: :1,$s/word1/word2/g </strong><br>  <strong> 从第1行到最后一行寻找word1字符串，取代为word2，取代前提示用户确认（confirm）是否需要取代: :1,$s/word1/word2/gc </strong></p>
+<li><p>a/A<br>从目前光标所在的下一个字符处开始输入:a<br>从光标所在行的最后一个字符处开始输入:A</p>
 </li>
-</ul>
-<ul>
-<li>删除、复制与粘贴</li>
-<li>删除<br>  <strong> 向前（后）删除一个字符：x(X)，相当于backspace </strong><br>  <strong> 连续向后删除n个字符： nx,如10x </strong><br>  <strong> 删除光标所在的一整行：dd </strong><br>  <strong> 删除光标所在的向下n行：ndd </strong><br>  删除光标所在到第一行的所有数据：d1G<br>  输出光标所在到最后一行的所有数据:dG<br>  删除光标所在到该行最后一个字符：d$<br>  删除光标所在到该行第一个字符：d0</li>
-</ul>
-<p>-复制<br>    <strong> 复制光标所在的那一行：yy </strong><br>    <strong> 复制光标所在的向下n行：nyy </strong><br>    复制光标所在行到第一行的所有数据：y1G<br>    复制光标所在行到最后一行的所有数据:yG<br>    复制光标所在到该行最后一个字符：y$<br>    复制光标所在到该行第一个字符：y0</p>
-<p>-粘贴<br>    <strong> 将已复制的数据在光标下（上）一行贴上：p(P); </strong><br>    <strong> 将光标所在行与 下一行的数据结合成一行： J </strong><br>    重复删除多个数据:c，如向下删除10行：10cj<br>    <strong> 复原前一个动作：u </strong><br>    <strong> 重复上一个动作：Ctrl + r </strong></p>
-<p>二、一般模式到编辑模式的切换<br>-进去输入模式<br>-i/I<br>    <strong> 从目前光标所在处输入：i </strong><br>    <strong> 从目前所在行的第一个非空格符处开始输入：I </strong></p>
-<p>-a/A<br>    从目前光标所在的下一个字符处开始输入:a<br>    从光标所在行的最后一个字符处开始输入:A</p>
-<p>-o/O<br>    <strong> 在光标所在的下一行输入新的一行：o </strong><br>    <strong> 在光标所在的上一行输入新的一行：O </strong><br>-进入取代模式<br>-r/R<br>    <strong> 取代光标所在的那一个字符一次：r </strong><br>    <strong> 一直取代光标所在的字符，直到按esc </strong></p>
-<p>三、一般模式到命令行模式的切换</p>
-<ul>
-<li><p>指令行的存储、离开等<br>  <strong> 保存编辑： :w </strong><br>  <strong> 强制写入： :w! </strong><br>  <strong> 退出： :q </strong><br>  <strong> 强制退出，不保存修改： :q! </strong><br>  <strong> 保存修改后退出： :wq </strong><br>  <strong> 将修改后的数据另存为一个文件： :w filename </strong><br>  在当前编辑的数据中，读入另一个文件的数据： :r filename<br>   将n1到n2的内容存储成另一个文件filename: :n1,n2 w filename<br>  <strong>     暂时离开 vi 到指令行模式下执行 command 的显示结果： :!command ;例如:! ls /home』即可在 vi 当中察看 /home 底下以 ls 输出的文件信息 </strong></p>
-</li>
-<li><p>vim环境的变更<br>  显示行号： :set nu<br>  取消显示行号： :set nonu</p>
+<li><p>o/O<br><strong> 在光标所在的下一行输入新的一行：o </strong><br><strong> 在光标所在的上一行输入新的一行：O </strong></p>
 </li>
 </ul>
+<h4 id="进入取代模式"><a href="#进入取代模式" class="headerlink" title="进入取代模式"></a>进入取代模式</h4><ul>
+<li>r/R<br><strong> 取代光标所在的那一个字符一次：r </strong><br><strong> 一直取代光标所在的字符，直到按esc </strong></li>
+</ul>
+<h3 id="三、一般模式到命令行模式的切换"><a href="#三、一般模式到命令行模式的切换" class="headerlink" title="三、一般模式到命令行模式的切换"></a>三、一般模式到命令行模式的切换</h3><h4 id="指令行的存储、离开等"><a href="#指令行的存储、离开等" class="headerlink" title="指令行的存储、离开等"></a>指令行的存储、离开等</h4><p><strong> 保存编辑： :w </strong><br><strong> 强制写入： :w! </strong><br><strong> 退出： :q </strong><br><strong> 强制退出，不保存修改： :q! </strong><br><strong> 保存修改后退出： :wq </strong><br><strong> 将修改后的数据另存为一个文件： :w filename </strong><br>在当前编辑的数据中，读入另一个文件的数据： :r filename<br>将n1到n2的内容存储成另一个文件filename: :n1,n2 w filename<br><strong>     暂时离开 vi 到指令行模式下执行 command 的显示结果： :!command ;例如:! ls /home』即可在 vi 当中察看 /home 底下以 ls 输出的文件信息 </strong></p>
+<h4 id="vim环境的变更"><a href="#vim环境的变更" class="headerlink" title="vim环境的变更"></a>vim环境的变更</h4><p>显示行号： :set nu<br>取消显示行号： :set nonu</p>
 
       
     </div>
@@ -619,8 +611,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -639,7 +640,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -650,7 +651,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -661,7 +662,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -707,6 +708,22 @@ var jiathis_config={
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、一般模式：光标的移动、复制粘贴、搜索替换"><span class="nav-number">1.</span> <span class="nav-text">一、一般模式：光标的移动、复制粘贴、搜索替换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#移动光标："><span class="nav-number">1.1.</span> <span class="nav-text">移动光标：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索替换："><span class="nav-number">1.2.</span> <span class="nav-text">搜索替换：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">1.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制"><span class="nav-number">1.4.</span> <span class="nav-text">复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#粘贴"><span class="nav-number">1.5.</span> <span class="nav-text">粘贴</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、一般模式到编辑模式的切换"><span class="nav-number">2.</span> <span class="nav-text">二、一般模式到编辑模式的切换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进去输入模式"><span class="nav-number">2.1.</span> <span class="nav-text">进去输入模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进入取代模式"><span class="nav-number">2.2.</span> <span class="nav-text">进入取代模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、一般模式到命令行模式的切换"><span class="nav-number">3.</span> <span class="nav-text">三、一般模式到命令行模式的切换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指令行的存储、离开等"><span class="nav-number">3.1.</span> <span class="nav-text">指令行的存储、离开等</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vim环境的变更"><span class="nav-number">3.2.</span> <span class="nav-text">vim环境的变更</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
