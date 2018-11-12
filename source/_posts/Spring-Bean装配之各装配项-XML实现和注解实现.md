@@ -1,7 +1,7 @@
 ---
 title: Spring Bean装配之各装配项 XML实现和注解实现
 date: 2018-07-27 18:56:18
-categories: "JavaWeb"
+categories: "Spring笔记"
 tags:
     - JavaWeb
     - Spring

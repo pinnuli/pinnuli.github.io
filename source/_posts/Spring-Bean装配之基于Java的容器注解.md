@@ -1,7 +1,7 @@
 ---
 title: 'Spring Bean装配之基于Java的容器注解 '
 date: 2018-07-29 17:13:43
-categories: "JavaWeb"
+categories: "Spring笔记"
 tags:
     - JavaWeb
     - Spring
