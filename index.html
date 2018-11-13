@@ -364,7 +364,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/11/12/Java中的线程安全和锁优化/">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/11/12/Java中的锁优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pinnuli">
@@ -383,7 +383,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/12/Java中的线程安全和锁优化/" itemprop="url">Java中的线程安全和锁优化</a></h1>
+                <a class="post-title-link" href="/2018/11/12/Java中的锁优化/" itemprop="url">Java中的锁优化</a></h1>
         
 
         <div class="post-meta">
@@ -457,12 +457,16 @@
       
         
           
-          Java中5种操作共享的数据- 
-
           
+自旋锁: 让请求锁的线程执行一个忙循环（自旋），不放弃处理器的执行时间，看看持有锁的线程是否很快就会释放锁
+自选等待时间必须要有一定的限度，如果自旋超过了限定的次数仍然没有成功获得锁，就应当使用传统方式挂起线程
+
+
+自旋适应锁: 自旋的时间不在固定，而是由前一次在同一个锁上的自旋时间及锁的拥有者的
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/12/Java中的线程安全和锁优化/#more" rel="contents">
+            <a class="btn" href="/2018/11/12/Java中的锁优化/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -897,8 +901,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javase笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javase笔记</span>
+                  <a href="/categories/JavaSE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE笔记</span>
                   </a>
                 </span>
 
@@ -1061,8 +1065,8 @@ HTML属性可以没有值，XML所有属性必须有值
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javase笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javase笔记</span>
+                  <a href="/categories/JavaSE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE笔记</span>
                   </a>
                 </span>
 
@@ -1217,8 +1221,8 @@ HTML属性可以没有值，XML所有属性必须有值
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javase笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">javase笔记</span>
+                  <a href="/categories/JavaSE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE笔记</span>
                   </a>
                 </span>
 
