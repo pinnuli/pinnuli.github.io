@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Java并发]]></title>
+    <url>%2F2018%2F11%2F15%2FJava%E5%B9%B6%E5%8F%91%2F</url>
+    <content type="text"><![CDATA[基本的线程机制定义一个线程 实现Runnable接口，重写run()方法，并传递给Thread构造器 继承Thread类，重写run()方法 调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法 使用Executor Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。ExecutorService（具有服务生命周期的Executor）知道如何构建恰当的上下文来执行Runnable对象 有集中不同的Executor： CacheThreadPool：通常创建与所需数量相同的线程，然后在它回收旧线程时停止创建新线程（首先的Executor） FixedThreadPool：使用有限的线程集来执行所提交的任务，可以一次性预先执行代价高昂的线程分配 SingleThreadPool：像是线程数量为1的FixedThreadPool，当希望在另一个线程中连续运行某事物来说很有用。当提交多个任务时，这些任务会排队。示例（三种Executor都这样使用）：123456789public class SingleThreadPool &#123; public static void main(String[] args) &#123; ExecutorService exec = Executors.newSingleThreadPool(); for (int i = 0; i &lt; 5; i++) &#123; exec.execute(new LiftOff()); &#125; exec.shutdown(); &#125;&#125; 从任务中产生返回值 实现Callable接口，从call（）方法中返回值，必须使用ExecutorService.submit()方法调用。submit()方法会产生Future对象。可以用isDone()方法来查询Future是否完成，完成时可以调用get()方法获取该结果，若完成就调用get()方法将阻塞到完成。 1234567891011121314151617181920212223242526272829public class TaskWithResult implements Callable&lt;String&gt; &#123; private int id ; public TaskWithResult(int id) &#123; this.id = id; &#125; public String call() &#123; return "result of TaskWithResult " + id; &#125;&#125;public class CallableDemo &#123; public static void main(String[] args) &#123; ExecutorService exec = Executors.newCachedThreadPool(); ArrayList&lt;Future&lt;String&gt;&gt; results = new ArrayList&lt;Future&lt;String&gt;&gt;(); for (int i = 0; i &lt; 5; i++) &#123; results.add(exec.submit(new TaskWithResult(i))); &#125; for(Future&lt;String&gt; fs: results) &#123; try &#123; System.out.println(fs.get()); &#125; catch &#123; System.out.printLn(e); return; &#125; finally &#123; exce.shutdown(); &#125; &#125; &#125;&#125; 休眠(sleep) sleep(),使任务中止执行给定的时间，但不会释放持有的锁 优先级Java有十个优先级，但不同的操作系统有不同的优先级，不能与操作系统有很好的映射。在调整优先级时只是用MAX_PRIORITY,NORM_PRIORITY,MIN_PRIORITY三个等级 让步(yield)暂停当前正在执行的线程对象，把执行机会让给相同或者更高优先级的线程。 加入一个线(join)某个线程在另一个线程t上个调用join()，此线程被挂起，知道目标线程t结束(即.isAlive()为假)才恢复，也可调用join()时带一个超时参数，超时便返回 后台线程(维护线程) 可以在线程启动之前调用setDaemon()方法设置为后台线程 一个后台进程创建的任何线程被自动地设置为后台线程 后台线程在不执行finally子句时就终止器run()方法 编码变体有时候可以使用内部类将代码隐藏在类中 继承Thread的两种写法：1.扩展自Thread的匿名内部类123456789101112131415class InnerThread1 &#123; private Inner inner; private class Inner extends Thread &#123; Inner(String name) &#123; super(name); start(); &#125; public void run() &#123; ...... &#125; &#125; public InnerThread1(String name) &#123; inner = new Inner(name); &#125;&#125; 2.在构造器中穿件一个匿名的Thread子类，并且向上转型为Thread引用t1234567891011class InnerThread2 &#123;&#125; private Thread t; public InnerThread2(String name) &#123; t = new Thread(name) &#123; public void run() &#123; ...... &#125; &#125;; t.start(); &#125;&#125; 实现Runnable的两种写法（同上两种情况）12345678910111213141516class InnerRunnable1 &#123; private Inner inner; private class Inner implements Runnable &#123; Thread t; Inner(String name) &#123; t = new Thread(this, name); t.start(); &#125; public void run() &#123; ...... &#125; &#125; public InnerRunnable1(String name) &#123; inner = new Inner(name); &#125;&#125; 12345678910class InnerRunnable2 &#123; private Thread t; public InnerRunnable2(String name) &#123; t = new Thread(new Runnable() &#123; public void run() &#123; ...... &#125;, name); t.start(); &#125;&#125; 在方法内部创建线程123456789101112131415class ThreadMethod &#123; private Thread t; private String name; public ThreadMethod(String name) &#123; this.name = name; &#125; public void runTask() &#123; if(t == null) &#123; t = new Thread(name) &#123; public void run() &#123; ...... &#125; &#125;; t.start(); &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>JavaSE笔记</category>
+      </categories>
+      <tags>
+        <tag>JavaSE</tag>
+        <tag>Java并发</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java中的锁优化]]></title>
     <url>%2F2018%2F11%2F12%2FJava%E4%B8%AD%E7%9A%84%E9%94%81%E4%BC%98%E5%8C%96%2F</url>
     <content type="text"><![CDATA[自旋锁: 让请求锁的线程执行一个忙循环（自旋），不放弃处理器的执行时间，看看持有锁的线程是否很快就会释放锁 自选等待时间必须要有一定的限度，如果自旋超过了限定的次数仍然没有成功获得锁，就应当使用传统方式挂起线程 自旋适应锁: 自旋的时间不在固定，而是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定。 如果在同一个锁对象上，自旋等待刚刚成功获得过锁，并且尺有所 的线程正在运行中，那么自旋等待时间将会持续相对更长；如果对于某个锁，自旋很少成功获得过，拿在以后要获取这个锁时将可能省略掉自旋过程 锁消除: 虚拟机即时编译器在运行时，对一些代码上要求同步，但是被检测到不存在共享数据竞争的锁进行消除 锁粗化: 虚拟机探测到有一串零碎的操作对同一对象加锁，将会把加锁同步的范围扩展（粗化）到整个操作序列的外部，例如： 1234567public String concatString(String s1, String s2, String s3) &#123; StringBuffer sb = new StringBuffer(); sb.append(s1); sb.append(s2); sb.append(s3); return sb.tostring();&#125; 这里原先每次append操作都需要加一次锁，而虚拟机会扩展到第一个append操作之前到最后一个append操作之后，就只需要加一次锁 轻量级锁: 轻量级是相对于使用操作系统互斥量来实现的传统锁而言的，传统的锁机制称为“重量级”锁 轻量级锁在没有多线程竞争的前提下，减少传统的重量级锁产生的性能消耗。 偏向锁: 消除数据在无竞争情况下的同步原语，进一步提高程序的运行性能，即在无精准的情况下把整个同步都消除掉]]></content>
@@ -248,8 +260,8 @@
         <category>计算机基础</category>
       </categories>
       <tags>
-        <tag>计算机基础</tag>
         <tag>OS</tag>
+        <tag>计算机基础</tag>
       </tags>
   </entry>
   <entry>

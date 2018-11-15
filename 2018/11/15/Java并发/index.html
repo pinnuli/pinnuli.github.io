@@ -127,7 +127,7 @@
 
 
 
-  <meta name="keywords" content="JavaWeb,Spring," />
+  <meta name="keywords" content="JavaSE,Java并发," />
 
 
 
@@ -140,18 +140,18 @@
 
 
 
-<meta name="description" content="1.可以将@Autowired注解为setter方法1234@Autowiredpublic void setInjectionDAO(InjectionDAO injectionDAO) &amp;#123;    this.injectionDAO = injectionDAO;&amp;#125;  2.可以用于构造器或成员变量1234@Autowired(required=false)public voi">
-<meta name="keywords" content="JavaWeb,Spring">
+<meta name="description" content="基本的线程机制定义一个线程 实现Runnable接口，重写run()方法，并传递给Thread构造器 继承Thread类，重写run()方法 调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法    使用Executor Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。E">
+<meta name="keywords" content="JavaSE,Java并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Bean装配之Autowired注解">
-<meta property="og:url" content="https://pinnuli.github.io/2018/07/28/Spring-Bean装配之Autowired注解/index.html">
+<meta property="og:title" content="Java并发">
+<meta property="og:url" content="https://pinnuli.github.io/2018/11/15/Java并发/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="1.可以将@Autowired注解为setter方法1234@Autowiredpublic void setInjectionDAO(InjectionDAO injectionDAO) &amp;#123;    this.injectionDAO = injectionDAO;&amp;#125;  2.可以用于构造器或成员变量1234@Autowired(required=false)public voi">
+<meta property="og:description" content="基本的线程机制定义一个线程 实现Runnable接口，重写run()方法，并传递给Thread构造器 继承Thread类，重写run()方法 调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法    使用Executor Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。E">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-12T13:00:24.281Z">
+<meta property="og:updated_time" content="2018-11-15T13:07:50.571Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Bean装配之Autowired注解">
-<meta name="twitter:description" content="1.可以将@Autowired注解为setter方法1234@Autowiredpublic void setInjectionDAO(InjectionDAO injectionDAO) &amp;#123;    this.injectionDAO = injectionDAO;&amp;#125;  2.可以用于构造器或成员变量1234@Autowired(required=false)public voi">
+<meta name="twitter:title" content="Java并发">
+<meta name="twitter:description" content="基本的线程机制定义一个线程 实现Runnable接口，重写run()方法，并传递给Thread构造器 继承Thread类，重写run()方法 调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法    使用Executor Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。E">
 
 
 
@@ -181,13 +181,13 @@
 
 
 
-  <link rel="canonical" href="https://pinnuli.github.io/2018/07/28/Spring-Bean装配之Autowired注解/"/>
+  <link rel="canonical" href="https://pinnuli.github.io/2018/11/15/Java并发/"/>
 
 
 
 
 
-  <title>Spring Bean装配之Autowired注解 | PINNULI'S BLOG</title>
+  <title>Java并发 | PINNULI'S BLOG</title>
   
 
 
@@ -365,7 +365,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/07/28/Spring-Bean装配之Autowired注解/">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/11/15/Java并发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pinnuli">
@@ -382,7 +382,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring Bean装配之Autowired注解</h1>
+          <h1 class="post-title" itemprop="name headline">Java并发</h1>
         
 
         <div class="post-meta">
@@ -394,8 +394,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-28T22:36:17+08:00">
-                2018-07-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T16:01:42+08:00">
+                2018-11-15
               </time>
             
 
@@ -417,8 +417,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Spring笔记</span>
+                  <a href="/categories/JavaSE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE笔记</span>
                   </a>
                 </span>
 
@@ -454,39 +454,50 @@
       
 
       
-        <h3 id="1-可以将-Autowired注解为setter方法"><a href="#1-可以将-Autowired注解为setter方法" class="headerlink" title="1.可以将@Autowired注解为setter方法"></a>1.可以将@Autowired注解为setter方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInjectionDAO</span><span class="params">(InjectionDAO injectionDAO)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.injectionDAO = injectionDAO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="2-可以用于构造器或成员变量"><a href="#2-可以用于构造器或成员变量" class="headerlink" title="2.可以用于构造器或成员变量"></a>2.可以用于构造器或成员变量</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span>(required=<span class="keyword">false</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInjectionDAO</span><span class="params">(InjectionDAO injectionDAO)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.injectionDAO = injectionDAO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>默认情况下，如果因找不到合适的<code>bean</code>将会导致<code>autowiring</code>失败抛出异常，可以通过将其<code>required</code>设置为false表示并非必须，每个类只能有一个构造器标记为<code>required=true</code>,也就是只能有一个构造器为必须，这种情况下建议使用<code>@Required</code>注解：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Required</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInjectionDAO</span><span class="params">(InjectionDAO injectionDAO)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.injectionDAO = injectionDAO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><code>@Required</code>表示标记的<code>bean</code>属性在<code>bean</code>装配时必须被填充，通过在<code>bean</code>定义或者自动装配一个明确的属性值</p>
+        <h3 id="基本的线程机制"><a href="#基本的线程机制" class="headerlink" title="基本的线程机制"></a>基本的线程机制</h3><h4 id="定义一个线程"><a href="#定义一个线程" class="headerlink" title="定义一个线程"></a>定义一个线程</h4><ul>
+<li>实现Runnable接口，重写run()方法，并传递给Thread构造器</li>
+<li>继承Thread类，重写run()方法<blockquote>
+<p>调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法</p>
 </blockquote>
-<hr>
-<h3 id="3-用于注解众所周知的解析依赖性借口，如BeanFactory，ApplicationCon，Environment，ResourceLoader，ApplicationEventPublisher，MessageSource-等"><a href="#3-用于注解众所周知的解析依赖性借口，如BeanFactory，ApplicationCon，Environment，ResourceLoader，ApplicationEventPublisher，MessageSource-等" class="headerlink" title="3.用于注解众所周知的解析依赖性借口，如BeanFactory，ApplicationCon，Environment，ResourceLoader，ApplicationEventPublisher，MessageSource 等"></a>3.用于注解众所周知的解析依赖性借口，如BeanFactory，ApplicationCon，Environment，ResourceLoader，ApplicationEventPublisher，MessageSource 等</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanSutowired</span></span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApplicationContext context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="4-可通过添加注解给需要该类型的数组的字段或方法，提供ApplicationContext中的所有特定类型的bean"><a href="#4-可通过添加注解给需要该类型的数组的字段或方法，提供ApplicationContext中的所有特定类型的bean" class="headerlink" title="4.可通过添加注解给需要该类型的数组的字段或方法，提供ApplicationContext中的所有特定类型的bean"></a>4.可通过添加注解给需要该类型的数组的字段或方法，提供ApplicationContext中的所有特定类型的bean</h3><p>下面的示例中，<code>list</code>添加了<code>@Autowired</code>注解，那么所有的实现<code>BeanInterface</code>接口的<code>bean</code>，假如有<code>BeanimplOne</code>和<code>BeanimplTwo</code>都实现了<code>BeanInterface</code>接口，那么这时<code>list</code>中将包含有<code>BeanimplOne</code>和<code>BeanimplTwo</code>。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanInvoker</span> <span class="keyword">implements</span> <span class="title">BeanInterface</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;BeanInterface&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"list..."</span>);</span><br><span class="line">        <span class="keyword">for</span> (BeanInterface bean : list) &#123;</span><br><span class="line">            System.out.println(bean.getClass().getName());</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果希望数组有序，可以使用<code>@Order</code>注解或者实现<code>org.springframework.core.Ordered</code>接口，但是对<code>map</code>无效</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Order</span>(<span class="number">1</span>)</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanimplTwo</span> <span class="keyword">implements</span> <span class="title">BeanInterface</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="5-用于装配key为String的Map"><a href="#5-用于装配key为String的Map" class="headerlink" title="5.用于装配key为String的Map"></a>5.用于装配key为String的Map</h3><p>下面的示例中，<code>map</code>添加了<code>@Autowired</code>注解，那么所有的实现<code>BeanInterface</code>接口的<code>bean</code>，加入有<code>BeanimplOne</code>和<code>BeanimplTwo</code>都实现了<code>BeanInterface</code>接口，那么这时map中将包含有键为<code>bean</code>名称和值为<code>bean</code>的两个元素。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanInvoker</span> <span class="keyword">implements</span> <span class="title">BeanInterface</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, BeanInterface&gt; map;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"map..."</span>);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, BeanInterface&gt; entry : map.entrySet()) &#123;</span><br><span class="line">            System.out.println(entry.getKey() + <span class="string">"      "</span> + entry.getValue().getClass().getName());</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h3 id="6-Qualifier"><a href="#6-Qualifier" class="headerlink" title="6.@Qualifier"></a>6.@Qualifier</h3><ul>
-<li>按类型自动装配可能多个bean实例的情况，可以使用Qualifier注解缩小范围或指定唯一</li>
+</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"beanImplTwo"</span>)</span><br><span class="line"><span class="keyword">private</span> BeanInterface beanInterface;</span><br></pre></td></tr></table></figure>
+<h4 id="使用Executor"><a href="#使用Executor" class="headerlink" title="使用Executor"></a>使用Executor</h4><blockquote>
+<p>Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。ExecutorService（具有服务生命周期的Executor）知道如何构建恰当的上下文来执行Runnable对象</p>
+</blockquote>
+<p>有集中不同的Executor：</p>
 <ul>
-<li>用于指定单独的构造器参数或方法参数</li>
-<li>用于注解集合类型变量</li>
+<li><strong>CacheThreadPool</strong>：通常创建与所需数量相同的线程，然后在它回收旧线程时停止创建新线程（首先的Executor）</li>
+<li><strong>FixedThreadPool</strong>：使用有限的线程集来执行所提交的任务，可以一次性预先执行代价高昂的线程分配</li>
+<li><strong>SingleThreadPool</strong>：像是线程数量为1的FixedThreadPool，当希望在另一个线程中连续运行某事物来说很有用。当提交多个任务时，这些任务会排队。<br>示例（三种Executor都这样使用）：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SingleThreadPool</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService exec = Executors.newSingleThreadPool();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            exec.execute(<span class="keyword">new</span> LiftOff());</span><br><span class="line">        &#125;</span><br><span class="line">        exec.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<p>可以在bean的定义中使用<code>@Qualifier</code>注解给他限定一个范围，比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"beanImpl"</span>)</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanImplTwo</span> <span class="keyword">implements</span> <span class="title">BeanInterface</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后在注入时，使用<code>@Qualifier</code>限定，则下面的<code>list</code>将会匹配到所有<code>@Qualifier(&quot;beanImp&quot;)</code>的<code>bean</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"beanImpl"</span>)</span><br><span class="line"><span class="keyword">private</span> List&lt;BeanInterface&gt; list;</span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>参阅：<br>  <a href="https://www.imooc.com/learn/196" target="_blank" rel="noopener">慕课网：Spring入门篇</a></p>
+<h4 id="从任务中产生返回值"><a href="#从任务中产生返回值" class="headerlink" title="从任务中产生返回值"></a>从任务中产生返回值</h4><blockquote>
+<p>实现Callable接口，从call（）方法中返回值，必须使用ExecutorService.submit()方法调用。submit()方法会产生Future对象。可以用isDone()方法来查询Future是否完成，完成时可以调用get()方法获取该结果，若完成就调用get()方法将阻塞到完成。</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskWithResult</span> <span class="keyword">implements</span> <span class="title">Callable</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id ;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TaskWithResult</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"result of TaskWithResult "</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallableDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ExecutorService exec = Executors.newCachedThreadPool();</span><br><span class="line">        ArrayList&lt;Future&lt;String&gt;&gt; results = <span class="keyword">new</span> ArrayList&lt;Future&lt;String&gt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            results.add(exec.submit(<span class="keyword">new</span> TaskWithResult(i)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(Future&lt;String&gt; fs: results) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                System.out.println(fs.get());</span><br><span class="line">            &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">                System.out.printLn(e);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                exce.shutdown();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="休眠-sleep"><a href="#休眠-sleep" class="headerlink" title="休眠(sleep)"></a>休眠(sleep)</h4><blockquote>
+<p>sleep(),使任务中止执行给定的时间，但不会释放持有的锁</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p>Java有十个优先级，但不同的操作系统有不同的优先级，不能与操作系统有很好的映射。在调整优先级时只是用MAX_PRIORITY,NORM_PRIORITY,MIN_PRIORITY三个等级</p>
+<h4 id="让步-yield"><a href="#让步-yield" class="headerlink" title="让步(yield)"></a>让步(yield)</h4><p>暂停当前正在执行的线程对象，把执行机会让给相同或者更高优先级的线程。</p>
+<h4 id="加入一个线-join"><a href="#加入一个线-join" class="headerlink" title="加入一个线(join)"></a>加入一个线(join)</h4><p>某个线程在另一个线程t上个调用join()，此线程被挂起，知道目标线程t结束(即.isAlive()为假)才恢复，也可调用join()时带一个超时参数，超时便返回</p>
+<h4 id="后台线程-维护线程"><a href="#后台线程-维护线程" class="headerlink" title="后台线程(维护线程)"></a>后台线程(维护线程)</h4><ul>
+<li>可以在线程启动之前调用setDaemon()方法设置为后台线程</li>
+<li>一个后台进程创建的任何线程被自动地设置为后台线程</li>
+<li>后台线程在不执行finally子句时就终止器run()方法 <h4 id="编码变体"><a href="#编码变体" class="headerlink" title="编码变体"></a>编码变体</h4>有时候可以使用内部类将代码隐藏在类中</li>
+<li>继承Thread的两种写法：<br>1.扩展自Thread的匿名内部类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InnerThread1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Inner inner;</span><br><span class="line">  <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    Inner(String name) &#123;</span><br><span class="line">      <span class="keyword">super</span>(name);</span><br><span class="line">      start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">InnerThread1</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    inner = <span class="keyword">new</span> Inner(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>2.在构造器中穿件一个匿名的Thread子类，并且向上转型为Thread引用t<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InnerThread2</span> </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">private</span> Thread t;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">InnerThread2</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    t = <span class="keyword">new</span> Thread(name) &#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    t.start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>实现Runnable的两种写法（同上两种情况）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InnerRunnable1</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Inner inner;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    Thread t;</span><br><span class="line">    Inner(String name) &#123;</span><br><span class="line">      t = <span class="keyword">new</span> Thread(<span class="keyword">this</span>, name);</span><br><span class="line">      t.start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      ......</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">InnerRunnable1</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    inner = <span class="keyword">new</span> Inner(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InnerRunnable2</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Thread t;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">InnerRunnable2</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">    &#125;, name);</span><br><span class="line">    t.start();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在方法内部创建线程<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Thread t;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ThreadMethod</span><span class="params">(String name)</span> </span>&#123; <span class="keyword">this</span>.name = name; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runTask</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(t == <span class="keyword">null</span>) &#123;</span><br><span class="line">      t = <span class="keyword">new</span> Thread(name) &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          ......</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      t.start();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -521,9 +532,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
+            <a href="/tags/JavaSE/" rel="tag"><i class="fa fa-tag"></i> JavaSE</a>
           
-            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+            <a href="/tags/Java并发/" rel="tag"><i class="fa fa-tag"></i> Java并发</a>
           
         </div>
       
@@ -536,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/27/Spring-Bean装配之各装配项-XML实现和注解实现/" rel="next" title="Spring Bean装配之各装配项 XML实现和注解实现">
-                <i class="fa fa-chevron-left"></i> Spring Bean装配之各装配项 XML实现和注解实现
+              <a href="/2018/11/12/Java中的锁优化/" rel="next" title="Java中的锁优化">
+                <i class="fa fa-chevron-left"></i> Java中的锁优化
               </a>
             
           </div>
@@ -545,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/29/Spring-Bean装配之基于Java的容器注解/" rel="prev" title="Spring Bean装配之基于Java的容器注解 ">
-                Spring Bean装配之基于Java的容器注解  <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -732,7 +739,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-可以将-Autowired注解为setter方法"><span class="nav-number">1.</span> <span class="nav-text">1.可以将@Autowired注解为setter方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可以用于构造器或成员变量"><span class="nav-number">2.</span> <span class="nav-text">2.可以用于构造器或成员变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-用于注解众所周知的解析依赖性借口，如BeanFactory，ApplicationCon，Environment，ResourceLoader，ApplicationEventPublisher，MessageSource-等"><span class="nav-number">3.</span> <span class="nav-text">3.用于注解众所周知的解析依赖性借口，如BeanFactory，ApplicationCon，Environment，ResourceLoader，ApplicationEventPublisher，MessageSource 等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-可通过添加注解给需要该类型的数组的字段或方法，提供ApplicationContext中的所有特定类型的bean"><span class="nav-number">4.</span> <span class="nav-text">4.可通过添加注解给需要该类型的数组的字段或方法，提供ApplicationContext中的所有特定类型的bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-用于装配key为String的Map"><span class="nav-number">5.</span> <span class="nav-text">5.用于装配key为String的Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Qualifier"><span class="nav-number">6.</span> <span class="nav-text">6.@Qualifier</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的线程机制"><span class="nav-number">1.</span> <span class="nav-text">基本的线程机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义一个线程"><span class="nav-number">1.1.</span> <span class="nav-text">定义一个线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Executor"><span class="nav-number">1.2.</span> <span class="nav-text">使用Executor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从任务中产生返回值"><span class="nav-number">1.3.</span> <span class="nav-text">从任务中产生返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#休眠-sleep"><span class="nav-number">1.4.</span> <span class="nav-text">休眠(sleep)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级"><span class="nav-number">1.5.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#让步-yield"><span class="nav-number">1.6.</span> <span class="nav-text">让步(yield)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加入一个线-join"><span class="nav-number">1.7.</span> <span class="nav-text">加入一个线(join)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台线程-维护线程"><span class="nav-number">1.8.</span> <span class="nav-text">后台线程(维护线程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码变体"><span class="nav-number">1.9.</span> <span class="nav-text">编码变体</span></a></li></ol></li></ol></div>
             
 
           </div>
