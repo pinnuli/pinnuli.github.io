@@ -140,13 +140,13 @@
 
 
 
-<meta name="description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志  服务器端使用的端口号   熟知端口号">
+<meta name="description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志   服务器端使用的端口号   熟知端口">
 <meta name="keywords" content="计算机网络,TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="五层体系结构之运输层">
 <meta property="og:url" content="https://pinnuli.github.io/2018/11/18/五层体系结构之运输层/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志  服务器端使用的端口号   熟知端口号">
+<meta property="og:description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志   服务器端使用的端口号   熟知端口">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pinnuli.github.io/images/udp_header.png">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_stream.png">
@@ -155,10 +155,17 @@
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_confirm_lose.jpg">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_channel_utilization.jpg">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_header.jpg">
-<meta property="og:updated_time" content="2018-11-18T13:50:51.461Z">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_window_send.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_window_state.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_send_cahce.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_recieve_cahce.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_rtts_calculate.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_rttd_calculate.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/tcp_rto_calculate.jpg">
+<meta property="og:updated_time" content="2018-11-19T14:33:57.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="五层体系结构之运输层">
-<meta name="twitter:description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志  服务器端使用的端口号   熟知端口号">
+<meta name="twitter:description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志   服务器端使用的端口号   熟知端口">
 <meta name="twitter:image" content="https://pinnuli.github.io/images/udp_header.png">
 
 
@@ -478,6 +485,7 @@
 </ul>
 <h4 id="运输层的端口（软件端口）"><a href="#运输层的端口（软件端口）" class="headerlink" title="运输层的端口（软件端口）"></a>运输层的端口（软件端口）</h4><blockquote>
 <p>给应用层的每个应用进程赋予一个明确的标志</p>
+</blockquote>
 <ol>
 <li>服务器端使用的端口号</li>
 </ol>
@@ -491,9 +499,9 @@
 <ul>
 <li>又叫 <strong>短暂端口号</strong> ,49152~65535，仅在客户进程运行时动态选择</li>
 </ul>
-</blockquote>
 <h3 id="用户数据报协议UDP"><a href="#用户数据报协议UDP" class="headerlink" title="用户数据报协议UDP"></a>用户数据报协议UDP</h3><blockquote>
 <p>在IP的数据服务上加了复用和分用，差错检测的功能</p>
+</blockquote>
 <h4 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h4><ul>
 <li><strong>UDP是无连接的</strong>: 发送数据之前不需要建立连接</li>
 <li><strong>UDP使用尽最大努力交付</strong></li>
@@ -502,16 +510,17 @@
 <li><strong>UDP支持一对一、一对多、多对一和多对多的交互通信</strong></li>
 <li><strong>UDP的首部开销小</strong>:只要8个字节</li>
 </ul>
-</blockquote>
 <h4 id="UDP的首部格式"><a href="#UDP的首部格式" class="headerlink" title="UDP的首部格式"></a>UDP的首部格式</h4><blockquote>
 <p>四个字段，每个字段两个字节</p>
+</blockquote>
 <ul>
 <li>源端口</li>
 <li>目的端口</li>
 <li>长度</li>
-<li>检验和<br><img src="/images/udp_header.png" alt="UDP header"><h3 id="传输控制协议TCP"><a href="#传输控制协议TCP" class="headerlink" title="传输控制协议TCP"></a>传输控制协议TCP</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4></li>
+<li>检验和<br><img src="/images/udp_header.png" alt="UDP header"></li>
 </ul>
-<ol>
+<hr>
+<h3 id="传输控制协议TCP"><a href="#传输控制协议TCP" class="headerlink" title="传输控制协议TCP"></a>传输控制协议TCP</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><ol>
 <li>主要特点</li>
 </ol>
 <ul>
@@ -521,7 +530,6 @@
 <li><strong>TCP提供全双工通信</strong>: 允许通信双方的应用进程在任何时候都很高发送数据。发送时，应用程序在把数据传送给TCP的缓存之后就可以做自己的事，然后TCP在合适的时候把数据发送出去；接收时，TCP把收到的数据放入缓存，上层的应用进程在合适的时候读取缓存中的数据</li>
 <li><strong>面向字节流</strong>: 应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序叫下俩的而数据看成仅仅是一连串的无结构的字节流<br><img src="/images/tcp_stream.png" alt="读取流程"></li>
 </ul>
-</blockquote>
 <ol>
 <li>TCP的连接</li>
 </ol>
@@ -533,10 +541,15 @@
 </ul>
 <h4 id="可靠传输的工作原理"><a href="#可靠传输的工作原理" class="headerlink" title="可靠传输的工作原理"></a>可靠传输的工作原理</h4><h5 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h5><blockquote>
 <p>”停止等待“就是每发送完一个分组就停止发送，等待对方的确认，在收到确认后再发送下一个分组</p>
+</blockquote>
 <ol>
 <li>无差错情况<br><img src="/images/tcp_no_error.jpg" alt="tcp_no_error"></li>
-<li>出现差错(超时重传)<br>发送方只要超过了一段时间仍然没有收到确认，就认为刚才发送的分组丢失了，因而重传前面发送过的分组<br><img src="/images/tcp_timeout_resend.jpg" alt="tcp_timeout_resend"><br>三点注意：</li>
+<li>出现差错(超时重传)<blockquote>
+<p>发送方只要超过了一段时间仍然没有收到确认，就认为刚才发送的分组丢失了，因而重传前面发送过的分组</p>
+</blockquote>
+</li>
 </ol>
+<p><img src="/images/tcp_timeout_resend.jpg" alt="tcp_timeout_resend"><br>三点注意：</p>
 <ul>
 <li>发送方发送完一个分组后，必须暂时保留已发送的分组的副本（超时重传时使用）,收到确认后才可以清除副本。</li>
 <li>分组和确认分组都必须编号（才能明确是哪一个发送出去的分组收到了确认）</li>
@@ -550,18 +563,22 @@
 <li><strong>确认迟到</strong>: 传输过程没有差错，但接收方对分组的确认迟到了<br>  i. 发送方会收到重复的确认，收下后丢弃；<br>  ii. 接收方会收到重复的分组， 同样丢弃，并重传确认分组</li>
 </ul>
 <ol>
-<li>信道利用率<br>信道利用率计算：<br><img src="/images/tcp_channel_utilization.jpg" alt="tcp_channel_utilization"><br>当往返时间RTT远大于分组发送时间Td时，信道的利用率会非常低，因而需要采用流水线传输<h5 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h5></li>
+<li>信道利用率<br>信道利用率计算：<br><img src="/images/tcp_channel_utilization.jpg" alt="tcp_channel_utilization"></li>
 </ol>
-<ul>
+<blockquote>
+<p>当往返时间RTT远大于分组发送时间Td时，信道的利用率会非常低，因而需要采用流水线传输</p>
+</blockquote>
+<h5 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h5><ul>
 <li>发送方维持一个发送窗口，位于发送窗口内的分组可以连续发送出去，不需要等待对方的确认</li>
 <li>发送方每收到一个一个确认，就把发送窗口向前滑动一个分组的位置</li>
 <li>接收方一般采用累积确认的方式，接收方不必对收到的分组逐个发送确认，而是在收到几个分组后对按序到达的最后一个分组发送确认，这表示：到这个分组为止的素有分组都已正确收到了</li>
 <li>优点： 容易实现，确认丢失也不必重传</li>
 <li>缺点： 不能正确反映出接收方已经正确收到的所有分组的信息，比如5个中的第3个丢了，就只能对前两个分组发出确认，后面三个重传</li>
 </ul>
-</blockquote>
 <h4 id="TCP报文段的首部格式"><a href="#TCP报文段的首部格式" class="headerlink" title="TCP报文段的首部格式"></a>TCP报文段的首部格式</h4><blockquote>
-<p>TCP的全部功能都体现在它首部中各字段的作用<br><img src="/images/tcp_header.jpg" alt="tcp_header"></p>
+<p>TCP的全部功能都体现在它首部中各字段的作用</p>
+</blockquote>
+<p><img src="/images/tcp_header.jpg" alt="tcp_header"></p>
 <ul>
 <li><strong>源端口和目的端口</strong>: </li>
 <li><strong>序号</strong>: 范围[0, 2^32 - 1],序号增加到2^32 - 1后，下一个序号又回到0。在一个TCP连接中传送的字节流中的每一个字节都按顺序编号</li>
@@ -577,9 +594,44 @@
 <li><strong>窗口</strong>: 指的是发送本报文段的一方的接收窗口。窗口值告诉对方：从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量</li>
 <li><strong>校验和</strong>: 计算方法和UDP一样</li>
 <li><strong>紧急指针</strong>: 当URG=1时才有意义，支出本报文段中的紧急数据的字节数</li>
-<li><strong>选项</strong>: 长度可变，最长达40字节<h4 id="TCP可靠传输的实现"><a href="#TCP可靠传输的实现" class="headerlink" title="TCP可靠传输的实现"></a>TCP可靠传输的实现</h4></li>
+<li><strong>选项</strong>: 长度可变，最长达40字节</li>
 </ul>
+<h4 id="TCP可靠传输的实现"><a href="#TCP可靠传输的实现" class="headerlink" title="TCP可靠传输的实现"></a>TCP可靠传输的实现</h4><ol>
+<li>以字节为单位的滑动窗口</li>
+</ol>
+<ul>
+<li>TCP的滑动窗口以字节为单位</li>
+<li>发送窗口里面的序号表示允许发送出去的序号</li>
+<li>如图，假定A收到B发来的确认报文段，其中窗口是20，确认窗口是31，表明B期望收到的下一个序号是31,30为止的数据已经收到了<br><img src="/images/tcp_window_send.jpg" alt=""></li>
+<li>凡是已经发送过的数据，在未收到确认之前都必须暂时保留，以便超时重传</li>
+<li>描述一个发送窗口的状态需要三个指针，如图：<br><img src="/images/tcp_window_state.jpg" alt=""></li>
+<li>发送缓存用来暂时存放：<br>  i. 发送应用程序传送给发送方TCP准备发送的数据；<br>  ii. TCP已发送出但尚未收到确认的数据；<br><img src="/images/tcp_send_cahce.jpg" alt="">tcp_recieve_cahce</li>
+<li><p>接收缓存用来暂时存放：<br>  i. 按序到达的、但尚未被接收应用程序读取的数据；<br>  ii. 未按序到达的数据；<br><img src="/images/tcp_recieve_cahce.jpg" alt=""></p>
+</li>
+<li><p>三点强调：<br>  i. 发送窗口并不总是和接收窗口一样大<br>  ii. 对于不按序到达的数据，先临时存放在接收窗口中，等到字节流中所缺少的字节收到后，再按序交付上层的应用进程<br>  iii. TCP要求接收方必须有累积确认的功能 </p>
+</li>
+</ul>
+<ol>
+<li><p>超时重传时间的选择<br>RTTs（加权平均往返时间）计算：<br><img src="/images/tcp_rtts_calculate.jpg" alt=""><br>RTTd（RTT的偏差的加权平均值）计算：<br><img src="/images/tcp_rttd_calculate.jpg" alt=""><br>RTO（超时重传时间）：<br><img src="/images/tcp_rto_calculate.jpg" alt=""></p>
+</li>
+<li><p>选择确认SACK</p>
+<blockquote>
+<p>用来解决只传送缺少的数据而不重传已经正确到达接收方的数据</p>
 </blockquote>
+</li>
+</ol>
+<h4 id="TCP的流量控制"><a href="#TCP的流量控制" class="headerlink" title="TCP的流量控制"></a>TCP的流量控制</h4><ol>
+<li>利用滑动窗口实现流量控制</li>
+<li>传输效率</li>
+</ol>
+<h4 id="TCP的拥塞控制"><a href="#TCP的拥塞控制" class="headerlink" title="TCP的拥塞控制"></a>TCP的拥塞控制</h4><ol>
+<li>拥塞控制的一般原理</li>
+<li>四种拥塞控制方法</li>
+<li>随机早期检测RED<h4 id="TCP的运输连接管理"><a href="#TCP的运输连接管理" class="headerlink" title="TCP的运输连接管理"></a>TCP的运输连接管理</h4></li>
+<li>TCP的连接建立</li>
+<li>TCP的连接释放</li>
+<li>TCP的有限状态机</li>
+</ol>
 
       
     </div>
@@ -821,7 +873,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#运输层协议概述"><span class="nav-number">1.</span> <span class="nav-text">运输层协议概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程之间的通信"><span class="nav-number">1.1.</span> <span class="nav-text">进程之间的通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运输层的端口（软件端口）"><span class="nav-number">1.2.</span> <span class="nav-text">运输层的端口（软件端口）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户数据报协议UDP"><span class="nav-number">2.</span> <span class="nav-text">用户数据报协议UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要特点"><span class="nav-number">2.1.</span> <span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP的首部格式"><span class="nav-number">2.2.</span> <span class="nav-text">UDP的首部格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输控制协议TCP"><span class="nav-number">3.</span> <span class="nav-text">传输控制协议TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠传输的工作原理"><span class="nav-number">3.2.</span> <span class="nav-text">可靠传输的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#停止等待协议"><span class="nav-number">3.2.1.</span> <span class="nav-text">停止等待协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连续ARQ协议"><span class="nav-number">3.2.2.</span> <span class="nav-text">连续ARQ协议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP报文段的首部格式"><span class="nav-number">3.3.</span> <span class="nav-text">TCP报文段的首部格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP可靠传输的实现"><span class="nav-number">3.4.</span> <span class="nav-text">TCP可靠传输的实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#运输层协议概述"><span class="nav-number">1.</span> <span class="nav-text">运输层协议概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程之间的通信"><span class="nav-number">1.1.</span> <span class="nav-text">进程之间的通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运输层的端口（软件端口）"><span class="nav-number">1.2.</span> <span class="nav-text">运输层的端口（软件端口）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户数据报协议UDP"><span class="nav-number">2.</span> <span class="nav-text">用户数据报协议UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主要特点"><span class="nav-number">2.1.</span> <span class="nav-text">主要特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP的首部格式"><span class="nav-number">2.2.</span> <span class="nav-text">UDP的首部格式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输控制协议TCP"><span class="nav-number">3.</span> <span class="nav-text">传输控制协议TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠传输的工作原理"><span class="nav-number">3.2.</span> <span class="nav-text">可靠传输的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#停止等待协议"><span class="nav-number">3.2.1.</span> <span class="nav-text">停止等待协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连续ARQ协议"><span class="nav-number">3.2.2.</span> <span class="nav-text">连续ARQ协议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP报文段的首部格式"><span class="nav-number">3.3.</span> <span class="nav-text">TCP报文段的首部格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP可靠传输的实现"><span class="nav-number">3.4.</span> <span class="nav-text">TCP可靠传输的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP的流量控制"><span class="nav-number">3.5.</span> <span class="nav-text">TCP的流量控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP的拥塞控制"><span class="nav-number">3.6.</span> <span class="nav-text">TCP的拥塞控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP的运输连接管理"><span class="nav-number">3.7.</span> <span class="nav-text">TCP的运输连接管理</span></a></li></ol></li></ol></div>
             
 
           </div>
