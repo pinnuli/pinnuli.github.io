@@ -148,7 +148,7 @@
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
 <meta property="og:description" content="基本的线程机制定义一个线程 实现Runnable接口，重写run()方法，并传递给Thread构造器 继承Thread类，重写run()方法   调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法  使用Executor Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。E">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-19T14:34:34.753Z">
+<meta property="og:updated_time" content="2018-11-22T11:23:16.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java并发">
 <meta name="twitter:description" content="基本的线程机制定义一个线程 实现Runnable接口，重写run()方法，并传递给Thread构造器 继承Thread类，重写run()方法   调用Thread.start()方法时，其实是创建一个线程，并初始化之后，再去调run()方法  使用Executor Executor从来管理Thread对象，在客户端和任务之间提供了一个间接层，可以管理一部任务的执行，无须显式地管理线程的生命周期。E">
@@ -516,6 +516,16 @@
 <p>实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExceptionThread2</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    System.out.println(<span class="string">"run() by "</span> + t);</span><br><span class="line">    System.out.println(</span><br><span class="line">      <span class="string">"eh = "</span> + t.getUncaughtExceptionHandler());</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个uncaughtExceptionHandler</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyUncaughtExceptionHandler</span> <span class="keyword">implements</span></span></span><br><span class="line"><span class="class"><span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"caught "</span> + e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HandlerThreadFactory</span> <span class="keyword">implements</span> <span class="title">ThreadFactory</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Thread <span class="title">newThread</span><span class="params">(Runnable r)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="keyword">this</span> + <span class="string">" creating new Thread"</span>);</span><br><span class="line">    Thread t = <span class="keyword">new</span> Thread(r);</span><br><span class="line">    System.out.println(<span class="string">"created "</span> + t);</span><br><span class="line">    <span class="comment">//设置uncaughtExceptionHandler</span></span><br><span class="line">    t.setUncaughtExceptionHandler(</span><br><span class="line">      <span class="keyword">new</span> MyUncaughtExceptionHandler());</span><br><span class="line">    System.out.println(</span><br><span class="line">      <span class="string">"eh = "</span> + t.getUncaughtExceptionHandler());</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CaptureUncaughtException</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    ExecutorService exec = Executors.newCachedThreadPool(</span><br><span class="line">      <span class="keyword">new</span> HandlerThreadFactory());</span><br><span class="line">    exec.execute(<span class="keyword">new</span> ExceptionThread2());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以上代码将输出：<br>  HandlerThreadFactory@de6ced creating new Thread<br>  created Thread[Thread-0,5,main]<br>  eh = MyUncaughtExceptionHandler@1fb8ee3<br>  run() by Thread[Thread-0,5,main]<br>  eh = MyUncaughtExceptionHandler@1fb8ee3<br>  caught java.lang.RuntimeException</p>
+<h4 id="线程安全性"><a href="#线程安全性" class="headerlink" title="线程安全性"></a>线程安全性</h4><blockquote>
+<p>当多个线程访问某个类时，这个类始终都能表现出正确的行为，那么称这个类是线程安全的。</p>
+</blockquote>
+<ul>
+<li><strong>无状态对象</strong>: 无状态对象一定是线程安全的</li>
+<li><strong>竞态条件</strong>： 由于不恰当的执行时序而出现不正确的结果的情况，大多数竞态条件的本质是———基于一种可能失效的观察结果做出判断或执行某个计算，比如“先检查后执行”操作</li>
+<li><strong>复合操作</strong>： 包含了一组必须以原子方式执行的操作以确保线程安全性</li>
+<li><strong>内置锁</strong>：每个Java对象都可以用作一个实现同步的锁，这些锁称为内置锁<br>i.同步代码块分为两部分：一个作为锁的对象的引用，一个作为这个锁保护的代码块<br>ii. 对象锁：用来控制实例方法之间的同步，包括用synchronized修饰的方法和代码块均是对象锁<br>iii. 类锁： 即以Class对象作为锁，用来控制静态方法之间的同步，包括静态的synchronized方法</li>
+<li><strong>重入</strong>： 某个线程试图获得一个已经由它自己持有的锁，那么这个请求会成功</li>
+</ul>
 <hr>
 <h3 id="共享受限资源"><a href="#共享受限资源" class="headerlink" title="共享受限资源"></a>共享受限资源</h3><h4 id="解决共享资源竞争"><a href="#解决共享资源竞争" class="headerlink" title="解决共享资源竞争"></a>解决共享资源竞争</h4><p>1.使用synchronized关键字<br>2.使用显式的Lock对象<br>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MutexEvenGenerator</span> <span class="keyword">extends</span> <span class="title">IntGenerator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> currentEvenValue = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lock.lock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ++currentEvenValue;</span><br><span class="line">      Thread.yield(); </span><br><span class="line">      ++currentEvenValue;</span><br><span class="line">      <span class="keyword">return</span> currentEvenValue;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    EvenChecker.test(<span class="keyword">new</span> MutexEvenGenerator());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -527,6 +537,53 @@
 </ul>
 <h4 id="线程本地存储"><a href="#线程本地存储" class="headerlink" title="线程本地存储"></a>线程本地存储</h4><blockquote>
 <p>一种自动化机制，可以为使用相同变量的每个不同的线程都创建不同的存储，有5个线程都要使用变量x所表示的对象，那线程本地存储就会生成5个用于x的不同的存储</p>
+</blockquote>
+<hr>
+<h3 id="线程之间的协作"><a href="#线程之间的协作" class="headerlink" title="线程之间的协作"></a>线程之间的协作</h3><h4 id="wait-notify-notifyAll"><a href="#wait-notify-notifyAll" class="headerlink" title="wait(),notify(),notifyAll()"></a>wait(),notify(),notifyAll()</h4><blockquote>
+<p>wait()使你将当前任务挂起，可以等待某个条件发生，而改变这个条件超出了当前方法的控制能力，通常这种条件由另一个任务来改变</p>
+</blockquote>
+<ul>
+<li>调用wait()时，对象上的锁被释放，该对象上的其他synchronized方法可以在wait()期间被调用；</li>
+<li>只有在notify()或notifyAll()发生时，调用wait()的任务才会被唤醒；</li>
+<li>wait()，notify()，notifyAll()是Object()的一部分，所以可以把wait()放在任何同步控制方法中，不需要考虑是否继承Thread或实现Runnable;</li>
+<li>只能在同步控制方法或同步控制块里调用wait()，notify()，notifyAll()；</li>
+<li>为了使任务从wait()中唤醒，必须首先重新获得当它进入wait()时释放的锁；</li>
+<li><p>有两种形式的wait()：<br>i. 接受毫秒数作为参数，可以通过notify()，notifyAll()，或者时间到期后恢复<br>ii. 不接受任何参数，通过notify()，notifyAll()恢复</p>
+</li>
+<li><p>使用notify()，众多等待同一个锁的任务中只有一个会被唤醒，必须保证被唤醒的任务是恰当的任务，而且所有任务必须等待相同的条件</p>
+</li>
+<li>notifyAll()将唤醒所有等待这个锁的任务</li>
+</ul>
+<hr>
+<h3 id="新类库中的构件"><a href="#新类库中的构件" class="headerlink" title="新类库中的构件"></a>新类库中的构件</h3><h4 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h4><blockquote>
+<p><strong>适用场景</strong>：用来同步一个或多个任务，强制他们等待由其他任务执行的一组操作完成</p>
+</blockquote>
+<ul>
+<li>CountDownLatch对象设置一个初始计数值，任何在这个对象上调用wait()方法都将阻塞，知道这个计数值到达0；</li>
+<li>其他任务结束时，可调用对象上的countDown()减小计数值</li>
+<li>计数值不能被重置（需要重置计数值可以用CyclicBarrier）</li>
+</ul>
+<h4 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h4><blockquote>
+<p><strong>适用场景</strong>： 希望创建一组任务，他们并行地执行工作，然后在下一个步骤之前等待，直至所有任务都完成<br>与CountDownLatch的区别</p>
+<ul>
+<li>可以重用</li>
+<li>可以向CyclicBarrier提供一个Runnable，当计数值到达0时自动执行</li>
+</ul>
+</blockquote>
+<h4 id="DelayQueue"><a href="#DelayQueue" class="headerlink" title="DelayQueue"></a>DelayQueue</h4><blockquote>
+<p>一个无边界的BlockingQueue，用于放置实现了Delayed接口的对象，队列是有序的，对头对象的延迟到期的时间最长，对象只能在到期时才能取走</p>
+</blockquote>
+<h4 id="PriorityBlockingQueue"><a href="#PriorityBlockingQueue" class="headerlink" title="PriorityBlockingQueue"></a>PriorityBlockingQueue</h4><blockquote>
+<p>基础的优先级队列，具有可阻塞的读取操作</p>
+</blockquote>
+<h4 id="ScheduleExecutor"><a href="#ScheduleExecutor" class="headerlink" title="ScheduleExecutor"></a>ScheduleExecutor</h4><blockquote>
+<p>解决在预定时间运行的任务，使用schedule()（运行一次）或scheduleThreadFixedRate()（每隔规定的时间重复执行任务），可以将Runnable对象设置为将来的某个时刻执行</p>
+</blockquote>
+<h4 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h4><blockquote>
+<p>计数信号量，允许n个任务同时访问这个资源</p>
+</blockquote>
+<h4 id="Exchanger"><a href="#Exchanger" class="headerlink" title="Exchanger"></a>Exchanger</h4><blockquote>
+<p>应用于一个任务在创建对象，这些对象的生产代价很高昂，而另一个任务在消费这些对象，通过使用Exchanger，可以有更多的对象在创建的同时被消费</p>
 </blockquote>
 
       
@@ -577,7 +634,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/12/Java中的锁优化/" rel="next" title="Java中的锁优化">
+              <a href="/2018/11/12/深入理解Java虚拟机之Java中的锁优化/" rel="next" title="Java中的锁优化">
                 <i class="fa fa-chevron-left"></i> Java中的锁优化
               </a>
             
@@ -695,7 +752,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -773,7 +830,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的线程机制"><span class="nav-number">1.</span> <span class="nav-text">基本的线程机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义一个线程"><span class="nav-number">1.1.</span> <span class="nav-text">定义一个线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Executor"><span class="nav-number">1.2.</span> <span class="nav-text">使用Executor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从任务中产生返回值"><span class="nav-number">1.3.</span> <span class="nav-text">从任务中产生返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#休眠-sleep"><span class="nav-number">1.4.</span> <span class="nav-text">休眠(sleep)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级"><span class="nav-number">1.5.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#让步-yield"><span class="nav-number">1.6.</span> <span class="nav-text">让步(yield)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加入一个线-join"><span class="nav-number">1.7.</span> <span class="nav-text">加入一个线(join)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台线程-维护线程"><span class="nav-number">1.8.</span> <span class="nav-text">后台线程(维护线程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码变体"><span class="nav-number">1.9.</span> <span class="nav-text">编码变体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#捕获异常"><span class="nav-number">1.10.</span> <span class="nav-text">捕获异常</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享受限资源"><span class="nav-number">2.</span> <span class="nav-text">共享受限资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决共享资源竞争"><span class="nav-number">2.1.</span> <span class="nav-text">解决共享资源竞争</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程本地存储"><span class="nav-number">2.2.</span> <span class="nav-text">线程本地存储</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的线程机制"><span class="nav-number">1.</span> <span class="nav-text">基本的线程机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义一个线程"><span class="nav-number">1.1.</span> <span class="nav-text">定义一个线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Executor"><span class="nav-number">1.2.</span> <span class="nav-text">使用Executor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从任务中产生返回值"><span class="nav-number">1.3.</span> <span class="nav-text">从任务中产生返回值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#休眠-sleep"><span class="nav-number">1.4.</span> <span class="nav-text">休眠(sleep)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优先级"><span class="nav-number">1.5.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#让步-yield"><span class="nav-number">1.6.</span> <span class="nav-text">让步(yield)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加入一个线-join"><span class="nav-number">1.7.</span> <span class="nav-text">加入一个线(join)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台线程-维护线程"><span class="nav-number">1.8.</span> <span class="nav-text">后台线程(维护线程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码变体"><span class="nav-number">1.9.</span> <span class="nav-text">编码变体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#捕获异常"><span class="nav-number">1.10.</span> <span class="nav-text">捕获异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程安全性"><span class="nav-number">1.11.</span> <span class="nav-text">线程安全性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享受限资源"><span class="nav-number">2.</span> <span class="nav-text">共享受限资源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决共享资源竞争"><span class="nav-number">2.1.</span> <span class="nav-text">解决共享资源竞争</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程本地存储"><span class="nav-number">2.2.</span> <span class="nav-text">线程本地存储</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程之间的协作"><span class="nav-number">3.</span> <span class="nav-text">线程之间的协作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wait-notify-notifyAll"><span class="nav-number">3.1.</span> <span class="nav-text">wait(),notify(),notifyAll()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新类库中的构件"><span class="nav-number">4.</span> <span class="nav-text">新类库中的构件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CountDownLatch"><span class="nav-number">4.1.</span> <span class="nav-text">CountDownLatch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CyclicBarrier"><span class="nav-number">4.2.</span> <span class="nav-text">CyclicBarrier</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DelayQueue"><span class="nav-number">4.3.</span> <span class="nav-text">DelayQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PriorityBlockingQueue"><span class="nav-number">4.4.</span> <span class="nav-text">PriorityBlockingQueue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ScheduleExecutor"><span class="nav-number">4.5.</span> <span class="nav-text">ScheduleExecutor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Semaphore"><span class="nav-number">4.6.</span> <span class="nav-text">Semaphore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exchanger"><span class="nav-number">4.7.</span> <span class="nav-text">Exchanger</span></a></li></ol></li></ol></div>
             
 
           </div>
