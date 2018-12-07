@@ -148,14 +148,14 @@
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
 <meta property="og:description" content="对象存活判断算法引用计数算法给对象添加一个引用计数器，有一个地方引用它计数值就加1，引用失效时减1，任何时刻计数器为0则不可能再被使用  实现简单，判定效率高，但很难解决对象之间相互循环引用的问题，主流Java虚拟机没有选用这种方式管理内存  可达性分析算法通过一系列的称为”GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过 的路径称为引用链，当一个对象到GC Roots没有任">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://pinnuli.github.io/2018/12/01/深入理解Java虚拟机之垃圾收集器与内存分配策略/images/jvm_gc_markclean.jpg">
-<meta property="og:image" content="https://pinnuli.github.io/2018/12/01/深入理解Java虚拟机之垃圾收集器与内存分配策略/images/jvm_gc_duplicate.jpg">
-<meta property="og:image" content="https://pinnuli.github.io/2018/12/01/深入理解Java虚拟机之垃圾收集器与内存分配策略/images/jvm_gc_markarrange.jpg">
-<meta property="og:updated_time" content="2018-12-07T13:24:20.291Z">
+<meta property="og:image" content="https://pinnuli.github.io/images/jvm_gc_markclean.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/jvm_gc_duplicate.jpg">
+<meta property="og:image" content="https://pinnuli.github.io/images/jvm_gc_markarrange.jpg">
+<meta property="og:updated_time" content="2018-12-07T13:32:15.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Java虚拟机之垃圾收集器与内存分配策略">
 <meta name="twitter:description" content="对象存活判断算法引用计数算法给对象添加一个引用计数器，有一个地方引用它计数值就加1，引用失效时减1，任何时刻计数器为0则不可能再被使用  实现简单，判定效率高，但很难解决对象之间相互循环引用的问题，主流Java虚拟机没有选用这种方式管理内存  可达性分析算法通过一系列的称为”GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过 的路径称为引用链，当一个对象到GC Roots没有任">
-<meta name="twitter:image" content="https://pinnuli.github.io/2018/12/01/深入理解Java虚拟机之垃圾收集器与内存分配策略/images/jvm_gc_markclean.jpg">
+<meta name="twitter:image" content="https://pinnuli.github.io/images/jvm_gc_markclean.jpg">
 
 
 
@@ -474,17 +474,17 @@
 </blockquote>
 <h4 id="对象死亡的判定"><a href="#对象死亡的判定" class="headerlink" title="对象死亡的判定"></a>对象死亡的判定</h4><p>真正宣告一个对象死亡，至少要经理两次标记过程：</p>
 <ol>
-<li><p>在进行可达性分析后发现不可达，将会被第一次标记并且进行一次筛选</p>
+<li>在进行可达性分析后发现不可达，将会被第一次标记并且进行一次筛选</li>
+</ol>
 <blockquote>
-<p>当对象没有覆盖finalize()方法，或者finalize()方法已经被虚拟机调用过，视为“没有必要执行finalize”的情况，若有必要执行finalize，则将对象放入F-Queue的队列之中，并稍后由虚拟机自动建立的、低优先级的Finalizer线程去执行。（一个对象的finalize()方法只会被系统调用一次）</p>
+<p>当对象没有覆盖finalize()方法，或者finalize()方法已经被虚拟机调用过，视为“没有必要执行<br>finalize”的情况，若有必要执行finalize，则将对象放入F-Queue的队列之中，并稍后由虚拟机自动建立的、低优先级的Finalizer线程去执行。（一个对象的finalize()方法只会被系统调用一次）</p>
 </blockquote>
-</li>
-<li><p>GC对F-Queue中的对象进行第二次标记</p>
+<ol>
+<li>GC对F-Queue中的对象进行第二次标记</li>
+</ol>
 <blockquote>
 <p>对象逃脱的唯一机会就在finalize()方法中，只要重新与引用链上的任何一个对象建立关联即可</p>
 </blockquote>
-</li>
-</ol>
 <h4 id="回收方法区（即HotSpot中的永久代）"><a href="#回收方法区（即HotSpot中的永久代）" class="headerlink" title="回收方法区（即HotSpot中的永久代）"></a>回收方法区（即HotSpot中的永久代）</h4><blockquote>
 <p>永久代的垃圾主要回收两部分的内容：废弃常量和无用的类。</p>
 </blockquote>
@@ -496,21 +496,21 @@
 </ol>
 <h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><ul>
 <li><strong>标记阶段</strong>: 标记所有需要回收的对象</li>
-<li><strong>清除阶段</strong>: 统一回收所有被标记的对象<br><img src="images/jvm_gc_markclean.jpg" alt=""><br>两个不足：</li>
+<li><strong>清除阶段</strong>: 统一回收所有被标记的对象<br><img src="/images/jvm_gc_markclean.jpg" alt=""><br>两个不足：</li>
 <li><strong>效率问题</strong>，标记和清除的效率都不高</li>
-<li><p><strong>空间问题</strong>，标记清除之后产生大量不连续的碎片</p>
+<li><strong>空间问题</strong>，标记清除之后产生大量不连续的碎片</li>
+</ul>
 <h4 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h4><blockquote>
 <p>将可用内存按<strong>容量</strong>划分为大小相等的凉快，每次之使用给一块。当这一块的内存用完时，就将还存活的对象复制到另外一块上，然后把已使用过的内存空间一次清理掉。</p>
 </blockquote>
-</li>
-<li><p>现在商业虚拟机用这种算法回收新生代，将内存分为一块 较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor，回收时将这两块上还存活的对象一次性复制到Survivor上，最后清理掉Eden和Survivor（在HotSpot默认Eden和Survivor的大小比例为8:1）</p>
-</li>
-<li>当Survivor内存不够用时，需要依赖其他内存（这里指老年代）进行分配担保<br><img src="images/jvm_gc_duplicate.jpg" alt=""></li>
+<ul>
+<li>现在商业虚拟机用这种算法回收新生代，将内存分为一块 较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中一块Survivor，回收时将这两块上还存活的对象一次性复制到Survivor上，最后清理掉Eden和Survivor（在HotSpot默认Eden和Survivor的大小比例为8:1）</li>
+<li>当Survivor内存不够用时，需要依赖其他内存（这里指老年代）进行分配担保<br><img src="/images/jvm_gc_duplicate.jpg" alt=""></li>
 </ul>
 <h4 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h4><blockquote>
 <p>和“标记-清除算法”一样，但后续步骤是不是直接对可回收对象进行清理，而是 <strong>让所有存活的对象都向一端移动</strong></p>
 </blockquote>
-<p><img src="images/jvm_gc_markarrange.jpg" alt=""></p>
+<p><img src="/images/jvm_gc_markarrange.jpg" alt=""></p>
 <h4 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h4><blockquote>
 <p>把Java堆分为 <strong>新生代</strong>和 <strong>老年代</strong>，这样可以根据各个年代的特点采用最适当的收集算法</p>
 </blockquote>
