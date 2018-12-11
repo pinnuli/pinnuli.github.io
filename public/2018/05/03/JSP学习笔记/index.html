@@ -127,7 +127,7 @@
 
 
 
-  <meta name="keywords" content="JavaWeb,JSP," />
+  <meta name="keywords" content="JavaWeb,Jsp," />
 
 
 
@@ -141,21 +141,21 @@
 
 
 <meta name="description" content="一、jsp简介1、jsp三大指令page指令:&amp;lt;%@page 属性=”” %&amp;gt;,位于jsp页面顶端，可以有多个 1&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; import=&quot;java.text.*&quot;%&amp;gt; taglib指令：标签库 includeinclude指令:&amp;lt;%@include f">
-<meta name="keywords" content="JavaWeb,JSP">
+<meta name="keywords" content="JavaWeb,Jsp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP学习笔记">
 <meta property="og:url" content="https://pinnuli.github.io/2018/05/03/JSP学习笔记/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
 <meta property="og:description" content="一、jsp简介1、jsp三大指令page指令:&amp;lt;%@page 属性=”” %&amp;gt;,位于jsp页面顶端，可以有多个 1&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; import=&quot;java.text.*&quot;%&amp;gt; taglib指令：标签库 includeinclude指令:&amp;lt;%@include f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/YyHsnwD.png">
-<meta property="og:image" content="https://i.imgur.com/U27ljB4.png">
-<meta property="og:image" content="https://i.imgur.com/wWWpmzd.png">
-<meta property="og:updated_time" content="2018-10-26T04:42:38.411Z">
+<meta property="og:image" content="https://pinnuli.github.io/imgages/jsp_diff_between_includeCommand_includeAction.png">
+<meta property="og:image" content="https://pinnuli.github.io/images/jsp_life_cycle.png">
+<meta property="og:image" content="https://pinnuli.github.io/images/jsp_diff_dispatch_redirect.png">
+<meta property="og:updated_time" content="2018-11-25T14:36:47.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSP学习笔记">
 <meta name="twitter:description" content="一、jsp简介1、jsp三大指令page指令:&amp;lt;%@page 属性=”” %&amp;gt;,位于jsp页面顶端，可以有多个 1&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; import=&quot;java.text.*&quot;%&amp;gt; taglib指令：标签库 includeinclude指令:&amp;lt;%@include f">
-<meta name="twitter:image" content="https://i.imgur.com/YyHsnwD.png">
+<meta name="twitter:image" content="https://pinnuli.github.io/imgages/jsp_diff_between_includeCommand_includeAction.png">
 
 
 
@@ -421,8 +421,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JSP笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">JSP笔记</span>
+                  <a href="/categories/Jsp笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Jsp笔记</span>
                   </a>
                 </span>
 
@@ -465,8 +465,7 @@
 <blockquote>
 <p>page:要包含的页面,<br>flush：被包含的页面是否从缓冲区读取</p>
 </blockquote>
-<p><strong>include指令与include动作的区别：</strong><br><img src="https://i.imgur.com/YyHsnwD.png" alt="diff_between_includeCommand_includeAction"></p>
-<p><strong>forward动作</strong>：<code>&lt;jsp: forward page=&quot;url&quot;/&gt;</code><br>等同于：<code>request.getRequestDispatcher(&quot;/url&quot;).forward(request,response);</code></p>
+<p><strong>include指令与include动作的区别：</strong><br><img src="/imgages/jsp_diff_between_includeCommand_includeAction.png" alt="diff_between_includeCommand_includeAction"><br><strong>forward动作</strong>：<code>&lt;jsp: forward page=&quot;url&quot;/&gt;</code><br>等同于：<code>request.getRequestDispatcher(&quot;/url&quot;).forward(request,response);</code></p>
 <p><strong>param动作</strong>：<code>&lt;jsp:param name=&quot;参数名&quot; value=&quot;参数值&quot;&gt;</code><br>常与<jsp:forward>一起使用，作为其的子标签:</jsp:forward></p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;jsp:forward page=<span class="string">"user.jsp"</span>&gt;</span><br><span class="line">	&lt;%--用&lt;jsp:param <span class="string">"&gt;&lt;/jsp:param&gt;添加参数--%&gt;</span></span><br><span class="line"><span class="string">	&lt;jsp:param name="</span>email<span class="string">" value="</span><span class="number">11111111</span>@<span class="number">163</span>.com<span class="string">"&gt;&lt;/jsp:param&gt;</span></span><br><span class="line"><span class="string">&lt;/jsp:forward&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="2、jsp注释"><a href="#2、jsp注释" class="headerlink" title="2、jsp注释"></a>2、jsp注释</h4><ul>
@@ -477,7 +476,7 @@
 <h4 id="3、jsp脚本"><a href="#3、jsp脚本" class="headerlink" title="3、jsp脚本"></a>3、jsp脚本</h4><p>&lt;% java代码 %&gt;</p>
 <h4 id="4、jsp声明变量或方法"><a href="#4、jsp声明变量或方法" class="headerlink" title="4、jsp声明变量或方法"></a>4、jsp声明变量或方法</h4><p>&lt;%! java代码 %&gt;</p>
 <h4 id="5、jsp表达式"><a href="#5、jsp表达式" class="headerlink" title="5、jsp表达式"></a>5、jsp表达式</h4><p>&lt;%=表达式 %&gt;  ps:不可;分号结束</p>
-<h4 id="6、jsp页面的生命周期"><a href="#6、jsp页面的生命周期" class="headerlink" title="6、jsp页面的生命周期"></a>6、jsp页面的生命周期</h4><p><img src="https://i.imgur.com/U27ljB4.png" alt="jsp_life_cycle.png"> </p>
+<h4 id="6、jsp页面的生命周期"><a href="#6、jsp页面的生命周期" class="headerlink" title="6、jsp页面的生命周期"></a>6、jsp页面的生命周期</h4><p><img src="/images/jsp_life_cycle.png" alt="jsp_life_cycle.png"> </p>
 <h3 id="二、jsp内置对象"><a href="#二、jsp内置对象" class="headerlink" title="二、jsp内置对象"></a>二、jsp内置对象</h3><p><strong> 九大内置对象：</strong><code>out</code>,<code>request</code>,<code>response</code>,<code>session</code>,<code>application</code>,<code>Page</code>,<code>pageContext</code>,<code>exception</code>,<code>config</code></p>
 <p><strong>out</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line">   	out.println("&lt;h2&gt;静夜思&lt;/h2&gt;");</span><br><span class="line">   	out.println("床前明月光<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   	out.println("疑是地上霜<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   	out.flush();</span><br><span class="line">  		/*out.clear();会抛出异常*/</span><br><span class="line">   	out.clearBuffer();//这里不会抛出异常</span><br><span class="line">   	out.println("举头望明月<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   	out.println("低头思故乡<span class="tag">&lt;<span class="name">br</span>&gt;</span>");</span><br><span class="line">   %&gt;</span><br><span class="line"></span><br><span class="line">   缓冲区大小：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">out.getBufferSize</span>()%&gt;</span>byte<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   缓冲区剩余大小：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">out.getRemaining</span>()%&gt;</span>byte<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   是否自动清空缓冲区：<span class="tag">&lt;<span class="name">%=</span> <span class="attr">out.isAutoFlush</span>()%&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -486,7 +485,7 @@
 <p><strong>response</strong></p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">response.setContentType</span>("<span class="attr">text</span>/<span class="attr">html</span>;<span class="attr">charset</span>=<span class="string">utf-8</span>");</span></span><br><span class="line">       out.println("&lt;h1&gt;response内置对象&lt;/h1&gt;");</span><br><span class="line">       out.println("<span class="tag">&lt;<span class="name">hr</span>&gt;</span>");</span><br><span class="line">       //out.flush();</span><br><span class="line">       /* 因为getWrite获得的输出流对象会先于内置对象out输出，</span><br><span class="line">       所以要先清空缓冲区，使out强制输出，否则结果会是先输出outer</span><br><span class="line">       再输出out*/</span><br><span class="line"></span><br><span class="line">       PrintWriter outer = response.getWriter();</span><br><span class="line">       outer.println("大家好，我是response生成的输出流outer");</span><br><span class="line">//  response.sendRedirect("login.jsp");//重定向</span><br><span class="line">//  response.sendRedirect("request.jsp");</span><br><span class="line">       request.getRequestDispatcher("request.jsp").forward(request,response);//转发</span><br><span class="line">   %&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>请求转发和请求重定向的区别：</strong></p>
-<p><img src="https://i.imgur.com/wWWpmzd.png" alt="redirectAndTransmit.PNG"></p>
+<p><img src="/images/jsp_diff_dispatch_redirect.png" alt="redirectAndTransmit.PNG"></p>
 <p><strong>session</strong><br>HttpSession的实例，周期：在第一个jsp页面被加载时自动创建，即浏览器连接到服务器开始，关闭浏览器离开这个服务器结束，在服务器的几个页面之间切换，服务器应当知道这是一个客户，就可以用session对象</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">SimpleDateFormat</span> <span class="attr">sdf</span> = <span class="string">new</span> <span class="attr">SimpleDateFormat</span>("<span class="attr">yyyy</span>年<span class="attr">mm</span>月<span class="attr">dd</span>日 <span class="attr">HH:mm:ss</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">Date</span> <span class="attr">d</span> = <span class="string">new</span> <span class="attr">Date</span>(<span class="attr">session.getCreationTime</span>());</span></span><br><span class="line"><span class="tag">       <span class="attr">session.setAttribute</span>("<span class="attr">username</span>","<span class="attr">pinnuli</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">session.setAttribute</span>("<span class="attr">password</span>","<span class="attr">123456</span>");</span></span><br><span class="line"><span class="tag">       <span class="attr">session.setAttribute</span>("<span class="attr">age</span>",<span class="attr">20</span>);</span></span><br><span class="line"><span class="tag">//  <span class="attr">session.setMaxInactiveInterval</span>(<span class="attr">10</span>);</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">//设置<span class="attr">session</span>最大生成期限，单位秒,也可在<span class="attr">web.xml</span>中设置<span class="attr">session-timeout</span></span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">   %&gt;</span></span><br><span class="line">   Session创建时间：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=sdf.format(d)%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   Session的ID：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=session.getId()%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   Session中获取属性值：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%=session.getAttribute("username")%</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">   Session保存的属性数组：</span><br><span class="line">   <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">       <span class="attr">String</span>[] <span class="attr">names</span> = <span class="string">session.getValueNames();</span></span></span><br><span class="line">       for(int i=0; i&lt;names.length; i++)&#123;</span><br><span class="line">           out.println(names[i] + "&amp;nbsp;&amp;nbsp;");</span><br><span class="line">       &#125;</span><br><span class="line">//        session.invalidate();//销毁当前会话,每次刷新一次页面就会新建一个session</span><br><span class="line">   %&gt;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">%--测试不同页面是否同一个session--%</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"session_page2.jsp"</span>&gt;</span>跳转到session_page2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><strong>application</strong><br>实现用户间数据的共享，可存放全局边变量，相当于java的静态变量</p>
@@ -562,7 +561,7 @@
           
             <a href="/tags/JavaWeb/" rel="tag"><i class="fa fa-tag"></i> JavaWeb</a>
           
-            <a href="/tags/JSP/" rel="tag"><i class="fa fa-tag"></i> JSP</a>
+            <a href="/tags/Jsp/" rel="tag"><i class="fa fa-tag"></i> Jsp</a>
           
         </div>
       
@@ -693,7 +692,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -704,7 +703,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -715,7 +714,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

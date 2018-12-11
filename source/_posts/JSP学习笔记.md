@@ -1,9 +1,9 @@
 ---
 title: JSP学习笔记
 date: 2018-05-03 21:17:47
-categories: "JSP笔记" 
+categories: "Jsp笔记" 
 tags:
-	- JSP
+	- Jsp
 	- JavaWeb
 ---
 ### 一、jsp简介
@@ -25,8 +25,7 @@ include动作:`<jsp:include page="url" flush="true|false"/>`
 flush：被包含的页面是否从缓冲区读取
 
 **include指令与include动作的区别：**
-![diff_between_includeCommand_includeAction](https://i.imgur.com/YyHsnwD.png)
-
+![diff_between_includeCommand_includeAction](/imgages/jsp_diff_between_includeCommand_includeAction.png)
 **forward动作**：`<jsp: forward page="url"/>`
 等同于：`request.getRequestDispatcher("/url").forward(request,response);`
 
@@ -60,7 +59,7 @@ flush：被包含的页面是否从缓冲区读取
 
 #### 6、jsp页面的生命周期
 
-![jsp_life_cycle.png](https://i.imgur.com/U27ljB4.png) 
+![jsp_life_cycle.png](/images/jsp_life_cycle.png) 
 
 
 ### 二、jsp内置对象
@@ -157,7 +156,7 @@ flush：被包含的页面是否从缓冲区读取
 
 **请求转发和请求重定向的区别：**
 
-![redirectAndTransmit.PNG](https://i.imgur.com/wWWpmzd.png)
+![redirectAndTransmit.PNG](/images/jsp_diff_dispatch_redirect.png)
 
 **session**
 HttpSession的实例，周期：在第一个jsp页面被加载时自动创建，即浏览器连接到服务器开始，关闭浏览器离开这个服务器结束，在服务器的几个页面之间切换，服务器应当知道这是一个客户，就可以用session对象

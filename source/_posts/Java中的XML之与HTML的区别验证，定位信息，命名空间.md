@@ -1,7 +1,7 @@
 ---
 title: Java中的XML之与HTML的区别验证，定位信息，命名空间
 date: 2018-07-30 12:19:45
-categories: "javase笔记"
+categories: "JavaSE笔记"
 tags:
     - JavaSE
     - XML
