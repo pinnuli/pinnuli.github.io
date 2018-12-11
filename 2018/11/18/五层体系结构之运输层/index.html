@@ -171,7 +171,7 @@
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_build_connect.jpg">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_release_connect.jpg">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_limited_state_machine.jpg">
-<meta property="og:updated_time" content="2018-11-25T13:27:05.951Z">
+<meta property="og:updated_time" content="2018-12-11T13:27:34.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="五层体系结构之运输层">
 <meta name="twitter:description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志   服务器端使用的端口号   熟知端口">
@@ -533,11 +533,11 @@
 <li>主要特点</li>
 </ol>
 <ul>
-<li><strong>TCP是面向链接的运输层协议</strong>: 使用之前，必须建立连接；数据传输完毕之后，必须释放已经建立的连接</li>
+<li><strong>TCP是面向连接的运输层协议</strong>: 使用之前，必须建立连接；数据传输完毕之后，必须释放已经建立的连接</li>
 <li><strong>每一条TCP连接只能有两个端点</strong>: 点对点（一对一）</li>
 <li><strong>TCP提供可靠交付的服务</strong>: 无差错、不丢失、不重复，按序到达</li>
-<li><strong>TCP提供全双工通信</strong>: 允许通信双方的应用进程在任何时候都很高发送数据。发送时，应用程序在把数据传送给TCP的缓存之后就可以做自己的事，然后TCP在合适的时候把数据发送出去；接收时，TCP把收到的数据放入缓存，上层的应用进程在合适的时候读取缓存中的数据</li>
-<li><strong>面向字节流</strong>: 应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序叫下俩的而数据看成仅仅是一连串的无结构的字节流<br><img src="/images/tcp_stream.png" alt="读取流程"></li>
+<li><strong>TCP提供全双工通信</strong>: 允许通信双方的应用进程在任何时候都能发送数据。发送时，应用程序在把数据传送给TCP的缓存之后就可以做自己的事，然后TCP在合适的时候把数据发送出去；接收时，TCP把收到的数据放入缓存，上层的应用进程在合适的时候读取缓存中的数据</li>
+<li><strong>面向字节流</strong>: 应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序交下来的数据看成仅仅是一连串的无结构的字节流<br><img src="/images/tcp_stream.png" alt="读取流程"></li>
 </ul>
 <ol>
 <li>TCP的连接</li>
@@ -552,8 +552,10 @@
 <p>”停止等待“就是每发送完一个分组就停止发送，等待对方的确认，在收到确认后再发送下一个分组</p>
 </blockquote>
 <ol>
-<li>无差错情况<br><img src="/images/tcp_no_error.jpg" alt="tcp_no_error"></li>
-<li>出现差错(超时重传)<blockquote>
+<li><p>无差错情况<br><img src="/images/tcp_no_error.jpg" alt="tcp_no_error"></p>
+</li>
+<li><p>出现差错(超时重传)</p>
+<blockquote>
 <p>发送方只要超过了一段时间仍然没有收到确认，就认为刚才发送的分组丢失了，因而重传前面发送过的分组</p>
 </blockquote>
 </li>
@@ -579,7 +581,7 @@
 </blockquote>
 <h5 id="连续ARQ协议"><a href="#连续ARQ协议" class="headerlink" title="连续ARQ协议"></a>连续ARQ协议</h5><ul>
 <li>发送方维持一个发送窗口，位于发送窗口内的分组可以连续发送出去，不需要等待对方的确认</li>
-<li>发送方每收到一个一个确认，就把发送窗口向前滑动一个分组的位置</li>
+<li>发送方每收到一个确认，就把发送窗口向前滑动一个分组的位置</li>
 <li>接收方一般采用累积确认的方式，接收方不必对收到的分组逐个发送确认，而是在收到几个分组后对按序到达的最后一个分组发送确认，这表示：到这个分组为止的素有分组都已正确收到了</li>
 <li>优点： 容易实现，确认丢失也不必重传</li>
 <li>缺点： 不能正确反映出接收方已经正确收到的所有分组的信息，比如5个中的第3个丢了，就只能对前两个分组发出确认，后面三个重传</li>
