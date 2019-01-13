@@ -171,7 +171,7 @@
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_build_connect.jpg">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_release_connect.jpg">
 <meta property="og:image" content="https://pinnuli.github.io/images/tcp_limited_state_machine.jpg">
-<meta property="og:updated_time" content="2018-12-11T13:27:34.441Z">
+<meta property="og:updated_time" content="2018-12-12T03:07:12.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="五层体系结构之运输层">
 <meta name="twitter:description" content="运输层协议概述进程之间的通信 运输层的重要功能：复用和分用   复用: 应用层所有的应用进程都可以通过运输层再传送到IP层 分用: 运输层从IP层收到数据后必须交付给指明的应用进程   网络层与运输层的区别   网络层: 为主机之间提供逻辑通信 运输层: 为应用进程之间提供端到端的逻辑通信  运输层的端口（软件端口） 给应用层的每个应用进程赋予一个明确的标志   服务器端使用的端口号   熟知端口">
@@ -604,7 +604,7 @@
 <li><strong>终止FIN</strong>: 用来释放一个连接</li>
 <li><strong>窗口</strong>: 指的是发送本报文段的一方的接收窗口。窗口值告诉对方：从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量</li>
 <li><strong>校验和</strong>: 计算方法和UDP一样</li>
-<li><strong>紧急指针</strong>: 当URG=1时才有意义，支出本报文段中的紧急数据的字节数</li>
+<li><strong>紧急指针</strong>: 当URG=1时才有意义，指出本报文段中的紧急数据的字节数</li>
 <li><strong>选项</strong>: 长度可变，最长达40字节</li>
 </ul>
 <h4 id="TCP可靠传输的实现"><a href="#TCP可靠传输的实现" class="headerlink" title="TCP可靠传输的实现"></a>TCP可靠传输的实现</h4><p>1.以字节为单位的滑动窗口</p>
@@ -663,7 +663,7 @@
 <li>随机早期检测RED</li>
 </ol>
 <ul>
-<li>随机早起检测： 在检测到网络拥塞的早期征兆时，就以概率p随机丢弃个别的分组，让拥塞控制只在个别的TCP连接上进行，少量的分组被丢弃，避免发生全局性的拥塞控制</li>
+<li>随机早期检测： 在检测到网络拥塞的早期征兆时，就以概率p随机丢弃个别的分组，让拥塞控制只在个别的TCP连接上进行，少量的分组被丢弃，避免发生全局性的拥塞控制</li>
 <li>需要选择好三个参数：最小门限THmin，最大门限THmax和概率p</li>
 <li>丢弃概率p与两个门限值的关系图：<br><img src="/images/tcp_red.jpg" alt=""></li>
 </ul>
@@ -674,7 +674,7 @@
 <li>TCP的连接建立：三次握手<br><img src="/images/tcp_build_connect.jpg" alt=""></li>
 </ol>
 <ul>
-<li><p><strong>第一次握手</strong>：客户进程A创建传输控制模块TCB，想服务进程发出连接请求报文段，等待B确认，这时A进入SYN-SENT（同步已发送）状态</p>
+<li><p><strong>第一次握手</strong>：客户进程A创建传输控制模块TCB，向服务进程发出连接请求报文段，等待B确认，这时A进入SYN-SENT（同步已发送）状态</p>
 <blockquote>
 <p>报文段首部中SYN=1，同时选择一个初始序号seq=x，不携带任何数据，但要消耗一个序号</p>
 </blockquote>
@@ -684,9 +684,9 @@
 <p>将SYN和ACK都置1，确认号是ack=x+1，同时也为自己选一个初始序列号seq=y</p>
 </blockquote>
 </li>
-<li><p><strong>第三次握手</strong>：A收到B的确认后，要想B给出确认，这时TCP连接已经建立，A进入ESTABLISHED（已建立连接）状态，当B收到A的确认后，也进入ESTABLISHED状态</p>
+<li><p><strong>第三次握手</strong>：A收到B的确认后，要向B给出确认，这时TCP连接已经建立，A进入ESTABLISHED（已建立连接）状态，当B收到A的确认后，也进入ESTABLISHED状态</p>
 <blockquote>
-<p>A发送的确认报文段ACK置1，确认号ack=y+1，自己的序号seq=x+1，ACK报文段可以携带数据，但不携带数据则不消耗序号。<strong>A发送一次确认是为了防止已失效的拦截请求报文段突然有传到了B</strong></p>
+<p>A发送的确认报文段ACK置1，确认号ack=y+1，自己的序号seq=x+1，ACK报文段可以携带数据，但不携带数据则不消耗序号。<strong>A发送一次确认是为了防止已失效的连接请求报文段突然又传到了B</strong></p>
 </blockquote>
 </li>
 </ul>
@@ -696,12 +696,12 @@
 <ul>
 <li><p><strong>第一次挥手</strong>：A向B发送释放连接报文段，A进入FIN-WAIT-1在（终止等待1）状态</p>
 <blockquote>
-<p>报文段首部中终止控制位FIN置1，其序号是seq=u，等于前面已传送过的数据的最后一个自己的序号加1，即使不携带任何数据，但要消耗一个序号</p>
+<p>报文段首部中终止控制位FIN置1，其序号是seq=u，等于前面已传送过的数据的最后一个字节的序号加1，即使不携带任何数据，但要消耗一个序号</p>
 </blockquote>
 </li>
 <li><p><strong>第二次挥手</strong>：B收到连接释放报文段后发出确认，B进入CLOSE-WAIT（关闭等待）状态，这时TCP连接处于半关闭状态，即A已经没有数据发送给B，但B若发送数据，A仍要接收。A收到确认之后，进入FIN-WAIT-2（终止等待2）状态</p>
 <blockquote>
-<p>确认号是ack=u+1，这个报文号自身的序号是v,等于前面已传送过的数据的最后一个自己的序号加1</p>
+<p>确认号是ack=u+1，这个报文号自身的序号是v,等于前面已传送过的数据的最后一个字节的序号加1</p>
 </blockquote>
 </li>
 <li><p><strong>第三次挥手</strong>：若B已经没有要想向A发送的数据，就通知TCP释放连接，B进入LAST-ACK（最后确认状态），等待A的确认</p>
@@ -987,7 +987,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
