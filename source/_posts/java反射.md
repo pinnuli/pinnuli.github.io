@@ -97,6 +97,80 @@ Constructor[] cs = c.getDeclaredConstructors();
 ```java
 Class fieldType = field.getType();
 ```
+- 获取类的私有属性或私有方法
+直接获取私有属性或者方法会报java.lang.IllegalAccessException异常，AccessibleObject是Class、Method、Field的父类，通过设置setAccessible(true)可以获取类的私有属性，获取和调用私有方法
+
+Student类：
+```java
+public class Student {
+
+    private String name;
+
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    private void speck(String name) {
+        System.out.println("I am " + name);
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + name + "age: " + age;
+    }
+}
+```
+获取私有属性：
+```java
+    Student student = new Student("pinnuli", 18);
+    Class studentClass = student.getClass();
+    Field[] studentField = studentClass.getDeclaredFields();
+
+    for (int i = 0; i < studentField.length; i++) {
+        studentField[i].setAccessible(true);
+        try {
+            System.out.println(studentField[i].get(student));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        System.out.println(studentField[i].getName());
+    }
+```
+获取私有方法
+```java
+    Student student = new Student("pinnuli", 18);
+    Class studentClass = student.getClass();
+    Method[] studentMethods = studentClass.getDeclaredMethods();
+    for (int i = 0; i < studentMethods.length; i++) {
+        studentMethods[i].setAccessible(true);
+        System.out.println(studentMethods[i].getName());
+    }
+```
+
+调用私有方法
+```java
+    Student student = new Student("pinnuli", 18);
+    Class studentClass = student.getClass();
+    Method[] studentMethods = studentClass.getDeclaredMethods();
+    for (int i = 0; i < studentMethods.length; i++) {
+        studentMethods[i].setAccessible(true);
+        try {
+            studentMethods[i].invoke(student,"pinnuli");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        System.out.println(studentMethods[i].getName());
+    }
+```
 
 > 更多方法看API文档
 

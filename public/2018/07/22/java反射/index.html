@@ -148,7 +148,7 @@
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
 <meta property="og:description" content="一、Class类的使用类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class  1Class c1 = Student.class;  通过getClass方法获得  1Class c2 = Student.getClass();  forName  1Class c3 =">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-13T06:13:03.756Z">
+<meta property="og:updated_time" content="2019-01-21T08:26:12.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java反射">
 <meta name="twitter:description" content="一、Class类的使用类是对象，任何一个类都是java.lang.class类的实例对象，这个类，这个实例对象可以有三种表达方式，比如Student类：  任何一个类都有一个隐含的静态成员变量class  1Class c1 = Student.class;  通过getClass方法获得  1Class c2 = Student.getClass();  forName  1Class c3 =">
@@ -525,6 +525,13 @@
 <li>构造函数的参数列表，得到的是参数列表的类类型</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class fieldType = field.getType();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取类的私有属性或私有方法<br>直接获取私有属性或者方法会报java.lang.IllegalAccessException异常，AccessibleObject是Class、Method、Field的父类，通过设置setAccessible(true)可以获取类的私有属性，获取和调用私有方法</li>
+</ul>
+<p>Student类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">speck</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"I am "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"name: "</span> + name + <span class="string">"age: "</span> + age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取私有属性：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student(<span class="string">"pinnuli"</span>, <span class="number">18</span>);</span><br><span class="line">Class studentClass = student.getClass();</span><br><span class="line">Field[] studentField = studentClass.getDeclaredFields();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; studentField.length; i++) &#123;</span><br><span class="line">    studentField[i].setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        System.out.println(studentField[i].get(student));</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(studentField[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>获取私有方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student(<span class="string">"pinnuli"</span>, <span class="number">18</span>);</span><br><span class="line">Class studentClass = student.getClass();</span><br><span class="line">Method[] studentMethods = studentClass.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; studentMethods.length; i++) &#123;</span><br><span class="line">    studentMethods[i].setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    System.out.println(studentMethods[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用私有方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student(<span class="string">"pinnuli"</span>, <span class="number">18</span>);</span><br><span class="line">Class studentClass = student.getClass();</span><br><span class="line">Method[] studentMethods = studentClass.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; studentMethods.length; i++) &#123;</span><br><span class="line">    studentMethods[i].setAccessible(<span class="keyword">true</span>);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        studentMethods[i].invoke(student,<span class="string">"pinnuli"</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(studentMethods[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>更多方法看API文档</p>
 </blockquote>
@@ -703,7 +710,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -714,7 +721,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -725,7 +732,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -801,7 +808,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
