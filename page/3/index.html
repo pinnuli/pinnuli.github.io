@@ -364,6 +364,326 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/07/23/servlet笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/23/servlet笔记/" itemprop="url">servlet</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T21:48:35+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaWeb笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaWeb笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          servlet生命周期1.初始化，调用init()方法，生成Servlet实例2.响应客户请求，调用service()方法，由service()方法根据提交方式悬着执行doGet()或者doPost()方法3.终止，调用destroy()方法
+tomcat装载servlet的三种情况1.Servle
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/23/servlet笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/07/23/java注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/23/java注解/" itemprop="url">java注解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T12:39:36+08:00">
+                2018-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          一、注解分类
+源码注解（SOURCE）：注解只在源码中存在，编译成.class文件就不存在
+编译时注解（CLASS）：注解在源码和.class文件都存在
+运行时注解（RUNTIME）：在运行阶段还起作用，甚至会影响运行逻辑的注解
+元注解：注解的注解
+
+
+二、自定义注解定义：1234567891011
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/23/java注解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/07/22/java反射/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -469,7 +789,7 @@
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/22/java反射/#espandi" rel="contents">
+            <a class="btn" href="/2018/07/22/java反射/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -629,7 +949,7 @@
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/Java-Socket应用/#espandi" rel="contents">
+            <a class="btn" href="/2018/07/21/Java-Socket应用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -787,7 +1107,7 @@
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/19/java-io流与文件/#espandi" rel="contents">
+            <a class="btn" href="/2018/07/19/java-io流与文件/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -944,7 +1264,7 @@
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/15/centos7-Let-s-Encrypt用Certbot获取Https证书-部署nginx/#espandi" rel="contents">
+            <a class="btn" href="/2018/07/15/centos7-Let-s-Encrypt用Certbot获取Https证书-部署nginx/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1104,7 +1424,7 @@ java迭代器可以认为位于两个元素之家，当调用next(
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/11/java集合框架/#espandi" rel="contents">
+            <a class="btn" href="/2018/07/11/java集合框架/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1261,7 +1581,7 @@ java迭代器可以认为位于两个元素之家，当调用next(
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/03/JSP学习笔记/#espandi" rel="contents">
+            <a class="btn" href="/2018/05/03/JSP学习笔记/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1417,7 +1737,7 @@ java迭代器可以认为位于两个元素之家，当调用next(
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/30/vim的使用/#espandi" rel="contents">
+            <a class="btn" href="/2018/04/30/vim的使用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1573,329 +1893,7 @@ java迭代器可以认为位于两个元素之家，当调用next(
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/30/IntelliJ-IDEA-使用技巧/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pinnuli">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PINNULI'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/" itemprop="url">进程并发常见问题基于信号量解决方法总结：生产者/消费者问题、读/写者问题、银行家算法、哲学家进餐</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T19:07:43+08:00">
-                2018-04-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一、信号量
-信号量是一个与队列有关的整型变量。
-可以初始化成非负数；
-semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；
-semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。
-
-信号量原语semWait和semSi
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/#espandi" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/04/09/git多账号配置，同时使用多个代码托管平台/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="pinnuli">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PINNULI'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/09/git多账号配置，同时使用多个代码托管平台/" itemprop="url">git多账号配置，同时使用多个代码托管平台</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T21:01:52+08:00">
-                2018-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          我们在使用git管理代码的时候，经常需要放到不同的托管网站，如github，osc等，那么不同的网站账号不一样，就需要生成不同密钥，配置对应的不同网站，接下来我们写写如何处理。
-
-ps:这里是在centos7.2下操作，不过其他操作系统依然适用，这里举的例子，一个是github，一个是osc。
-
-1
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/09/git多账号配置，同时使用多个代码托管平台/#espandi" rel="contents">
+            <a class="btn" href="/2018/04/30/IntelliJ-IDEA-使用技巧/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1995,7 +1993,7 @@ ps:这里是在centos7.2下操作，不过其他操作系统依然适用，这�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2006,7 +2004,7 @@ ps:这里是在centos7.2下操作，不过其他操作系统依然适用，这�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2017,7 +2015,7 @@ ps:这里是在centos7.2下操作，不过其他操作系统依然适用，这�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

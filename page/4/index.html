@@ -364,6 +364,328 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/" itemprop="url">进程并发常见问题基于信号量解决方法总结：生产者/消费者问题、读/写者问题、银行家算法、哲学家进餐</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T19:07:43+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          一、信号量
+信号量是一个与队列有关的整型变量。
+可以初始化成非负数；
+semWait操作使信号量减1。若值为负数，则执行semWait的进程阻塞，否则继续执行；
+semSignal操作使信号量加1。若值小于或等于0，则被semWait操作阻塞的进程被解除阻塞。
+
+信号量原语semWait和semSi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/进程并发常见问题基于信号量解决方法总结：生产者消费者问题、读写者问题、银行家算法、哲学家进餐/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/04/09/git多账号配置，同时使用多个代码托管平台/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/09/git多账号配置，同时使用多个代码托管平台/" itemprop="url">git多账号配置，同时使用多个代码托管平台</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T21:01:52+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          我们在使用git管理代码的时候，经常需要放到不同的托管网站，如github，osc等，那么不同的网站账号不一样，就需要生成不同密钥，配置对应的不同网站，接下来我们写写如何处理。
+
+ps:这里是在centos7.2下操作，不过其他操作系统依然适用，这里举的例子，一个是github，一个是osc。
+
+1
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/09/git多账号配置，同时使用多个代码托管平台/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/04/04/nginx-配置实现端口转发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -461,7 +783,7 @@
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/nginx-配置实现端口转发/#espandi" rel="contents">
+            <a class="btn" href="/2018/04/04/nginx-配置实现端口转发/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -622,7 +944,7 @@ getElementsByAttributeVal
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/16/jsoup要点记录/#espandi" rel="contents">
+            <a class="btn" href="/2018/03/16/jsoup要点记录/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -785,7 +1107,7 @@ git checkout -b branch_name origin/branch_n
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/11/git分支管理/#espandi" rel="contents">
+            <a class="btn" href="/2018/03/11/git分支管理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -942,7 +1264,7 @@ git checkout -b branch_name origin/branch_n
           
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/10/markdownpad2-无法预览-显示This-view-has-crashed/#espandi" rel="contents">
+            <a class="btn" href="/2018/03/10/markdownpad2-无法预览-显示This-view-has-crashed/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1108,7 +1430,7 @@ git checkout -b branch_name origin/branch_n
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/08/2018要学的知识/#espandi" rel="contents">
+            <a class="btn" href="/2018/03/08/2018要学的知识/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1208,7 +1530,7 @@ git checkout -b branch_name origin/branch_n
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1219,7 +1541,7 @@ git checkout -b branch_name origin/branch_n
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1230,7 +1552,7 @@ git checkout -b branch_name origin/branch_n
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
