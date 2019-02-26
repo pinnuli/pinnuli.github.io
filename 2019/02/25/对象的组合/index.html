@@ -127,7 +127,7 @@
 
 
 
-  <meta name="keywords" content="JVM," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -140,21 +140,17 @@
 
 
 
-<meta name="description" content="运行时数据内存线程私有的内存区域 每条线程都有，各线程之间互不影响，独立存储的一类内存区域   程序计数器: 可以看成是当前线程锁执行的字节码的行号指示器 Java虚拟机栈: 生命周期与线程相同，描述的是Java方法执行的内存模型：每个方法子执行的同时都会创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息 本地方法栈: 为虚拟机使用到的Native方法服务（而虚拟机栈为Java方法">
-<meta name="keywords" content="JVM">
+<meta name="description" content="如果你连努力都拼不过别人,凭什么和别人拼天赋！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入理解Java虚拟机之Java内存区域">
-<meta property="og:url" content="https://pinnuli.github.io/2018/12/07/深入理解Java虚拟机之Java内存区域/index.html">
+<meta property="og:title" content="对象的组合">
+<meta property="og:url" content="https://pinnuli.github.io/2019/02/25/对象的组合/index.html">
 <meta property="og:site_name" content="PINNULI&#39;S BLOG">
-<meta property="og:description" content="运行时数据内存线程私有的内存区域 每条线程都有，各线程之间互不影响，独立存储的一类内存区域   程序计数器: 可以看成是当前线程锁执行的字节码的行号指示器 Java虚拟机栈: 生命周期与线程相同，描述的是Java方法执行的内存模型：每个方法子执行的同时都会创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息 本地方法栈: 为虚拟机使用到的Native方法服务（而虚拟机栈为Java方法">
+<meta property="og:description" content="如果你连努力都拼不过别人,凭什么和别人拼天赋！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://pinnuli.github.io/images/jvm_object_reference_handle.jpg">
-<meta property="og:image" content="https://pinnuli.github.io/images/jvm_object_reference_pointer.jpg">
-<meta property="og:updated_time" content="2018-12-07T13:30:28.050Z">
+<meta property="og:updated_time" content="2019-02-25T14:10:13.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入理解Java虚拟机之Java内存区域">
-<meta name="twitter:description" content="运行时数据内存线程私有的内存区域 每条线程都有，各线程之间互不影响，独立存储的一类内存区域   程序计数器: 可以看成是当前线程锁执行的字节码的行号指示器 Java虚拟机栈: 生命周期与线程相同，描述的是Java方法执行的内存模型：每个方法子执行的同时都会创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息 本地方法栈: 为虚拟机使用到的Native方法服务（而虚拟机栈为Java方法">
-<meta name="twitter:image" content="https://pinnuli.github.io/images/jvm_object_reference_handle.jpg">
+<meta name="twitter:title" content="对象的组合">
+<meta name="twitter:description" content="如果你连努力都拼不过别人,凭什么和别人拼天赋！">
 
 
 
@@ -184,13 +180,13 @@
 
 
 
-  <link rel="canonical" href="https://pinnuli.github.io/2018/12/07/深入理解Java虚拟机之Java内存区域/"/>
+  <link rel="canonical" href="https://pinnuli.github.io/2019/02/25/对象的组合/"/>
 
 
 
 
 
-  <title>深入理解Java虚拟机之Java内存区域 | PINNULI'S BLOG</title>
+  <title>对象的组合 | PINNULI'S BLOG</title>
   
 
 
@@ -368,7 +364,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2018/12/07/深入理解Java虚拟机之Java内存区域/">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2019/02/25/对象的组合/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="pinnuli">
@@ -385,7 +381,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入理解Java虚拟机之Java内存区域</h1>
+          <h1 class="post-title" itemprop="name headline">对象的组合</h1>
         
 
         <div class="post-meta">
@@ -397,8 +393,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-07T21:17:36+08:00">
-                2018-12-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T21:13:36+08:00">
+                2019-02-25
               </time>
             
 
@@ -407,28 +403,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深入理解java虚拟机笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">深入理解java虚拟机笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -457,49 +431,7 @@
       
 
       
-        <h3 id="运行时数据内存"><a href="#运行时数据内存" class="headerlink" title="运行时数据内存"></a>运行时数据内存</h3><h4 id="线程私有的内存区域"><a href="#线程私有的内存区域" class="headerlink" title="线程私有的内存区域"></a>线程私有的内存区域</h4><blockquote>
-<p>每条线程都有，各线程之间互不影响，独立存储的一类内存区域</p>
-</blockquote>
-<ul>
-<li><strong>程序计数器</strong>: 可以看成是当前线程锁执行的字节码的行号指示器</li>
-<li><strong>Java虚拟机栈</strong>: 生命周期与线程相同，描述的是Java方法执行的内存模型：每个方法子执行的同时都会创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等信息</li>
-<li><strong>本地方法栈</strong>: 为虚拟机使用到的Native方法服务（而虚拟机栈为Java方法服务）<h4 id="线程共享的内存区域"><a href="#线程共享的内存区域" class="headerlink" title="线程共享的内存区域"></a>线程共享的内存区域</h4></li>
-<li><strong>Java堆</strong>: 在虚拟机启动时创建，用于存放对象实例，可以处于物理上不连续的内存空间，主要逻辑上连续即可</li>
-<li><strong>方法区</strong>: 用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据，可以选择笃定大小或者可拓展外，还可以选择不实现垃圾收集</li>
-<li><strong>运行时常量池</strong>: 方法区的一部分，用于存放编译期生成的各种字面量和符号引用（这部分内容在类加载后进入方法区的运行时常量池存放）</li>
-</ul>
-<h3 id="HotSpot虚拟机对象探秘"><a href="#HotSpot虚拟机对象探秘" class="headerlink" title="HotSpot虚拟机对象探秘"></a>HotSpot虚拟机对象探秘</h3><h4 id="对象的创建"><a href="#对象的创建" class="headerlink" title="对象的创建"></a>对象的创建</h4><ol>
-<li>虚拟机遇到一条new指令时，检查这个指令的参数是否能在常量池中定位到一个类的符号引用</li>
-<li>为新生对象分配内存</li>
-</ol>
-<ul>
-<li>两种分配内存的方法：<br>  i. <strong>指针碰撞</strong>: Java堆中内存绝对规整时<br>  ii. <strong>空闲列表</strong>: Java堆中内存不规整，已使用的内存和空闲的内存相互交错时</li>
-<li>并发情况下解决线程安全的两种方法：<br>  i. 对分配内存空间的动作进行同步<br>  ii. 把内存分配动作按照线程划分在不同的空间之中进行</li>
-</ul>
-<ol>
-<li>将分配到的内存空间都初始化为零值（对象头除外）</li>
-<li>对对象进行必要的设置（对象头）<blockquote>
-<p>从虚拟机的视角来看，一个新的对象已经产生了，但从Java程序的视角来看，还需要第5步</p>
-</blockquote>
-</li>
-<li>执行<code>&lt;init&gt;</code>方法</li>
-</ol>
-<h4 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h4><blockquote>
-<p>对象在内存中存储的布局可以分为三块区域：对象头、实例数据、对齐填充</p>
-</blockquote>
-<ul>
-<li><strong>对象头</strong>: 包括两部分：<br>  i. 用于存储对象自身的运行时数据，如HashCode、GC分代年龄…<br>  ii. 类型指针，即对象指向他的类元数据的指针，虚拟机通过这个指针来确定这个对象是那个类的实例（如果对象是一个Java数组，那对象头中还必须有一块用于记录数组长度的数据）</li>
-<li><strong>实例数据</strong>: 对象真正存储的有效信息，也是在程序代码中定义的各种类型的字段内容</li>
-<li><strong>对齐填充</strong>: 并不是必然存在的，也没有特别的含义，仅仅起着占位符的作用（HotSpot VM的自动内存管理系统要求对象起始地址必须是8字节的整数倍）</li>
-</ul>
-<h4 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h4><blockquote>
-<p>取决于虚拟机的实现，主流的访问方式有两种：</p>
-</blockquote>
-<ul>
-<li><strong>使用句柄</strong>: Java堆中会划分出一块内存来作为句柄池，reference中存储的是对象的句柄地址，句柄中包含了对象实例数据与类型数据各自的具体地址信息<br><img src="/images/jvm_object_reference_handle.jpg" alt=""></li>
-<li><strong>直接指针</strong>: reference中存储的直接就是对象地址<br><img src="/images/jvm_object_reference_pointer.jpg" alt=""></li>
-</ul>
-
+        
       
     </div>
     
@@ -531,12 +463,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/JVM/" rel="tag"><i class="fa fa-tag"></i> JVM</a>
-          
-        </div>
-      
 
       
       
@@ -546,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/07/深入理解Java虚拟机之Class类文件结构/" rel="next" title="深入理解Java虚拟机之Class类文件结构">
-                <i class="fa fa-chevron-left"></i> 深入理解Java虚拟机之Class类文件结构
+              <a href="/2019/02/15/单例模式的几种写法对比/" rel="next" title="单例模式的几种写法对比">
+                <i class="fa fa-chevron-left"></i> 单例模式的几种写法对比
               </a>
             
           </div>
@@ -555,10 +481,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/15/单例模式的几种写法对比/" rel="prev" title="单例模式的几种写法对比">
-                单例模式的几种写法对比 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -635,17 +557,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -732,22 +645,6 @@ var jiathis_config={
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时数据内存"><span class="nav-number">1.</span> <span class="nav-text">运行时数据内存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程私有的内存区域"><span class="nav-number">1.1.</span> <span class="nav-text">线程私有的内存区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程共享的内存区域"><span class="nav-number">1.2.</span> <span class="nav-text">线程共享的内存区域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HotSpot虚拟机对象探秘"><span class="nav-number">2.</span> <span class="nav-text">HotSpot虚拟机对象探秘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的创建"><span class="nav-number">2.1.</span> <span class="nav-text">对象的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的内存布局"><span class="nav-number">2.2.</span> <span class="nav-text">对象的内存布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的访问定位"><span class="nav-number">2.3.</span> <span class="nav-text">对象的访问定位</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

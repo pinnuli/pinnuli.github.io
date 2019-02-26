@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[对象的组合]]></title>
+    <url>%2F2019%2F02%2F25%2F%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E5%90%88%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[单例模式的几种写法对比]]></title>
     <url>%2F2019%2F02%2F15%2F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%86%99%E6%B3%95%E5%AF%B9%E6%AF%94%2F</url>
     <content type="text"><![CDATA[懒汉模式1. 最简单的懒汉模式线程不安全，不推荐12345678910111213public class Singleton &#123; private Singleton() &#123;&#125; private static Singleton instance = null; public static Singleton getInstance() &#123; if (instance == null) &#123; instance = new Singleton(); &#125; return instance; &#125;&#125; 在多线程环境下，当多个线程执行到第9行代码时，此时instance都为空，那么这些线程都会执行第10行代码，从而创建了多个对象 2. 在上面的基础上给getInstance方法加上synchronized线程安全，不推荐，加上synchronized之后，方法内的所有实现在同一时间只允许一个线程访问，可以保证线程安全，但是synchronized会带来性上很大的开销 12345678910111213public class Singleton &#123; private Singleton() &#123;&#125; private static Singleton instance = null; public static synchronized Singleton getInstance() &#123; if (instance == null) &#123; instance = new Singleton(); &#125; return instance; &#125;&#125; 3. 双重同步锁单例模式线程不安全，可以改进 1234567891011121314151617public class Singleton &#123; private Singleton() &#123;&#125; private static Singleton instance = null; public static Singleton getInstance() &#123; if (instance == null) &#123; // 双重检测机制 synchronized (Singleton.class) &#123; // 同步锁 if (instance == null) &#123; instance = new Singleton(); &#125; &#125; &#125; return instance; &#125;&#125; 对于instance = new Singleton(); 这一行代码，实际上可以看出以下三步： 1、memory = allocate() 分配对象的内存空间 2、ctorInstance() 初始化对象 3、instance = memory 设置instance指向刚分配的内存 由于第二步和第三步不能由先行发生原则到处出来，JVM和cpu优化，发生了指令重排，顺序如下： 1、memory = allocate() 分配对象的内存空间 3、instance = memory 设置instance指向刚分配的内存 2、ctorInstance() 初始化对象 那么可能存在这样一种情况，在多线程情况下，当线程A执行到第10行代码instance = new Singleton();的第3步instance = memory 设置instance指向刚分配的内存时，线程B执行到第8行代码if (instance == null)， 这时对象还没有初始化完毕，然而instance已经指向了分配给对象的内存，instance已经不为空，会造成对象逸出，因而线程不安全； 4. volatile + 双重检测机制，禁止指令重排线程安全，推荐1234567891011121314151617public class Singleton &#123; private Singleton() &#123;&#125; private static volatile Singleton instance = null; public static Singleton getInstance() &#123; if (instance == null) &#123; // 双重检测机制 synchronized (Singleton.class) &#123; // 同步锁 if (instance == null) &#123; instance = new Singleton(); &#125; &#125; &#125; return instance; &#125;&#125; 饿汉模式，单例实例在类装载时进行创建如果构造方法中没有很多的处理，那么饿汉模式是可以接收的，但是如果构造方法中有非常多的处理，会导致类加载的时候很慢，会导致一些性能的问题。 如果只进行类的加载，而没有进行实际的调用，就会造成资源的浪费，因此使用饿汉模式的时候应该考虑两个问题： 构造方法有没有过多的处理 这个类是否一定会被使用，避免装载之后没有调用造成资源浪费 1. 普通饿汉模式线程安全，可以改进12345678910public class Singleton &#123; private Singleton() &#123;&#125; private static Singleton instance = new Singleton(); public static Singleton getInstance() &#123; return instance; &#125;&#125; 2. 将创建对象的代码放到static块中线程安全，推荐1234567891011121314public class Singleton &#123; private Singleton() &#123;&#125; private static Singleton instance = null; static &#123; instance = new Singleton(); &#125; public static Singleton getInstance() &#123; return instance; &#125;&#125; 枚举模式最安全，推荐1234567891011121314151617181920212223public class Singleton &#123; private Singleton() &#123;&#125; public static Singleton getInstance() &#123; return Singleton.INSTANCE.getInstance(); &#125; private enum Singleton &#123; INSTANCE; private Singleton singleton; // JVM保证这个方法绝对只调用一次 Singleton() &#123; singleton = new Singleton(); &#125; public Singleton getInstance() &#123; return singleton; &#125; &#125;&#125;]]></content>
@@ -11,11 +16,6 @@
         <tag>Java并发</tag>
         <tag>设计模式</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[实现简单的jdk动态代理]]></title>
-    <url>%2F2019%2F01%2F21%2F%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84jdk%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%2F</url>
-    <content type="text"></content>
   </entry>
   <entry>
     <title><![CDATA[深入理解Java虚拟机之Java内存区域]]></title>
@@ -310,8 +310,8 @@
         <category>Jsp笔记</category>
       </categories>
       <tags>
-        <tag>Jsp</tag>
         <tag>JavaWeb</tag>
+        <tag>Jsp</tag>
       </tags>
   </entry>
   <entry>
