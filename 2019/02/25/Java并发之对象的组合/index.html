@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!--添加顶部加载条-->
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Rotobo:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/20180223220057.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java并发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="PINNULI'S BLOG" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、设计线程安全的类 设计线程安全类的过程中,需要包含以下三个基本要素:   找出构成对象状态的所有变量 找出约束状态变量的不变性条件 建立对象状态的并发访问管理策略   同步策略定义了如何在不违背对象不变性条件或后验条件的情况下对其状态的访问操作进行协同.同步策略规定了如何将不可变性,线程封闭与加锁机制等结合起来以维护线程的安全性,并且还规定了哪些变量由哪些锁来保护  收集同步需求 要确保类的线">
+<meta name="keywords" content="Java并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发之对象的组合">
+<meta property="og:url" content="https://pinnuli.github.io/2019/02/25/Java并发之对象的组合/index.html">
+<meta property="og:site_name" content="PINNULI&#39;S BLOG">
+<meta property="og:description" content="一、设计线程安全的类 设计线程安全类的过程中,需要包含以下三个基本要素:   找出构成对象状态的所有变量 找出约束状态变量的不变性条件 建立对象状态的并发访问管理策略   同步策略定义了如何在不违背对象不变性条件或后验条件的情况下对其状态的访问操作进行协同.同步策略规定了如何将不可变性,线程封闭与加锁机制等结合起来以维护线程的安全性,并且还规定了哪些变量由哪些锁来保护  收集同步需求 要确保类的线">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-28T02:18:30.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发之对象的组合">
+<meta name="twitter:description" content="一、设计线程安全的类 设计线程安全类的过程中,需要包含以下三个基本要素:   找出构成对象状态的所有变量 找出约束状态变量的不变性条件 建立对象状态的并发访问管理策略   同步策略定义了如何在不违背对象不变性条件或后验条件的情况下对其状态的访问操作进行协同.同步策略规定了如何将不可变性,线程封闭与加锁机制等结合起来以维护线程的安全性,并且还规定了哪些变量由哪些锁来保护  收集同步需求 要确保类的线">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://pinnuli.github.io/2019/02/25/Java并发之对象的组合/"/>
+
+
+
+
+
+  <title>Java并发之对象的组合 | PINNULI'S BLOG</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5302ef1ff06baba1932c46f843e4cd9f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  
+  
+<script src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/pinnuli">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+    </a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PINNULI'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-成就">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            成就
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinnuli.github.io/2019/02/25/Java并发之对象的组合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="pinnuli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PINNULI'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java并发之对象的组合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T21:13:36+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java并发/" itemprop="url" rel="index">
+                    <span itemprop="name">Java并发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="一、设计线程安全的类"><a href="#一、设计线程安全的类" class="headerlink" title="一、设计线程安全的类"></a>一、设计线程安全的类</h3><ul>
+<li>设计线程安全类的过程中,需要包含以下三个基本要素:</li>
+</ul>
+<ol>
+<li>找出构成对象状态的所有变量</li>
+<li>找出约束状态变量的不变性条件</li>
+<li>建立对象状态的并发访问管理策略</li>
+</ol>
+<ul>
+<li>同步策略定义了如何在不违背对象不变性条件或后验条件的情况下对其状态的访问操作进行协同.同步策略规定了如何将不可变性,线程封闭与加锁机制等结合起来以维护线程的安全性,并且还规定了哪些变量由哪些锁来保护</li>
+</ul>
+<h4 id="收集同步需求"><a href="#收集同步需求" class="headerlink" title="收集同步需求"></a>收集同步需求</h4><ul>
+<li>要确保类的线程安全性,就需要确保它的不变性条件不会在并发访问的情况下被破坏,这就需要对其状态进行推断</li>
+<li>如果在一个不变性条件中包含多个变量， 那么在执行任何访问相关变量的操作时， 都必须持有保护这些变量的锁。</li>
+<li>如果不了解对象的不变性条件与后验条件，那么就不能确保线程安全性。要满足在状态变量的有效值或状态转换上的各种约束条件，就需要借助于原子性与封装性。</li>
+</ul>
+<h4 id="依赖状态的操作"><a href="#依赖状态的操作" class="headerlink" title="依赖状态的操作"></a>依赖状态的操作</h4><ul>
+<li>什么是依赖状态的操作：<br>  如果在某个操作中包含有基千状态的先验条件，那么这个操作就称为依赖状态的操作。</li>
+<li>在单线程程序中，如果某个操作无法满足先验条件，那么就只能失败。 </li>
+<li>但在并发程序中， 先验条件可能会由于其他线程执行的操作而变成真。在并发程序中要一直等到先验条件为真，然后再执行该操作。</li>
+</ul>
+<hr>
+<h3 id="二、实例封闭"><a href="#二、实例封闭" class="headerlink" title="二、实例封闭"></a>二、实例封闭</h3><ul>
+<li>封装简化了线程安全类的实现过程，它提供了一种实例封闭机制(Instance Confinement), 通常也简称为 “封闭” 。当一 个对象被封装到另一 个对象中时，能够访问被封装对象的所有代码路径都是已知的。与对象可以由整个程序访问的情况相比，更易于对代码进行分析。通过将封闭机制与合适的加锁策略结合起来， 可以确保以线程安全的方式来使用非线程安全的对象。</li>
+<li>将数据封装在对象内部，可以将数据的访问限制在对象的方法上，从而更容易确保线程访问数据时总能持有正确的锁。</li>
+<li>被封闭对象一定不能超出它们既定的作用域。对象可以封闭在类的一 个实例（例如作为类 的一个私有成员）中， 或者封闭在某个作用域内（例如作为一个局部变量），再或者封闭在线程内（例如在某个线程中 将对象从一 个方法传递到另一 个方法， 而不是在多个线程之间共享该对象 ）。<h4 id="Java监视器模式"><a href="#Java监视器模式" class="headerlink" title="Java监视器模式"></a>Java监视器模式</h4></li>
+<li>遵循Java监视器模式的对象会把对象的所有可变状态都封装起来，并由对象自己的内置锁来保护。（在许多类中都使用了Java监视器模式， 例如Vector和Hashtable）</li>
+<li>使用私有的锁对象而不是对象的内置锁（或任何其他可通过公有方式访问的锁）， 有许多优点：<ol>
+<li>私有的锁对象可以将对象锁封装起来，使客户代码无法得到锁， 但客户代码可以通过公有方法来访问锁， 以便（正确或者不正确地）参与到它的同步策略中。</li>
+<li>如果客户代码错误地获得了另一个对象的锁， 那么可能会产生活跃性问题。此外， 要想验证某个公有访问的锁在程序中否被正确地使用， 则需要检查整个程序， 而不是单个的类。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="三、线程安全性的委托"><a href="#三、线程安全性的委托" class="headerlink" title="三、线程安全性的委托"></a>三、线程安全性的委托</h3><p>在某些 情况下， 通过多个线程安全类组合而成的类是线程安全的， 而在某些情况下， 这仅仅是一个好的开端。</p>
+<h4 id="将线程安全委托给单个线程安全的状态变量"><a href="#将线程安全委托给单个线程安全的状态变量" class="headerlink" title="将线程安全委托给单个线程安全的状态变量"></a>将线程安全委托给单个线程安全的状态变量</h4><p>以下示例将线程安全性委托给AtomicLong：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountingFactorizer</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicLong count = <span class="keyword">new</span> AtomicLong(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> count.get(); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(ServletRequest req, ServletResponse resp)</span> </span>&#123;</span><br><span class="line">        count.incrementAndGet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="将线程安全性委托给多个状态变量"><a href="#将线程安全性委托给多个状态变量" class="headerlink" title="将线程安全性委托给多个状态变量"></a>将线程安全性委托给多个状态变量</h4><ul>
+<li>可以将线程安全性委托给多个状态变量,只要这些变量是彼此独立的,即组合而成的类并不会在其包含的多个状态变量上增加任何不变性条件：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VisualComponent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;KeyListener&gt; keyListeners</span><br><span class="line">            = <span class="keyword">new</span> CopyOnWriteArrayList&lt;KeyListener&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;MouseListener&gt; mouseListeners</span><br><span class="line">            = <span class="keyword">new</span> CopyOnWriteArrayList&lt;MouseListener&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addKeyListener</span><span class="params">(KeyListener listener)</span> </span>&#123;</span><br><span class="line">        keyListeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMouseListener</span><span class="params">(MouseListener listener)</span> </span>&#123;</span><br><span class="line">        mouseListeners.add(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeKeyListener</span><span class="params">(KeyListener listener)</span> </span>&#123;</span><br><span class="line">        keyListeners.remove(listener);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeMouseListener</span><span class="params">(MouseListener listener)</span> </span>&#123;</span><br><span class="line">        mouseListeners.remove(listener);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>VisualComponent为鼠标和键盘备有一个注册监听器列表，因此当某个事件发生时，就会调用相应的监听器，然而鼠标事件监听器和键盘事件监听器之间不存在任何关联，二者是彼此独立的而因此VisualComponent可以将其线程安全性委托给这两个线程安全的监听器列表。</p>
+</blockquote>
+<ul>
+<li>反例：当委托失效时</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NumberRange</span> </span>&#123;</span><br><span class="line">    <span class="comment">// INVARIANT: lower &lt;= upper</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger lower = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicInteger upper = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLower</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Warning -- unsafe check-then-act</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; upper.get())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"can't set lower to "</span> + i + <span class="string">" &gt; upper"</span>);</span><br><span class="line">        lower.set(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUpper</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Warning -- unsafe check-then-act</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; lower.get())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"can't set upper to "</span> + i + <span class="string">" &lt; lower"</span>);</span><br><span class="line">        upper.set(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isInRange</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (i &gt;= lower.get() &amp;&amp; i &lt;= upper.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>NumberRange使用两个AtomicInteger来管理状态，并且两个状态变量之间存在一个不变形条件：即第一个数值要小于或等于第二个数值。因而NumberRange不是线程安全的。</p>
+</blockquote>
+<ul>
+<li>如果某个类含有符合操作，例如NumberRange,那么仅靠委托并不足以实现线程安全性。这种情况下,这个类必须提供自己的加锁机制以保证这些复合操作都是原子操作,除非整个复合操作都可以委托给状态变量</li>
+<li>如果一个类是由多个独立且线程安全的状态变量组成，并且在所有的操作中都不包含无效状态转换，那么可以将线程安全性委托给底层的状态变量。</li>
+<li>如果一个状态变量是线程安全的，并且没有任何不变性条件来约束它的值，在变量的操作上也不存在任何不允许的状态转换，那么就可以安全地发布这个变量。</li>
+</ul>
+<hr>
+<h3 id="四、在现有的线程安全类中添加功能"><a href="#四、在现有的线程安全类中添加功能" class="headerlink" title="四、在现有的线程安全类中添加功能"></a>四、在现有的线程安全类中添加功能</h3><h4 id="将新方法添加到类中"><a href="#将新方法添加到类中" class="headerlink" title="将新方法添加到类中"></a>将新方法添加到类中</h4><p>要添加一个新的原子操作， 最安全的方法是修改原始的类，如果直接将新方法添加到类中， 那么意味着实现同步策略的所有代码仍然处于一个源代码文件中， 从而更容易理解与维护。<strong>但这通常无法做到。</strong></p>
+<h4 id="扩展这个类"><a href="#扩展这个类" class="headerlink" title="扩展这个类"></a>扩展这个类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BetterVector</span> &lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Vector</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">3963416950630760754L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(E x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> absent = !contains(x);</span><br><span class="line">        <span class="keyword">if</span> (absent)</span><br><span class="line">            add(x);</span><br><span class="line">        <span class="keyword">return</span> absent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>“扩展” 方法比直接将代码添加到类中更加脆弱， 因为现在的同步策略实现被分布到多个单独维护的源代码文件中。</p>
+</blockquote>
+<h4 id="使用客户端加锁"><a href="#使用客户端加锁" class="headerlink" title="使用客户端加锁"></a>使用客户端加锁</h4><p>扩展类的功能， 但并不是扩展类本身， 而是将扩展代码放人一个“ 辅助类” 中。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BadListHelper</span> &lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;E&gt; list = Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;E&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(E x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> absent = !list.contains(x);</span><br><span class="line">        <span class="keyword">if</span> (absent)</span><br><span class="line">            list.add(x);</span><br><span class="line">        <span class="keyword">return</span> absent;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这种方法是线程不安全的，问题在于在错误的锁上进行了同步。无论List使用哪一个锁来保护它的状态，可以确定的是，这个锁并不是ListHelper上的锁。要使用客户端加锁， 你必须知道对象X使用的是哪一个锁。</p>
+</blockquote>
+<p>以下的实现才是正确的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GoodListHelper</span> &lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;E&gt; list = Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;E&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(E x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (list) &#123;</span><br><span class="line">            <span class="keyword">boolean</span> absent = !list.contains(x);</span><br><span class="line">            <span class="keyword">if</span> (absent)</span><br><span class="line">                list.add(x);</span><br><span class="line">            <span class="keyword">return</span> absent;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>通过添加一个原子操作来扩展类是脆弱的， 因为它将类的加锁代码分布到多个类中。然而，客户端加锁却更加脆弱， 因为它将类 C的加锁代码放到与C完全无关的其他类中。</p>
+</blockquote>
+<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImprovedList</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;T&gt; list;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ImprovedList</span><span class="params">(List&lt;T&gt; list)</span> </span>&#123; <span class="keyword">this</span>.list = list; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">putIfAbsent</span><span class="params">(T x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> contains = list.contains(x);</span><br><span class="line">        <span class="keyword">if</span> (contains)</span><br><span class="line">            list.add(x);</span><br><span class="line">        <span class="keyword">return</span> !contains;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span>&#123;list.clear();&#125;</span><br><span class="line">    <span class="comment">// ...按照类似的方式委托给List的其他方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>ImprovedList通过自身的内置锁增加了一层额外的加锁。它并不关心底层的List是否是线程安全的， 即使List不是线程安全的或者修改了它的加锁实现，ImprovedList也会提供一致的加锁机制来实现线程安全性。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java并发/" rel="tag"><i class="fa fa-tag"></i> Java并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/25/Java并发之对象的共享/" rel="next" title="Java并发之对象的共享">
+                <i class="fa fa-chevron-left"></i> Java并发之对象的共享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/27/Java并发之基础构建模块/" rel="prev" title="Java并发之基础构建模块:同步容器、并发容器、阻塞队列、同步工具类">
+                Java并发之基础构建模块:同步容器、并发容器、阻塞队列、同步工具类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_32x32">
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_cqq"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_googleplus"></a>
+<a class="jiathis_button_twitter"></a>
+<a class="jiathis_button_copy"></a>
+<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+	siteNum:7,
+	sm:"weixin,cqq,fb,twitter,tsina,googleplus,copy",
+	summary:"",
+	boldNum:6,
+	shortUrl:false,
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="pinnuli" />
+            
+              <p class="site-author-name" itemprop="name">pinnuli</p>
+              <p class="site-description motion-element" itemprop="description">如果你连努力都拼不过别人,凭什么和别人拼天赋！</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/pinnuli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/users/c855b8a72987/timeline" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-book"></i>简书</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、设计线程安全的类"><span class="nav-number">1.</span> <span class="nav-text">一、设计线程安全的类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#收集同步需求"><span class="nav-number">1.1.</span> <span class="nav-text">收集同步需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖状态的操作"><span class="nav-number">1.2.</span> <span class="nav-text">依赖状态的操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、实例封闭"><span class="nav-number">2.</span> <span class="nav-text">二、实例封闭</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java监视器模式"><span class="nav-number">2.1.</span> <span class="nav-text">Java监视器模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、线程安全性的委托"><span class="nav-number">3.</span> <span class="nav-text">三、线程安全性的委托</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#将线程安全委托给单个线程安全的状态变量"><span class="nav-number">3.1.</span> <span class="nav-text">将线程安全委托给单个线程安全的状态变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将线程安全性委托给多个状态变量"><span class="nav-number">3.2.</span> <span class="nav-text">将线程安全性委托给多个状态变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、在现有的线程安全类中添加功能"><span class="nav-number">4.</span> <span class="nav-text">四、在现有的线程安全类中添加功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#将新方法添加到类中"><span class="nav-number">4.1.</span> <span class="nav-text">将新方法添加到类中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展这个类"><span class="nav-number">4.2.</span> <span class="nav-text">扩展这个类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用客户端加锁"><span class="nav-number">4.3.</span> <span class="nav-text">使用客户端加锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组合"><span class="nav-number">4.4.</span> <span class="nav-text">组合</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">pinnuli</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
