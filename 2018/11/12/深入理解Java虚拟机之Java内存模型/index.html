@@ -149,7 +149,7 @@
 <meta property="og:description" content="主内存与工作内存 主内存: Java内存模型规定了所有的变量都存储在主内存中。 这里的主内存与物理硬件的主内存可以类比，但这里的主内存仅是指虚拟机内存的一部分。   工作内存: 每条线程都有自己的工作内存，线程的工作内存中保存了被该线程使用到的变量的主内存副本拷贝，线程对变量的所有操作（读取、赋值等）都必须在工作内存中，而不能直接读写主内存中的变量。 工作内存可以与处理器的高速缓存类比   线程、">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pinnuli.github.io/images/thread_wm_mm.png">
-<meta property="og:updated_time" content="2019-02-28T02:28:35.453Z">
+<meta property="og:updated_time" content="2019-03-03T08:03:54.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型">
 <meta name="twitter:description" content="主内存与工作内存 主内存: Java内存模型规定了所有的变量都存储在主内存中。 这里的主内存与物理硬件的主内存可以类比，但这里的主内存仅是指虚拟机内存的一部分。   工作内存: 每条线程都有自己的工作内存，线程的工作内存中保存了被该线程使用到的变量的主内存副本拷贝，线程对变量的所有操作（读取、赋值等）都必须在工作内存中，而不能直接读写主内存中的变量。 工作内存可以与处理器的高速缓存类比   线程、">
@@ -499,7 +499,7 @@
 <ul>
 <li><p><strong>可见性</strong>: 当一条线程修改了这个变量的值，新值对于其他线程来说是可以立即得知的。而普通变量不能做到这一点，普通变量的值在线程间传递需要通过主内存完成</p>
 <blockquote>
-<p>volatile变量只能在一下两种场景保证可见性<br>  1.运算结果并不依赖变量的当前值，或者能够确保只有单一的线程修改变量的值<br>  2.变量不需要与其他的状态变量共同参与不变约束</p>
+<p>volatile变量只能在以下两种场景保证可见性<br>  1.运算结果并不依赖变量的当前值，或者能够确保只有单一的线程修改变量的值<br>  2.变量不需要与其他的状态变量共同参与不变约束</p>
 </blockquote>
 </li>
 <li><p><strong>禁止指令重排序优化</strong>: 普通变量仅仅会保证在该方法的执行过程中所有依赋值结果的地方都能获取到正确的结果，而不能保证变量复制的顺序与程序代码中的执行顺序一致。</p>
@@ -546,7 +546,7 @@
 <li><strong>传递性</strong>: A先行发生于B，B先行发生于C，则A先行发生于C</li>
 </ul>
 <blockquote>
-<p>这些先行发生关系无须任何同步协助就已经存在，可以直接使用</p>
+<p>这些先行发生关系无须任何同步协助就已经存在，可以直接使用。如果两个操作之间的关系不在此列，并且无法从下列规则推导出来的话，它们就没有顺序性保障，虚拟机可以对它们随意地进行重排序。</p>
 </blockquote>
 
       
@@ -713,7 +713,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -724,7 +724,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -735,7 +735,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
