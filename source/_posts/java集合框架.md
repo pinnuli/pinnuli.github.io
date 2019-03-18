@@ -1,7 +1,7 @@
 ---
 title: java集合框架
 date: 2018-07-11 07:02:56
-categories: "JavaSE笔记" 
+categories: "JavaSE" 
 tags:
 	- JavaSE
 ---

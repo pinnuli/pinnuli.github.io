@@ -1,7 +1,7 @@
 ---
 title: Java中的XML之四种方式解析XML文档：DOM，SAX，JDOM，DOM4J
 date: 2018-07-30 12:17:35
-categories: "JavaSE笔记"
+categories: "JavaSE"
 tags:
     - JavaSE
     - XML

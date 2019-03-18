@@ -1,7 +1,7 @@
 ---
 title: Java中的锁优化
 date: 2018-11-12 20:08:20
-categories: "深入理解java虚拟机笔记"
+categories: "深入理解java虚拟机"
 tags:
     - JVM
     - 多线程

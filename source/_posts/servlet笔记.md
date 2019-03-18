@@ -1,7 +1,7 @@
 ---
 title: servlet
 date: 2018-07-23 21:48:35
-categories: "JavaWeb笔记"
+categories: "JavaWeb"
 tags:
     - servlet
     - JavaWeb

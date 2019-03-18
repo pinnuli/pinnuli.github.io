@@ -1,7 +1,7 @@
 ---
 title: Java并发
 date: 2018-11-15 16:01:42
-categories: "JavaSE笔记"
+categories: "JavaSE"
 tags:
     - JavaSE
     - Java并发

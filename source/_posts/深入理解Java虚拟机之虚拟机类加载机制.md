@@ -1,7 +1,7 @@
 ---
 title: 深入理解Java虚拟机之虚拟机类加载机制
 date: 2018-11-30 21:18:22
-categories: "深入理解java虚拟机笔记"
+categories: "深入理解java虚拟机"
 tags:
     - JVM
 copyright:
@@ -61,15 +61,19 @@ copyright:
 #### 5. 初始化
 在初始化阶段，根据程序员通过程序制定的主观计划去初始化类变量和其他资源，可以从另外一个角度来表达：初始化阶段是执行类构造器`<clinit>()`方法的过程
 - `<clinit>()`方法是由编译器自动收集类中的所有类变量的赋值动作和静态语句块中的语句合并产生的，编译器收集的顺序是由语句在源文件中出现的顺序所决定的，静态语句块中只能访问到定义在静态语句块之前的变量，定义在它之后的变量，在前面的静态语句块可以赋值，但是不能访问。
-示例：
+示例：如下例子输出结果为-1（静态语句块中x为局部变量，不影响静态变量x的值）
 ```java
-public class Test {
-    static {
-        i = 0;  //  给变量复制可以正常编译通过
-        System.out.print(i);  // 这句编译器会提示“非法向前引用”  
+public class Test{
+    static{
+        int x=5;
     }
-    static int i = 1;
+    static int x,y;
+    public static void main(String args[]){
+        x--;
+        System.out.println(x);
+    }
 }
+
 ```
 - 虚拟机会保证在子类的`<clinit>()`方法执行之前，父类的`<clinit>()`方法已经执行完毕
 - 父类的`<clinit>()`方法先执行，所以父类中定义的静态语句块要优先于子类的变量赋值操作

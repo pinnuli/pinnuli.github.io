@@ -1,7 +1,7 @@
 ---
 title: 深入理解Java虚拟机之垃圾收集器与内存分配策略
 date: 2018-12-01 21:17:54
-categories: "深入理解java虚拟机笔记"
+categories: "深入理解java虚拟机"
 tags:
     - JVM
 copyright:

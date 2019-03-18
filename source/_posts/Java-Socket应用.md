@@ -1,7 +1,7 @@
 ---
 title: java Socket应用
 date: 2018-07-21 15:09:14
-categories: "JavaSE笔记" 
+categories: "JavaSE" 
 tags:
     - JavaSE
 ---

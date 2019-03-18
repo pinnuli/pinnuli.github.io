@@ -1,7 +1,7 @@
 ---
 title: 深入理解Java虚拟机之Class类文件结构
 date: 2018-12-07 21:17:08
-categories: "深入理解java虚拟机笔记"
+categories: "深入理解java虚拟机"
 tags:
     - JVM
 copyright:

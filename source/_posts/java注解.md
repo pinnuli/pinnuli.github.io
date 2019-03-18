@@ -1,7 +1,7 @@
 ---
 title: java注解
 date: 2018-07-23 12:39:36
-categories: "JavaSE笔记" 
+categories: "JavaSE" 
 tags:
     - JavaSE
 ---

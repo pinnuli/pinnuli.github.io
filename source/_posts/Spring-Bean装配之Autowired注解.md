@@ -1,7 +1,7 @@
 ---
 title: Spring Bean装配之Autowired注解
 date: 2018-07-28 22:36:17
-categories: "Spring笔记"
+categories: "Spring"
 tags:
     - Spring
     - JavaWeb

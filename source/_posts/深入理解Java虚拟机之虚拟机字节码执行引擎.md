@@ -1,7 +1,7 @@
 ---
 title: 深入理解Java虚拟机之虚拟机字节码执行引擎
 date: 2018-12-02 21:18:09
-categories: "深入理解java虚拟机笔记"
+categories: "深入理解java虚拟机"
 tags:
     - JVM
 copyright:

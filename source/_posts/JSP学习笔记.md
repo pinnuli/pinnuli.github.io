@@ -1,7 +1,7 @@
 ---
 title: JSP学习笔记
 date: 2018-05-03 21:17:47
-categories: "Jsp笔记" 
+categories: "Jsp" 
 tags:
 	- Jsp
 	- JavaWeb
