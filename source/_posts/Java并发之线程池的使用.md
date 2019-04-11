@@ -43,7 +43,7 @@ copyright:
 ### 线程池的使用：ThreadPoolExecutor
 #### 线程池的创建
 
-`new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,milliseconds,runnableTaskQueue, handler);`
+new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,milliseconds,runnableTaskQueue, handler);
 
 创建一个线程池时需要输入几个参数，如下：
 
